@@ -1,0 +1,1166 @@
+@charset "UTF-8";
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/mobile.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 5, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/* -------------------- FONT FAMILY ---------------------*/
+@font-face {
+  font-family: 'NeoSansPro-Regular';
+  src: url("../../../fonts/NeoSansPro-Regular.woff") format("woff"), url("../../../fonts/NeoSansPro-Regular.ttf") format("truetype"), url("../../../fonts/NeoSansPro-Regular.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NeoSansPro-Bold';
+  src: url("../../../fonts/NeoSansPro-Bold.woff") format("woff"), url("../../../fonts/NeoSansPro-Bold.ttf") format("truetype"), url("../../../fonts/NeoSansPro-Bold.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NeoSansPro-Italic';
+  src: url("../../../fonts/NeoSansPro-Italic.woff") format("woff"), url("../../../fonts/NeoSansPro-Italic.ttf") format("truetype"), url("../../../fonts/NeoSansPro-Italic.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NeoSansPro-Light';
+  src: url("../../../fonts/NeoSansPro-Light.woff") format("woff"), url("../../../fonts/NeoSansPro-Light.ttf") format("truetype"), url("../../../fonts/NeoSansPro-Light.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NeoSansPro-Medium';
+  src: url("../../../fonts/NeoSansPro-Medium.woff") format("woff"), url("../../../fonts/NeoSansPro-Medium.ttf") format("truetype"), url("../../../fonts/NeoSansPro-Medium.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NeoSansPro-MediumItalic';
+  src: url("../../../fonts/NeoSansPro-MediumItalic.woff") format("woff"), url("../../../fonts/NeoSansPro-MediumItalic.ttf") format("truetype"), url("../../../fonts/NeoSansPro-MediumItalic.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* -------------------- VARIABLES ---------------------*/
+/* -------------------- MIXINS ---------------------*/
+/* line 81, ../sass/tablet3sep2015.scss */
+.select, .main-middle select, .main-right select {
+  font-family: "NeoSansPro-Regular";
+  border: 1px solid #cecece;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 5px;
+  width: 89%;
+}
+
+/* line 88, ../sass/tablet3sep2015.scss */
+.input_txt, .main-middle input[type='text'], .main-right input[type='text'], .main-middle input[type="text"] {
+  font-family: "NeoSansPro-Regular";
+  border: 1px solid #cecece;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 5px;
+  width: 89%;
+}
+
+/* line 95, ../sass/tablet3sep2015.scss */
+.textarea, .main-right textarea {
+  font-family: "NeoSansPro-Regular";
+  border: 1px solid #cecece;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 5px;
+  width: 100%;
+  resize: none;
+  height: 150px;
+}
+
+/* -------------------- MAIN CSS ---------------------*/
+/* line 107, ../sass/tablet3sep2015.scss */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "NeoSansPro-Regular" !important;
+  font-size: 12px !important;
+  color: #727376 !important;
+}
+
+/* line 114, ../sass/tablet3sep2015.scss */
+a {
+  text-decoration: none;
+  color: #727376 !important;
+}
+/* line 117, ../sass/tablet3sep2015.scss */
+a:hover {
+  color: #cc0000 !important;
+  text-decoration: none !important;
+}
+
+/* line 122, ../sass/tablet3sep2015.scss */
+p {
+  margin-bottom: 10px;
+}
+
+/* line 125, ../sass/tablet3sep2015.scss */
+b {
+  font-family: "NeoSansPro-Bold";
+}
+
+/* line 128, ../sass/tablet3sep2015.scss */
+.top-strip {
+  background: #eeeeee;
+}
+
+/* line 131, ../sass/tablet3sep2015.scss */
+.top-strip-inner, .header-inner, .container-inner {
+  padding: 7px;
+}
+
+/* line 134, ../sass/tablet3sep2015.scss */
+.top-strip-inner {
+  text-align: left;
+  font-size: 13px;
+  line-height: 27px;
+}
+
+/* line 139, ../sass/tablet3sep2015.scss */
+.main-header, .main-container {
+  width: 100%;
+}
+
+/* line 142, ../sass/tablet3sep2015.scss */
+.main-header {
+  border-bottom: 1px solid #cecece;
+}
+/* line 145, ../sass/tablet3sep2015.scss */
+.main-header .main-nav ul {
+  margin: 0;
+  padding: 0;
+}
+/* line 148, ../sass/tablet3sep2015.scss */
+.main-header .main-nav ul li {
+  float: left;
+  margin: 0 35px 0 0;
+}
+/* line 151, ../sass/tablet3sep2015.scss */
+.main-header .main-nav ul li a {
+  line-height: 84px;
+}
+
+/* line 159, ../sass/tablet3sep2015.scss */
+.top-strip-inner .top-devider {
+  display: inline-block;
+  padding: 0 4px;
+  font-size: 0;
+}
+/* line 164, ../sass/tablet3sep2015.scss */
+.top-strip-inner .top-text-fld {
+  font-family: "NeoSansPro-Regular";
+  margin: 0;
+  border: 1px solid #eaeaea;
+  padding: 3px 7px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  width: 100%;
+}
+/* line 172, ../sass/tablet3sep2015.scss */
+.top-strip-inner a {
+  color: #727376;
+}
+/* line 174, ../sass/tablet3sep2015.scss */
+.top-strip-inner a:hover {
+  color: #cc0000;
+}
+/* line 177, ../sass/tablet3sep2015.scss */
+.top-strip-inner a:focus {
+  border: 1px solid #dadada;
+}
+
+/* line 182, ../sass/tablet3sep2015.scss */
+.responsive_sidebars {
+  background: #ec3235;
+  height: 40px;
+  width: 100%;
+  display: block;
+  clear: both;
+  border-bottom: 1px solid #cecece;
+}
+/* line 189, ../sass/tablet3sep2015.scss */
+.responsive_sidebars .left-bar {
+  color: #ffffff;
+  cursor: pointer;
+  float: left;
+  box-sizing: border-box;
+}
+/* line 194, ../sass/tablet3sep2015.scss */
+.responsive_sidebars .left-bar i {
+  font-size: 18px;
+  float: right;
+  line-height: 39px;
+  font-weight: 100;
+}
+/* line 200, ../sass/tablet3sep2015.scss */
+.responsive_sidebars .left-bar .left-bar-title {
+  font-size: 16px;
+  float: left;
+  text-transform: uppercase;
+  line-height: 37px;
+}
+/* line 207, ../sass/tablet3sep2015.scss */
+.responsive_sidebars .right-bar {
+  color: #ffffff;
+  height: 40px;
+  width: 100px;
+  cursor: pointer;
+  float: right;
+  box-sizing: border-box;
+}
+/* line 214, ../sass/tablet3sep2015.scss */
+.responsive_sidebars .right-bar i {
+  font-size: 15px;
+  float: right;
+  line-height: 35px;
+}
+/* line 219, ../sass/tablet3sep2015.scss */
+.responsive_sidebars .right-bar .right-bar-title {
+  font-size: 13px;
+  float: left;
+  text-transform: uppercase;
+  line-height: 37px;
+}
+
+/* line 227, ../sass/tablet3sep2015.scss */
+.main-left {
+  float: left;
+  padding: 15px 0 10px;
+  position: absolute !important;
+  border: 1px solid #eeeeee;
+  top: 187px;
+  left: -100%;
+  z-index: 10;
+  background: #ffffff;
+  padding: 4%;
+  box-sizing: border-box;
+}
+/* line 238, ../sass/tablet3sep2015.scss */
+.main-left h2.block-title {
+  font-size: 16px;
+  font-family: 'NeoSansPro-Medium';
+  margin: 15px 0 10px;
+}
+/* line 243, ../sass/tablet3sep2015.scss */
+.main-left .rating {
+  margin: 5px 0;
+}
+/* line 246, ../sass/tablet3sep2015.scss */
+.main-left .followers, .main-left .partners {
+  margin: 5px 0;
+  padding: 5px 0;
+  border-top: 1px solid #dadada;
+}
+/* line 252, ../sass/tablet3sep2015.scss */
+.main-left .profile-block span {
+  margin: 2px 0 10px;
+  display: inline-block;
+  font-family: 'NeoSansPro-Medium';
+  color: #555555;
+}
+/* line 258, ../sass/tablet3sep2015.scss */
+.main-left .profile-block a {
+  margin: 3px 0 20px;
+  display: block;
+  clear: both;
+}
+/* line 263, ../sass/tablet3sep2015.scss */
+.main-left .profile-block p {
+  margin: 3px 0 0;
+}
+/* line 266, ../sass/tablet3sep2015.scss */
+.main-left .profile-block .profile-bar {
+  height: 12px;
+  width: 115px;
+  background: #bbbdbf;
+}
+/* line 270, ../sass/tablet3sep2015.scss */
+.main-left .profile-block .profile-bar .profile-complete {
+  width: 73px;
+  height: 12px;
+  background: #ed3237;
+}
+
+/* line 278, ../sass/tablet3sep2015.scss */
+.block {
+  margin: 20px 0 5px;
+}
+
+/* line 281, ../sass/tablet3sep2015.scss */
+.main-middle {
+  float: none;
+  padding: 15px 0 10px 0;
+  margin: auto;
+  width: 96%;
+}
+/* line 286, ../sass/tablet3sep2015.scss */
+.main-middle .bread-crumb {
+  display: block;
+}
+/* line 290, ../sass/tablet3sep2015.scss */
+.main-middle .tab-nav ul#tabs {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+/* line 295, ../sass/tablet3sep2015.scss */
+.main-middle .tab-nav ul#tabs > li {
+  display: inline-block;
+  padding: 3px 0;
+  margin: 0 30px 10px 0;
+  cursor: pointer;
+  font-size: 13px;
+  position: relative;
+}
+/* line 303, ../sass/tablet3sep2015.scss */
+.main-middle .tab-nav ul#tabs > li.active {
+  color: #cc0000;
+}
+/* line 306, ../sass/tablet3sep2015.scss */
+.main-middle .tab-nav div#tab {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+/* line 311, ../sass/tablet3sep2015.scss */
+.main-middle .tab-nav div#tab > div {
+  display: block;
+  padding: 10px;
+  background: #f0f1f1;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+/* line 318, ../sass/tablet3sep2015.scss */
+.main-middle .tab-nav div#tab > div h2 {
+  font-weight: 400;
+  margin: 0px 0 10px;
+}
+/* line 323, ../sass/tablet3sep2015.scss */
+.main-middle select {
+  width: 100%;
+  margin-bottom: 10px;
+}
+/* line 328, ../sass/tablet3sep2015.scss */
+.main-middle input[type='text'] {
+  width: 100%;
+  margin-bottom: 10px;
+}
+/* line 333, ../sass/tablet3sep2015.scss */
+.main-middle .textbox_container:before {
+  font-family: FontAwesome;
+  content: "∩Çé";
+  position: absolute;
+  top: 4px;
+  right: 5px;
+}
+/* line 340, ../sass/tablet3sep2015.scss */
+.main-middle .new_msg_link {
+  padding-top: 5px;
+}
+/* line 342, ../sass/tablet3sep2015.scss */
+.main-middle .new_msg_link a {
+  font-family: "NeoSansPro-Bold";
+  font-size: 13px;
+  text-decoration: underline;
+}
+/* line 348, ../sass/tablet3sep2015.scss */
+.main-middle .table {
+  margin-bottom: 0;
+  width: 100% !important;
+}
+/* line 353, ../sass/tablet3sep2015.scss */
+.main-middle .table thead tr th {
+  border-bottom: 1px solid #dddddd;
+  font-family: "NeoSansPro-Medium";
+  padding-left: 0;
+}
+/* line 362, ../sass/tablet3sep2015.scss */
+.main-middle .table tbody tr td {
+  padding-left: 0;
+}
+/* line 368, ../sass/tablet3sep2015.scss */
+.main-middle ul.bottom_text {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+/* line 372, ../sass/tablet3sep2015.scss */
+.main-middle ul.bottom_text li {
+  width: 100%;
+}
+/* line 374, ../sass/tablet3sep2015.scss */
+.main-middle ul.bottom_text li ol {
+  margin: 0 0 20px 15px;
+  width: 100%;
+}
+/* line 377, ../sass/tablet3sep2015.scss */
+.main-middle ul.bottom_text li ol li {
+  width: 100%;
+  list-style-type: decimal;
+  text-decoration: underline;
+  margin-bottom: 2px;
+}
+/* line 386, ../sass/tablet3sep2015.scss */
+.main-middle .bottom_link {
+  text-decoration: underline;
+}
+
+/* line 390, ../sass/tablet3sep2015.scss */
+.main-right {
+  float: left;
+  padding: 4%;
+  position: absolute !important;
+  border: 1px solid #eeeeee;
+  top: 187px;
+  right: -100%;
+  z-index: 10;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+/* line 400, ../sass/tablet3sep2015.scss */
+.main-right .left-top-text {
+  margin: 0 0 10px 15px;
+  display: block;
+}
+/* line 404, ../sass/tablet3sep2015.scss */
+.main-right h3.block-head {
+  font-size: 15px;
+  font-family: "NeoSansPro-Regular";
+  margin: 0;
+  background: #f0f1f1 none repeat scroll 0 0;
+  box-sizing: border-box;
+  padding: 9px 15px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+/* line 414, ../sass/tablet3sep2015.scss */
+.main-right h3.block-head.dark {
+  background: #666666 none repeat scroll 0 0;
+  color: #ffffff;
+  font-family: "NeoSansPro-Regular";
+  margin-bottom: 5px;
+}
+/* line 420, ../sass/tablet3sep2015.scss */
+.main-right .left-dropdown-text {
+  font-family: "NeoSansPro-Bold";
+  letter-spacing: normal;
+  display: block;
+  margin-bottom: 10px;
+}
+/* line 425, ../sass/tablet3sep2015.scss */
+.main-right .left-dropdown-text i {
+  margin: 3px 5px 0 0;
+  font-size: 12px;
+  color: #727376 !important;
+}
+/* line 431, ../sass/tablet3sep2015.scss */
+.main-right .block {
+  margin: 14px 0 15px;
+  clear: both;
+  display: block;
+}
+/* line 435, ../sass/tablet3sep2015.scss */
+.main-right .block i {
+  font-size: 20px;
+  color: #cfcfcf;
+}
+/* line 440, ../sass/tablet3sep2015.scss */
+.main-right select {
+  margin-bottom: 10px;
+}
+/* line 444, ../sass/tablet3sep2015.scss */
+.main-right input[type='text'] {
+  margin-bottom: 10px;
+}
+/* line 448, ../sass/tablet3sep2015.scss */
+.main-right .textbox_container:before {
+  font-family: FontAwesome;
+  content: "∩Çé";
+  position: absolute;
+  top: 4px;
+  right: 5px;
+}
+/* line 455, ../sass/tablet3sep2015.scss */
+.main-right textarea {
+  margin-bottom: 10px;
+}
+/* line 459, ../sass/tablet3sep2015.scss */
+.main-right p {
+  font-family: "NeoSansPro-Regular";
+}
+
+/* line 463, ../sass/tablet3sep2015.scss */
+.padding-none {
+  padding: 0 !important;
+}
+
+/* line 466, ../sass/tablet3sep2015.scss */
+.padding-right-none, .container.container-inner {
+  padding-right: 0 !important;
+}
+
+/* line 469, ../sass/tablet3sep2015.scss */
+.padding-left-none, .container.container-inner {
+  padding-left: 0 !important;
+}
+
+/* line 472, ../sass/tablet3sep2015.scss */
+.mobile-form-padding-1 {
+  padding: 0 5px 0 0  !important;
+}
+
+/* line 475, ../sass/tablet3sep2015.scss */
+.mobile-form-padding-2 {
+  padding: 0 0 0 5px  !important;
+}
+
+/* line 482, ../sass/tablet3sep2015.scss */
+.profile-block span {
+  margin: 2px 0 20px;
+  display: inline-block;
+  font-family: 'NeoSansPro-Medium';
+  color: #555555;
+}
+/* line 488, ../sass/tablet3sep2015.scss */
+.profile-block a {
+  margin: 3px 0 20px;
+  display: block;
+  clear: both;
+}
+/* line 493, ../sass/tablet3sep2015.scss */
+.profile-block p {
+  margin: 3px 0 2px;
+}
+/* line 496, ../sass/tablet3sep2015.scss */
+.profile-block .profile-bar {
+  height: 12px;
+  width: 115px;
+  background: #bbbdbf;
+}
+/* line 500, ../sass/tablet3sep2015.scss */
+.profile-block .profile-bar .profile-complete {
+  width: 73px;
+  height: 12px;
+  background: #ed3237;
+}
+/* line 506, ../sass/tablet3sep2015.scss */
+.profile-block h3.block-head {
+  background: #f0f1f1 none repeat scroll 0 0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: "NeoSansPro-Regular";
+  font-size: 12px;
+  margin: 0 0 10px;
+  padding: 9px 15px;
+}
+
+/* line 518, ../sass/tablet3sep2015.scss */
+.post-but a {
+  border: 1px solid red;
+  border-radius: 5px;
+  display: block;
+  font-family: "NeoSansPro-Medium";
+  font-size: 14px;
+  margin-bottom: 6px;
+  padding: 5px 10px;
+}
+
+/* line 528, ../sass/tablet3sep2015.scss */
+.bg-red {
+  background: #ff0000 none repeat scroll 0 0 !important;
+  color: #fff;
+}
+
+/* line 533, ../sass/tablet3sep2015.scss */
+.profile-block ul {
+  line-height: 22px;
+  margin: 0px 10px;
+}
+/* line 536, ../sass/tablet3sep2015.scss */
+.profile-block ul li {
+  padding-left: 15px;
+}
+/* line 540, ../sass/tablet3sep2015.scss */
+.profile-block ul li .active {
+  background: url(../../../images/right-arrow.png) no-repeat left center;
+  font-family: "NeoSansPro-Medium";
+}
+
+@media only screen and (max-width: 480px) {
+  /* line 553, ../sass/tablet3sep2015.scss */
+  .mobile-fluid {
+    width: 100% !important;
+  }
+
+  /* line 557, ../sass/tablet3sep2015.scss */
+  .table-responsive {
+    padding: 10px !important;
+  }
+
+  /* line 560, ../sass/tablet3sep2015.scss */
+  .table-top {
+    margin-bottom: 10px;
+  }
+}
+/* ---------------------SUMAN ------------------------------*/
+/* line 586, ../sass/tablet3sep2015.scss */
+.help, .number, .address, .search-icon, .login-icon, .chat, .email, .website {
+  font-size: 0;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+/* line 587, ../sass/tablet3sep2015.scss */
+.login-icon {
+  float: right;
+  background-image: url(../../../images/login.png);
+  background-repeat: no-repeat;
+  background-size: 15px 12px;
+  background-position: center;
+}
+
+/* line 588, ../sass/tablet3sep2015.scss */
+.help {
+  background-image: url(../../../images/help.png);
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-position: center;
+}
+
+/* line 589, ../sass/tablet3sep2015.scss */
+.number {
+  background-image: url(../../../images/number.png);
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-position: center;
+}
+
+/* line 590, ../sass/tablet3sep2015.scss */
+.address {
+  background-image: url(../../../images/address.png);
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-position: center;
+}
+
+/* line 591, ../sass/tablet3sep2015.scss */
+.search-icon {
+  background-image: url(../../../images/search.png);
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-position: center;
+}
+
+/* line 592, ../sass/tablet3sep2015.scss */
+.chat {
+  background-image: url(../../../images/chat.png);
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-position: center;
+}
+
+/* line 593, ../sass/tablet3sep2015.scss */
+.email {
+  background-image: url(../../../images/email.png);
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-position: center;
+}
+
+/* line 594, ../sass/tablet3sep2015.scss */
+.website {
+  background-image: url(../../../images/website.png);
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-position: center;
+}
+
+/* line 596, ../sass/tablet3sep2015.scss */
+.search-fld {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 12px 20px;
+  top: 45px;
+  z-index: 10;
+  background-color: #ffffff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+  display: none;
+}
+
+/* line 597, ../sass/tablet3sep2015.scss */
+.mobile-hide {
+  display: none !important;
+}
+
+/* line 598, ../sass/tablet3sep2015.scss */
+.mobile-show {
+  display: inline-block !important;
+}
+
+/* line 600, ../sass/tablet3sep2015.scss */
+.login-dropdown li {
+  position: unset !important;
+}
+/* line 602, ../sass/tablet3sep2015.scss */
+.login-dropdown li a {
+  padding: 5px 0 !important;
+}
+/* line 606, ../sass/tablet3sep2015.scss */
+.login-dropdown .dropdown-menu {
+  left: auto !important;
+  right: 0 !important;
+  width: 100% !important;
+  padding: 5px 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  margin-top: 0 !important;
+}
+/* line 615, ../sass/tablet3sep2015.scss */
+.login-dropdown .dropdown-menu li a {
+  padding: 5px 10px !important;
+}
+
+/* line 624, ../sass/tablet3sep2015.scss */
+.table-data .table-row div {
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+}
+
+/* line 631, ../sass/tablet3sep2015.scss */
+.table-details div:nth-child(1) {
+  text-align: left;
+}
+
+/* line 634, ../sass/tablet3sep2015.scss */
+.table-details div:nth-child(2) {
+  text-align: center;
+}
+
+/* line 637, ../sass/tablet3sep2015.scss */
+.table-details div:nth-child(3) {
+  text-align: right;
+}
+
+/* line 639, ../sass/tablet3sep2015.scss */
+.table-slide {
+  border: 1px solid #dadada;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  overflow: hidden;
+  padding: 5px !important;
+  display: none;
+  margin-top: 5px;
+}
+
+/* line 647, ../sass/tablet3sep2015.scss */
+.table-control {
+  background: #ffffff !important;
+}
+/* line 649, ../sass/tablet3sep2015.scss */
+.table-control div {
+  background: #ffffff !important;
+}
+/* line 652, ../sass/tablet3sep2015.scss */
+.table-control div:first-child {
+  margin: 5px 0 10px !important;
+}
+
+/* line 656, ../sass/tablet3sep2015.scss */
+.table-row {
+  padding: 0 5px !important;
+  background-color: #f0f1f1;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  margin: 5px 0 0;
+}
+
+/* line 662, ../sass/tablet3sep2015.scss */
+.detailsslide {
+  cursor: pointer;
+}
+
+/* line 663, ../sass/tablet3sep2015.scss */
+.table-head {
+  margin: 10px 0 !important;
+  padding: 0 5px !important;
+  display: table;
+}
+
+/* line 668, ../sass/tablet3sep2015.scss */
+.mobile-nav {
+  display: none;
+}
+
+/* line 671, ../sass/tablet3sep2015.scss */
+.post-button a {
+  border: 1px solid red;
+  border-radius: 5px;
+  display: block;
+  font-family: "NeoSansPro-Medium";
+  font-size: 14px;
+  margin-bottom: 6px;
+  padding: 8px 16px;
+}
+
+/* line 680, ../sass/tablet3sep2015.scss */
+.black-btn {
+  background: #808184 none repeat scroll 0 0;
+  border: 1px solid #808184 !important;
+  color: #fff;
+  font-size: 13px;
+  padding: 7px 20px;
+}
+/* line 686, ../sass/tablet3sep2015.scss */
+.black-btn:hover {
+  background: #fff !important;
+}
+
+/* line 690, ../sass/tablet3sep2015.scss */
+.radio-inline, .checkbox-inline {
+  padding: 0 !important;
+}
+
+/* line 693, ../sass/tablet3sep2015.scss */
+.radio label, .checkbox label {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* line 697, ../sass/tablet3sep2015.scss */
+.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
+  margin: 0 5px 0 0 !important;
+  position: relative !important;
+}
+
+/* line 702, ../sass/tablet3sep2015.scss */
+.bootstrap-select .btn {
+  font-size: 12px !important;
+  padding-left: 7px !important;
+  padding-top: 8px !important;
+  padding-bottom: 7px !important;
+}
+
+/* line 709, ../sass/tablet3sep2015.scss */
+.align-padding-div {
+  padding-bottom: 11px !important;
+}
+
+/* line 712, ../sass/tablet3sep2015.scss */
+.margin-top.bold p {
+  margin-bottom: 10px !important;
+}
+
+/* line 715, ../sass/tablet3sep2015.scss */
+.margin-bottom {
+  margin-bottom: 10px !important;
+}
+
+/* line 718, ../sass/tablet3sep2015.scss */
+.mobile-margin-top {
+  margin-top: 10px !important;
+}
+
+/* line 721, ../sass/tablet3sep2015.scss */
+.margin-none {
+  margin: 0 !important;
+}
+
+/* line 724, ../sass/tablet3sep2015.scss */
+.low-top-padding {
+  padding-top: 7px !important;
+}
+
+/* line 727, ../sass/tablet3sep2015.scss */
+input[type="radio"], input[type="checkbox"] {
+  margin: 0 5px 0 0 !important;
+}
+
+/* line 730, ../sass/tablet3sep2015.scss */
+.gray_bg {
+  background: #f0f1f1;
+  padding: 10px 10px 0;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+/* line 737, ../sass/tablet3sep2015.scss */
+.form-group {
+  margin-bottom: 10px;
+}
+
+/* line 740, ../sass/tablet3sep2015.scss */
+.superscript {
+  position: absolute;
+  top: -4px;
+}
+
+/* line 744, ../sass/tablet3sep2015.scss */
+.post-button {
+  margin: 0 !important;
+}
+
+/* line 747, ../sass/tablet3sep2015.scss */
+.calendar {
+  background-color: #fff !important;
+  background-image: url("../../../images/calendar-icon.png") !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important;
+  background-position: right center !important;
+  margin-bottom: 0px !important;
+}
+
+/* line 755, ../sass/tablet3sep2015.scss */
+.form-group1 {
+  margin-bottom: 10px !important;
+  clear: both !important;
+  display: table;
+  width: 100%;
+}
+/* line 760, ../sass/tablet3sep2015.scss */
+.form-group1 ul {
+  margin-bottom: 0 !important;
+}
+
+/* line 764, ../sass/tablet3sep2015.scss */
+.font-bold {
+  font-family: "NeoSansPro-Medium";
+}
+
+/* line 767, ../sass/tablet3sep2015.scss */
+.profile-bar {
+  height: 10px;
+  width: 100%;
+  background: #bbbdbf;
+}
+/* line 771, ../sass/tablet3sep2015.scss */
+.profile-bar .profile-complete {
+  width: 59%;
+  height: 10px;
+  background: #ed3237;
+}
+
+/* line 778, ../sass/tablet3sep2015.scss */
+.form-group select {
+  margin-bottom: 0 !important;
+}
+/* line 781, ../sass/tablet3sep2015.scss */
+.form-group input {
+  margin-bottom: 0 !important;
+}
+
+/* line 785, ../sass/tablet3sep2015.scss */
+.form-group {
+  margin-bottom: 10px !important;
+}
+
+/* line 788, ../sass/tablet3sep2015.scss */
+.heading {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* line 792, ../sass/tablet3sep2015.scss */
+.main-right-10 {
+  margin-right: 10px !important;
+}
+
+/* line 795, ../sass/tablet3sep2015.scss */
+.border-bottom {
+  border-bottom: 2px solid #e8e8e8;
+}
+
+/* line 798, ../sass/tablet3sep2015.scss */
+.red {
+  color: #ff0000;
+}
+
+/* line 802, ../sass/tablet3sep2015.scss */
+.main-middle select {
+  width: 100%;
+}
+/* line 806, ../sass/tablet3sep2015.scss */
+.main-middle input[type="text"] {
+  width: 100%;
+}
+
+/* line 811, ../sass/tablet3sep2015.scss */
+.border-top {
+  border-top: 1px solid #dddddd;
+  padding-top: 10px !important;
+}
+
+/* line 815, ../sass/tablet3sep2015.scss */
+.heading {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* line 819, ../sass/tablet3sep2015.scss */
+.space-10px {
+  padding: 10px;
+  width: 100%;
+  float: left;
+}
+
+/* line 825, ../sass/tablet3sep2015.scss */
+.right-menu li {
+  width: 100%;
+  float: left;
+  padding: 5px 0px;
+}
+/* line 829, ../sass/tablet3sep2015.scss */
+.right-menu li .fa {
+  margin: 0px 10px 0px 0px;
+}
+
+/* line 834, ../sass/tablet3sep2015.scss */
+.right-head {
+  background: #f0f1f1;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  clear: both;
+  margin: 7px 0;
+  padding: 9px;
+}
+
+/* line 841, ../sass/tablet3sep2015.scss */
+.grey {
+  background: #808184;
+  color: #fff;
+  font-family: "NeoSansPro-Regular";
+  margin: 0 0 2px 0;
+  font-size: 14px;
+}
+
+/* line 849, ../sass/tablet3sep2015.scss */
+.trans_bg {
+  background: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 185px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+  z-index: 10;
+}
+
+/* line 860, ../sass/tablet3sep2015.scss */
+.border-bottom {
+  border-bottom: 2px solid #e8e8e8;
+}
+
+/* line 864, ../sass/tablet3sep2015.scss */
+.border-bottom-red {
+  border-bottom: 2px solid red;
+}
+
+/* line 867, ../sass/tablet3sep2015.scss */
+.margin-top {
+  margin-top: 10px;
+}

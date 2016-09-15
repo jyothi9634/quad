@@ -1,0 +1,329 @@
+
+/* -------------------- FONT FAMILY ---------------------*/
+@font-face {
+	font-family: 'NeoSansPro-Regular';
+	src: url('../../../fonts/NeoSansPro-Regular.eot');
+	src: url('../../../fonts/NeoSansPro-Regular.eot?#iefix') format('embedded-opentype'),
+		url('../../../fonts/NeoSansPro-Regular.woff') format('woff'),
+		url('../../../fonts/NeoSansPro-Regular.ttf')  format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'NeoSansPro';
+	src: url('../../../fonts/NeoSansPro-Bold.eot');
+	src: url('../../../fonts/NeoSansPro-Bold.eot?#iefix') format('embedded-opentype'),
+		url('../../../fonts/NeoSansPro-Bold.woff') format('woff'),
+		url('../../../fonts/NeoSansPro-Bold.ttf')  format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'NeoSansPro';
+	src: url('../../../fonts/NeoSansPro-Light.eot');
+	src: url('../../../fonts/NeoSansPro-Light.eot?#iefix') format('embedded-opentype'),
+		url('../../../fonts/NeoSansPro-Light.woff') format('woff'),
+		url('../../../fonts/NeoSansPro-Light.ttf')  format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'NeoSansPro';
+	src: url('../../../fonts/NeoSansPro-Italic.eot');
+	src: url('../../../fonts/NeoSansPro-Italic.eot?#iefix') format('embedded-opentype'),
+		url('../../../fonts/NeoSansPro-Italic.woff') format('woff'),
+		url('../../../fonts/NeoSansPro-Italic.ttf')  format('truetype');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'NeoSansPro-Medium';
+	src: url('../../../fonts/NeoSansPro-Medium.eot');
+	src: url('../../../fonts/NeoSansPro-Medium.eot?#iefix') format('embedded-opentype'),
+		url('../../../fonts/NeoSansPro-Medium.woff') format('woff'),
+		url('../../../fonts/NeoSansPro-Medium.ttf')  format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'NeoSansPro';
+	src: url('../../../fonts/NeoSansPro-MediumItalic.eot');
+	src: url('../../../fonts/NeoSansPro-MediumItalic.eot?#iefix') format('embedded-opentype'),
+		url('../../../fonts/NeoSansPro-MediumItalic.woff') format('woff'),
+		url('../../../fonts/NeoSansPro-MediumItalic.ttf')  format('truetype');
+	font-weight: 500;
+	font-style: italic;
+}
+
+/* -------------------- VARIABLES ---------------------*/
+
+$padding-none: 0;
+$margin-none: 0;
+$primary-text-color: #727376;
+$primary-font-size: 12px;
+$font-family: 'NeoSansPro-Regular';
+$medium:'NeoSansPro-Medium';
+$fluid-width: 100%;
+$light-gray: #eeeeee;
+$text-left: left;
+$text-right: right;
+$text-center: center;
+
+
+
+/* -------------------- MIXINS ---------------------*/
+
+@mixin radius($radius) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	-o-border-radius: $radius;
+	border-radius: $radius;
+}
+@mixin box-shadow ($shadow) {
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  -o-box-shadow: $shadow;
+  -ms-box-shadow: $shadow;
+  box-shadow: $shadow;
+}
+.select{
+	font-family: "NeoSansPro-Regular";
+	border: 1px solid #cecece;
+	@include radius(4px);
+	padding: 5px;
+	width: 90%;
+	font-size:$primary-font-size;
+}
+.input_txt{
+	font-family: "NeoSansPro-Regular";
+	border: 1px solid #cecece;
+	@include radius(4px);
+	padding: 5px;
+	width: 90%;
+	font-size:$primary-font-size;
+}
+.textarea{
+	font-family: "NeoSansPro-Regular";
+	border: 1px solid #cecece;
+	@include radius(4px);
+	padding: 5px;
+	width: 100%;
+	resize: none;
+	height: 150px;
+	font-size:$primary-font-size;
+}
+
+
+/* -------------------- MAIN CSS ---------------------*/
+body{
+	margin: $padding-none;
+	padding: $margin-none;
+	font-family: $font-family !important;
+	font-size: $primary-font-size !important;
+	color: $primary-text-color !important;
+	
+}
+a{
+	text-decoration: none;
+	color: $primary-text-color !important;
+	&:hover{
+		color: #cc0000 !important;
+		text-decoration: none !important;
+	}
+}
+/* Divya Styles start here */
+.search{ 
+  background-color: #fff !important;
+  background-image: url(../../../images/search-icon.png) !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important;
+  background-position: right center !important;
+}
+.top-strip-inner {
+  .top-text-fld{
+    width: 190px;
+  }
+}
+.main-right {
+  h3.block-head{
+	margin: 0px 0px $margin-none+5px 0px;
+	}
+}
+.main-right{
+  .block{
+    margin: $margin-none;
+  }
+  .right-menu{
+    margin: $margin-none;
+  }
+} 
+.profile-block{
+  h3.block-head{
+  margin-bottom: $margin-none+5px;
+  }
+} 
+.right-head {
+  background: #f0f1f1;
+  @include radius(4px);
+  clear: both;
+  margin: 7px 0;
+  padding: 9px;
+}
+.grey {
+  background: #808184;
+  color: #fff;
+  font-family: $font-family;
+  margin:$margin-none $margin-none $margin-none+2px $margin-none;
+  font-size: 14px;
+   
+}
+.border-bottom {
+  border-bottom: 2px solid #e8e8e8;
+}
+.border-bottom-red{
+  border-bottom: 2px solid red;
+}
+.post-button{
+  a{
+    border: 1px solid red;
+    @include radius(5px);
+    display: block;
+    font-family: $medium;
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: $margin-none+6px;
+    padding: $padding-none+8px $padding-none+16px;
+    text-align: center;
+  }
+}
+.padding-left{
+  padding-left: $padding-none !important;
+}
+.main-middle{
+  input[type="checkbox"], input{
+  margin-bottom:$margin-none+10px;
+  }
+}
+input[type="radio"] {
+  margin-top: 1px !important;
+}
+.bold {
+  font-family: neosanspro-medium;
+}
+.margin-top{
+  margin-top:$margin-none+10px;
+}
+.margin-more{
+   margin:$margin-none+30px $margin-none $margin-none $margin-none;
+}
+.mobile-fluid.small-width {
+    width: 35%;
+}
+
+@media (min-width:1024px) and  (max-width:1200px){
+.mobile-fluid.small-width { width: 50%;}
+
+}
+
+.bold-text { 
+  font-family: $medium;
+}
+.table-boder {
+  float: $text-left;
+  margin-bottom: $margin-none !important;
+  padding: 15px 0 10px;
+  width: $fluid-width;
+}
+.red-border{border-bottom: 2px solid red;}
+.post-plus a{ padding: 8px;}
+.underline{text-decoration: underline;}
+.inline-block-list > li {
+    margin-right: $margin-none+2px;
+    display: inline-block;
+}
+.inline-block-list a {
+  border-right: 1px solid #222;
+   padding-right: 11px;
+}
+.inline-block-list li:last-child a{
+  border-right:none;
+}
+.full-width{
+  width:$fluid-width;
+  display:table;
+  .first-width{
+    width:$fluid-width/2;
+  vertical-align:top;
+  display:table-cell;
+  }
+  .second-width{
+    display:table-cell;
+  vertical-align:middle;
+  text-align:center;
+  background:#fcfcfc;
+  .btn-grey{
+    margin:0px 3px 5px;
+  }
+  span{
+    display: block;
+      padding: 10px 0 0;
+  }
+  }
+}
+.inline-block{
+  ul {
+    display: block;
+  margin:10px 0px;
+  li.text-left{
+    display: inline-block;
+      width: 23%;
+    vertical-align:top;
+  }
+  li.text-left.more-padding{
+    padding-left:50px;
+  }
+  li.text-left.small-width{
+  width:4%;
+  
+  }
+  li.text-left.full-width{
+   width: 60%;
+  }
+  .right-text{
+    float:right;
+    text-align:right;
+  }
+  
+  }
+} 
+.table-view{
+  h4{
+    margin-bottom:0px;
+  }
+}
+.red{
+  color:red !important;
+}
+.no-border-right li a {
+    border-right: 0 none;
+}
+.small-width textarea{
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  font-family: "NeoSansPro-Regular";
+  font-size: 12px;
+  padding: 5px;
+  width:100%; 
+  margin-bottom:10px;
+}
+.main-right-10 {
+    margin-right: 10px;
+}
+input[type="checkbox"]{
+  margin-right: 5px !important;
+}

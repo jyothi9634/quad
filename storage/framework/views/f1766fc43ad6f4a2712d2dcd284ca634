@@ -1,0 +1,47 @@
+<?php /**/ $routeName = strtolower(substr(class_basename(Route::currentRouteAction()), (strpos(class_basename(Route::currentRouteAction()), '@') + 1))) /**/ ?>
+        <!-- LeftNav Content Starts Here -->
+<?php $common = app('App\Components\CommonComponent'); ?>
+
+<?php /**/ $pageServiceId = Session::get('service_id')  /**/ ?>
+<?php if($pageServiceId == 0 || $pageServiceId == ''): ?>
+    <?php /**/ $pageServiceId = '0'  /**/ ?>
+<?php endif; ?>
+
+
+   <span class="post-but pull-right post-button">
+								<?php if((Auth::user()->lkp_role_id == SELLER && Session::get('last_login_role_id')== 0) || (Session::get('last_login_role_id')== SELLER)): ?>
+                                    <?php if(Session::get('service_id') == ROAD_FTL): ?>
+                                    	<?php if($routeName != 'createseller'): ?>
+								<a class="btn post-btn pull-right" href="#" onclick="return checkSession(<?php echo e($pageServiceId); ?>,'/createseller');">+ Post </a>
+                                        <?php endif; ?>
+                                    <?php elseif(Session::get('service_id') == ROAD_PTL 
+                                            || Session::get('service_id') == RAIL 
+                                            || Session::get('service_id') == AIR_DOMESTIC
+                                            || Session::get('service_id') == AIR_INTERNATIONAL
+                                            || Session::get('service_id') == OCEAN
+                                            || Session::get('service_id') == COURIER): ?>
+                                    	<?php if($routeName != 'ptlcreatesellerpost'): ?>
+                                       <a class="btn post-btn pull-right" href="#" onclick="return checkSession(<?php echo e($pageServiceId); ?>,'/ptl/createsellerpost');">+ Post </a>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                <?php elseif((Auth::user()->lkp_role_id == BUYER && (Session::get('last_login_role_id')== 0)) || (Session::get('last_login_role_id')== BUYER)): ?>
+                                    <?php if(Session::get('service_id') == ROAD_FTL): ?>
+                                  		<?php if($routeName != 'createbuyerquote'): ?>
+                                        <a class="btn post-btn pull-right" href="#" onclick="return checkSession(<?php echo e($pageServiceId); ?>,'/createbuyerquote');"> Post & Get Quote </a>
+                                        <?php endif; ?>
+                                    <?php elseif(Session::get('service_id') == ROAD_PTL
+                                            || Session::get('service_id') == RAIL 
+                                            || Session::get('service_id') == AIR_DOMESTIC
+                                            || Session::get('service_id') == AIR_INTERNATIONAL
+                                            || Session::get('service_id') == OCEAN   
+                                            || Session::get('service_id') == COURIER): ?>                                   
+                                    	<?php if($routeName != 'ptlcreatebuyerquote'): ?>
+                                    	<a class="btn post-btn pull-right" href="#" onclick="return checkSession(<?php echo e($pageServiceId); ?>,'/ptl/createbuyerquote');"> Post & Get Quote </a>
+               							<?php endif; ?>
+                                    <?php elseif(Session::get('service_id') == ROAD_INTRACITY): ?>
+                                    <?php if($routeName != 'buyerpost'): ?>
+                                        <a class="btn post-btn pull-right" href="#" onclick="return checkSession(<?php echo e($pageServiceId); ?>,'/intracity/buyer_post');"> Post & Get Quote </a>
+                                    <?php endif; ?>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+    </span>

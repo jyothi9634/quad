@@ -1,0 +1,136 @@
+ <?php $__env->startSection('content'); ?>
+<!-- Page top navigation Starts Here-->
+<?php echo $__env->make('partials.page_top_navigation', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+<div class="main">
+	<div class="container">
+		<?php if(Session::has('sumsg')): ?> 
+                <div class="flash">
+                    <p class="text-success col-sm-12 text-center flash-txt alert-success">
+                        <?php echo e(Session::get('sumsg')); ?>
+
+                    </p>
+		</div>
+		<?php endif; ?>
+                <?php if(Session::has('success')): ?> 
+                <div class="flash">
+                    <p class="text-success col-sm-12 text-center flash-txt alert-success">
+                        <?php echo e(Session::get('success')); ?>
+
+                    </p>
+		</div>
+		<?php endif; ?>
+		<span class="pull-left">
+                    <h1 class="page-title">Messages</h1>
+        </span>
+			<a href="<?php echo e(url('/sentmessages')); ?>"><button class="btn post-btn pull-right flat-btn">Sent Messages</button></a>
+
+		    <div class="clearfix"></div>
+                    <?php /**/ $message_types = '0' /**/ ?>
+                    <?php /**/ $message_services = '0' /**/ ?>
+                    <?php /**/ $from_message = '' /**/ ?>
+                    <?php /**/ $to_message = '' /**/ ?>
+                    <?php /**/ $message_keywords = '' /**/ ?>
+                    
+                <?php if(isset($_GET['message_types']) && $_GET['message_types'] != ''): ?>
+                <?php /**/ $message_types = $_GET['message_types'] /**/ ?>
+                <?php endif; ?>
+                <?php if(isset($_GET['message_services']) && $_GET['message_services'] != ''): ?>
+                <?php /**/ $message_services = $_GET['message_services'] /**/ ?>
+                <?php endif; ?>
+                <?php if(isset($_GET['from_message']) &&  $_GET['from_message'] != ''): ?>
+                <?php /**/ $from_message = $_GET['from_message'] /**/ ?>
+                <?php endif; ?>
+                <?php if(isset($_GET['to_message']) && $_GET['to_message'] != ''): ?>
+                <?php /**/ $to_message = $_GET['to_message'] /**/ ?>
+                <?php endif; ?>
+                <?php if(isset($_GET['message_keywords']) && $_GET['message_keywords'] != ''): ?>
+                <?php /**/ $message_keywords = $_GET['message_keywords'] /**/ ?>
+                <?php endif; ?>
+			<div class="col-md-12 padding-none">
+				<div class="main-inner"> 
+					<div class="main-right">
+						<div class="gray-bg">
+							<div class="col-md-12 padding-none filter">
+									<?php echo Form::open(array('url' => '#', 'id'
+					=>'messages-search', 'class'=>'form-inline' ,'method'=>'get')); ?>
+
+									
+									<div class="col-md-3 form-control-fld">
+										<div class="normal-select">
+											<?php echo Form::select('message_types', $allMessageTypes,
+                                                    $message_types, ['id' => 'message_types', 'class' => 'selectpicker']); ?>
+
+                                                                                </div>
+									</div>
+									<div class="col-md-3 form-control-fld">
+										<div class="normal-select">
+											<?php echo Form::select('message_services', $allServices,
+                                                    $message_services, ['id' => 'message_services', 'class' => 'selectpicker']); ?>
+
+										</div>
+									</div>
+									
+									<div class="col-md-3 form-control-fld">
+										<div class="input-prepend">
+                                                                                    <span class="add-on">
+                                                                                    <i class="fa fa-calendar-o"></i>
+                                                                                    </span>
+											<?php echo Form::text('from_message', $from_message,['id' => 'from_message','class'=>'form-control calendar', 'placeholder' => 'From']); ?>
+
+										</div>
+									</div>
+									<div class="col-md-3 form-control-fld">
+										<div class="input-prepend">
+                                                                                    <span class="add-on">
+                                                                                    <i class="fa fa-calendar-o"></i>
+                                                                                    </span>
+											<?php echo Form::text('to_message', $to_message,['id' => 'to_message','class'=>'form-control calendar', 'placeholder' => 'To']); ?>
+
+										</div>
+									</div>
+
+									<div class="col-md-3 form-control-fld">
+										<div class="input-prepend">
+											<?php echo Form::text('message_keywords', $message_keywords,['id' => 'message_keywords','class'=>'top-text-fld form-control form-control1', 'placeholder' => 'Search']); ?>
+
+										</div>
+									</div>
+									<div class="col-md-3 form-control-fld">
+										<div class="input-prepend">
+										<?php echo Form::submit('Go', array( 'class'=>'btn add-btn pull-left')); ?> 
+                        
+                                                                                	
+										</div>
+									</div>
+									<div class="col-md-6 form-control-fld">
+										<span class="btn add-btn pull-right"><a href="#" class="new_message">New Message</a></span>
+									</div>
+									 <?php echo Form::close(); ?> 
+									
+								</div>
+
+						</div> <!--gray-bg -->
+						
+						<div class="table-div">
+							<div class="table-data">
+								<?php echo $grid; ?>
+
+							</div>
+						</div>
+					</div> <!-- main-right -->	
+
+
+				</div> <!-- main-inner -->
+			</div> <!-- 		col-md-12 padding-none -->
+			
+	
+	</div><!-- container div -->
+</div> <!-- Main div -->	
+
+
+	
+<?php echo $__env->make('partials.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

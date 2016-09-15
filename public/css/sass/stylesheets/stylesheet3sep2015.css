@@ -1,0 +1,365 @@
+/* -------------------- FONT FAMILY ---------------------*/
+@font-face {
+  font-family: 'NeoSansPro-Regular';
+  src: url("../../../fonts/NeoSansPro-Regular.woff") format("woff"), url("../../../fonts/NeoSansPro-Regular.ttf") format("truetype"), url("../../../fonts/NeoSansPro-Regular.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NeoSansPro-Bold';
+  src: url("../../../fonts/NeoSansPro-Bold.woff") format("woff"), url("../../../fonts/NeoSansPro-Bold.ttf") format("truetype"), url("../../../fonts/NeoSansPro-Bold.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NeoSansPro-Italic';
+  src: url("../../../fonts/NeoSansPro-Italic.woff") format("woff"), url("../../../fonts/NeoSansPro-Italic.ttf") format("truetype"), url("../../../fonts/NeoSansPro-Italic.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NeoSansPro-Light';
+  src: url("../../../fonts/NeoSansPro-Light.woff") format("woff"), url("../../../fonts/NeoSansPro-Light.ttf") format("truetype"), url("../../../fonts/NeoSansPro-Light.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NeoSansPro-Medium';
+  src: url("../../../fonts/NeoSansPro-Medium.woff") format("woff"), url("../../../fonts/NeoSansPro-Medium.ttf") format("truetype"), url("../../../fonts/NeoSansPro-Medium.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NeoSansPro-MediumItalic';
+  src: url("../../../fonts/NeoSansPro-MediumItalic.woff") format("woff"), url("../../../fonts/NeoSansPro-MediumItalic.ttf") format("truetype"), url("../../../fonts/NeoSansPro-MediumItalic.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* -------------------- VARIABLES ---------------------*/
+/* -------------------- MIXINS ---------------------*/
+/* line 74, ../sass/stylesheet3sep2015.scss */
+.select {
+  font-family: "NeoSansPro-Regular";
+  border: 1px solid #cecece;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 5px;
+  width: 90%;
+  font-size: 12px;
+}
+
+/* line 82, ../sass/stylesheet3sep2015.scss */
+.input_txt {
+  font-family: "NeoSansPro-Regular";
+  border: 1px solid #cecece;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 5px;
+  width: 90%;
+  font-size: 12px;
+}
+
+/* line 90, ../sass/stylesheet3sep2015.scss */
+.textarea {
+  font-family: "NeoSansPro-Regular";
+  border: 1px solid #cecece;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 5px;
+  width: 100%;
+  resize: none;
+  height: 150px;
+  font-size: 12px;
+}
+
+/* -------------------- MAIN CSS ---------------------*/
+/* line 103, ../sass/stylesheet3sep2015.scss */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "NeoSansPro-Regular" !important;
+  font-size: 12px !important;
+  color: #727376 !important;
+}
+
+/* line 111, ../sass/stylesheet3sep2015.scss */
+a {
+  text-decoration: none;
+  color: #727376 !important;
+}
+/* line 114, ../sass/stylesheet3sep2015.scss */
+a:hover {
+  color: #cc0000 !important;
+  text-decoration: none !important;
+}
+
+/* Divya Styles start here */
+/* line 120, ../sass/stylesheet3sep2015.scss */
+.search {
+  background-color: #fff !important;
+  background-image: url(../../../images/search-icon.png) !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important;
+  background-position: right center !important;
+}
+
+/* line 128, ../sass/stylesheet3sep2015.scss */
+.top-strip-inner .top-text-fld {
+  width: 190px;
+}
+
+/* line 133, ../sass/stylesheet3sep2015.scss */
+.main-right h3.block-head {
+  margin: 0px 0px 5px 0px;
+}
+
+/* line 138, ../sass/stylesheet3sep2015.scss */
+.main-right .block {
+  margin: 0;
+}
+/* line 141, ../sass/stylesheet3sep2015.scss */
+.main-right .right-menu {
+  margin: 0;
+}
+
+/* line 146, ../sass/stylesheet3sep2015.scss */
+.profile-block h3.block-head {
+  margin-bottom: 5px;
+}
+
+/* line 150, ../sass/stylesheet3sep2015.scss */
+.right-head {
+  background: #f0f1f1;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  clear: both;
+  margin: 7px 0;
+  padding: 9px;
+}
+
+/* line 157, ../sass/stylesheet3sep2015.scss */
+.grey {
+  background: #808184;
+  color: #fff;
+  font-family: "NeoSansPro-Regular";
+  margin: 0 0 2px 0;
+  font-size: 14px;
+}
+
+/* line 165, ../sass/stylesheet3sep2015.scss */
+.border-bottom {
+  border-bottom: 2px solid #e8e8e8;
+}
+
+/* line 168, ../sass/stylesheet3sep2015.scss */
+.border-bottom-red {
+  border-bottom: 2px solid red;
+}
+
+/* line 172, ../sass/stylesheet3sep2015.scss */
+.post-button a {
+  border: 1px solid red;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  display: block;
+  font-family: "NeoSansPro-Medium";
+  font-size: 12px;
+  line-height: 14px;
+  margin-bottom: 6px;
+  padding: 8px 16px;
+  text-align: center;
+}
+
+/* line 184, ../sass/stylesheet3sep2015.scss */
+.padding-left {
+  padding-left: 0 !important;
+}
+
+/* line 188, ../sass/stylesheet3sep2015.scss */
+.main-middle input[type="checkbox"], .main-middle input {
+  margin-bottom: 10px;
+}
+
+/* line 192, ../sass/stylesheet3sep2015.scss */
+input[type="radio"] {
+  margin-top: 1px !important;
+}
+
+/* line 195, ../sass/stylesheet3sep2015.scss */
+.bold {
+  font-family: neosanspro-medium;
+}
+
+/* line 198, ../sass/stylesheet3sep2015.scss */
+.margin-top {
+  margin-top: 10px;
+}
+
+/* line 201, ../sass/stylesheet3sep2015.scss */
+.margin-more {
+  margin: 30px 0 0 0;
+}
+
+/* line 204, ../sass/stylesheet3sep2015.scss */
+.mobile-fluid.small-width {
+  width: 35%;
+}
+
+@media (min-width: 1024px) and (max-width: 1200px) {
+  /* line 209, ../sass/stylesheet3sep2015.scss */
+  .mobile-fluid.small-width {
+    width: 50%;
+  }
+}
+/* line 213, ../sass/stylesheet3sep2015.scss */
+.bold-text {
+  font-family: "NeoSansPro-Medium";
+}
+
+/* line 216, ../sass/stylesheet3sep2015.scss */
+.table-boder {
+  float: left;
+  margin-bottom: 0 !important;
+  padding: 15px 0 10px;
+  width: 100%;
+}
+
+/* line 222, ../sass/stylesheet3sep2015.scss */
+.red-border {
+  border-bottom: 2px solid red;
+}
+
+/* line 223, ../sass/stylesheet3sep2015.scss */
+.post-plus a {
+  padding: 8px;
+}
+
+/* line 224, ../sass/stylesheet3sep2015.scss */
+.underline {
+  text-decoration: underline;
+}
+
+/* line 225, ../sass/stylesheet3sep2015.scss */
+.inline-block-list > li {
+  margin-right: 2px;
+  display: inline-block;
+}
+
+/* line 229, ../sass/stylesheet3sep2015.scss */
+.inline-block-list a {
+  border-right: 1px solid #222;
+  padding-right: 11px;
+}
+
+/* line 233, ../sass/stylesheet3sep2015.scss */
+.inline-block-list li:last-child a {
+  border-right: none;
+}
+
+/* line 236, ../sass/stylesheet3sep2015.scss */
+.full-width {
+  width: 100%;
+  display: table;
+}
+/* line 239, ../sass/stylesheet3sep2015.scss */
+.full-width .first-width {
+  width: 50%;
+  vertical-align: top;
+  display: table-cell;
+}
+/* line 244, ../sass/stylesheet3sep2015.scss */
+.full-width .second-width {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  background: #fcfcfc;
+}
+/* line 249, ../sass/stylesheet3sep2015.scss */
+.full-width .second-width .btn-grey {
+  margin: 0px 3px 5px;
+}
+/* line 252, ../sass/stylesheet3sep2015.scss */
+.full-width .second-width span {
+  display: block;
+  padding: 10px 0 0;
+}
+
+/* line 259, ../sass/stylesheet3sep2015.scss */
+.inline-block ul {
+  display: block;
+  margin: 10px 0px;
+}
+/* line 262, ../sass/stylesheet3sep2015.scss */
+.inline-block ul li.text-left {
+  display: inline-block;
+  width: 23%;
+  vertical-align: top;
+}
+/* line 267, ../sass/stylesheet3sep2015.scss */
+.inline-block ul li.text-left.more-padding {
+  padding-left: 50px;
+}
+/* line 270, ../sass/stylesheet3sep2015.scss */
+.inline-block ul li.text-left.small-width {
+  width: 4%;
+}
+/* line 274, ../sass/stylesheet3sep2015.scss */
+.inline-block ul li.text-left.full-width {
+  width: 60%;
+}
+/* line 277, ../sass/stylesheet3sep2015.scss */
+.inline-block ul .right-text {
+  float: right;
+  text-align: right;
+}
+
+/* line 285, ../sass/stylesheet3sep2015.scss */
+.table-view h4 {
+  margin-bottom: 0px;
+}
+
+/* line 289, ../sass/stylesheet3sep2015.scss */
+.red {
+  color: red !important;
+}
+
+/* line 292, ../sass/stylesheet3sep2015.scss */
+.no-border-right li a {
+  border-right: 0 none;
+}
+
+/* line 295, ../sass/stylesheet3sep2015.scss */
+.small-width textarea {
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  font-family: "NeoSansPro-Regular";
+  font-size: 12px;
+  padding: 5px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* line 304, ../sass/stylesheet3sep2015.scss */
+.main-right-10 {
+  margin-right: 10px;
+}
+
+/* line 307, ../sass/stylesheet3sep2015.scss */
+input[type="checkbox"] {
+  margin-right: 5px !important;
+}

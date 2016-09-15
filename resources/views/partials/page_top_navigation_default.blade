@@ -1,0 +1,88 @@
+{{--*/ $routeName = strtolower(substr(class_basename(Route::currentRouteAction()), (strpos(class_basename(Route::currentRouteAction()), '@') + 1))) /*--}}
+        <!-- LeftNav Content Starts Here -->
+@inject('common', 'App\Components\CommonComponent')
+{{--*/ $pageServiceId = Session::get('service_id')  /*--}}
+@if($pageServiceId == 0 || $pageServiceId == '')
+    {{--*/ $pageServiceId = '0'  /*--}}
+@endif
+
+{{--*/  $homeClass = '';   /*--}}
+{{--*/  $messageClass = '';   /*--}}
+{{--*/  $postClass = '';   /*--}}
+{{--*/  $sellerpostClass = '';   /*--}}
+{{--*/  $networkClass = '';   /*--}}
+{{--*/  $masterClass = '';  /*--}}
+{{--*/  $orderClass = '';  /*--}}
+  
+        @if($routeName == 'index')
+       
+     {{--*/  $homeClass = '1' /*--}}
+    @else
+     {{--*/    $homeClass = '0' /*--}}
+     @endif
+   
+     {{--*/    $messageClass = '0' /*--}}
+     
+ @if(Auth::user()->lkp_role_id == BUYER)
+            
+            @if($routeName == 'buyerpostslist' || $routeName == 'getpostbuyercounteroffer' ||
+                $routeName == 'editbuyer' || $routeName == 'createbuyerquote' || $routeName == 'ptlcreatebuyerquote')
+                
+       {{--*/  $postClass = '1'; /*--}}
+       @elseif(Auth::user()->lkp_role_id == SELLER)
+            @if($routeName == 'sellerpostdetails' || $routeName== 'sellerpostslist'
+             || $routeName== 'sellerlists' || $routeName== 'createseller'
+            || $routeName == 'updateseller' || $routeName == 'ptlcreatesellerpost')
+
+       {{--*/     $sellerpostClass = '1'  /*--}}
+    @else
+     {{--*/    $postClass = '0' /*--}}
+     {{--*/    $sellerpostClass = '0' /*--}}
+     @endif @endif @endif 
+    
+     
+     
+     @if($routeName == 'sellerorders' || $routeName == 'buyerorders' ||
+                            $routeName == 'showdetails' || $routeName == 'buyerordershowdetails' ||
+                            $routeName == 'consignmentpickup')
+       
+      {{--*/  $orderClass = '1'  /*--}}
+    @else
+      {{--*/    $orderClass = '0'  /*--}}
+     @endif
+    
+     @if($routeName == 'viewzone')
+       
+      {{--*/  $masterClass = '1'  /*--}}
+    @else
+      {{--*/   $masterClass = '0'  /*--}}
+     @endif
+     {{--*/ $networkClass = '0' /*--}}
+		<div class="top-menu-strip">
+            <div class="container">
+                <div class="pull-left">
+                    <a @if($homeClass == '1') class="active" @endif href="/home">Home</a>
+                    <a @if($messageClass == '1') class="active" @endif href="#">Messages</a>
+                  @if(Auth::user()->lkp_role_id == BUYER)
+                    <a  @if($postClass == '1') class="active" @endif href="#" onclick="return checkSession({{$pageServiceId}},'/buyerposts');">Posts</a>
+                    @elseif(Auth::user()->lkp_role_id == SELLER)
+                     <a @if($sellerpostClass == '1') class="active" @endif href="#" onclick="return checkSession({{$pageServiceId}},'/sellerlist');">
+                     Posts
+                     @endif
+                    
+                   @if(Auth::user()->lkp_role_id==SELLER)
+                     <a  @if($orderClass == '1') class="active" @endif href="#" onclick="return checkSession({{$pageServiceId}},'/orders/seller_orders');">Orders
+	               @elseif(Auth::user()->lkp_role_id==BUYER)
+              		<a  @if($orderClass == '1') class="active" @endif  href="#"  onclick="return checkSession({{$pageServiceId}},'/orders/buyer_orders');">Orders
+                   @endif
+                    <a  @if($networkClass == '1') class="active" @endif href="#">Network</a>
+                </div>
+                <div class="pull-right icon-block">
+                    <a href="#">
+                        <i class="fa fa-cog"></i>
+                        <span class="count">5</span>
+                    </a>
+
+                </div>
+            </div>
+        </div>       

@@ -1,0 +1,413 @@
+<?php $__env->startSection('content'); ?>
+<?php $commoncomponent = app('App\Components\CommonComponent'); ?>
+<div class="container-inner">
+	
+	<!-- Page Center Content Starts Here -->
+	<div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 main-middle">
+		<div class="block">
+			<div class="tab-nav underline">
+				<?php echo $__env->make('partials.network_page_top_navigation', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+			</div>
+		</div>
+	</div>
+	
+   <div class="main">
+      <div class="container">
+         <div class="crum-2"><i class="fa  fa-angle-right"></i>
+         <a href="/network">Network</a></div>
+         <span class="pull-left">
+            <h1 class="page-title">Network</h1>
+         </span>
+         
+         <div class="gray-bg network">
+            
+            <?php /* Network Header file */ ?>
+            <?php echo $__env->make('networks/header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>            
+
+            <div class="col-md-12">
+               <ul class="nav-tabs">
+                  <li class="active"><a data-toggle="tab" href="#news-feed">News Feed</a></li>
+                  <li><a data-toggle="tab" href="#connections">Connections</a></li>
+                  <li><a data-toggle="tab" href="#services">Services</a></li>
+               </ul>
+               
+               <?php /* Profile and Potential Partners */ ?>
+               <?php echo $__env->make('networks/profile-potential-count', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+               
+               <div class="tab-content">
+                  
+                  <?php /* Network news feed section */ ?>
+                  <?php echo $__env->make('networks/news-feed', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                  
+                  <div id="connections" class="tab-pane fade">
+                              <div class="clearfix"></div>
+                              <div class="col-md-3 padding-none">
+                                 <ul class="nav-tabs connections-tabs">
+                                    <li class="active"><a data-toggle="tab" href="#partners">Partners</a></li>
+                                    <li><a data-toggle="tab" href="#following">Following</a></li>
+                                    <li><a data-toggle="tab" href="#groups">Groups (Memberships)</a></li>
+                                 </ul>
+                              </div>
+                              <div class="col-md-9 padding-none">
+                                 <div class="clearfix"></div>
+                                 <div class="tab-content connections-content-tabs">
+                                    <div id="partners" class="tab-pane fade in active">
+                                       <div class="inner-block-bg">
+                                          <div class="col-md-6 form-control-fld padding-none">
+                                             <div class="input-prepend">
+                                                <span class="add-on"><i class="fa fa-search"></i></span>
+                                                <input type="text" placeholder="Search" name="partner_search" id="partner_search"  class="form-control">
+                                             </div>
+                                          </div>
+                                          <div class="col-md-1 form-control-fld">
+                                             <button class="btn add-btn" id="btnpartner" type="submit">Go</button>
+                                          </div>
+                                          <div class="clearfix"></div>
+                                          <div id="myCarousel1" class="carousel slide" data-ride="carousel1">
+                                             <!-- Wrapper for slides -->
+                                             <div class="carousel-inner" role="listbox">
+                                                <?php /**/ $g =1; $ga=1; /**/ ?>
+                                             <?php foreach($getLogoPartners as $key=>$getLogoPartner): ?>
+                                             
+                                             <?php if($getLogoPartner->user_id == Auth::user()->id): ?>
+                                             <?php /**/ $getLogoPartner->partner_user_id = $getLogoPartner->partner_user_id /**/ ?>
+                                             <?php else: ?>
+                                             <?php /**/ $getLogoPartner->partner_user_id = $getLogoPartner->user_id /**/ ?> 
+                                             <?php endif; ?>
+                                             
+                                          		<?php /**/ $getLogo = $getLogoPartner->logo; $active=''; /**/ ?>
+                                          		
+                                          		<?php /**/ $partner_id_profile = "network/profile/$getLogoPartner->partner_user_id" /**/ ?>
+                                          		
+                                          		<?php if($getLogoPartner->lkp_role_id == 2): ?>
+                                          		<?php /**/ $url = "uploads/seller/$getLogoPartner->partner_user_id/" /**/ ?>
+                                          		<?php else: ?>
+                                          		<?php /**/ $url = "uploads/buyer/$getLogoPartner->partner_user_id/" /**/ ?>
+                                          		<?php endif; ?>
+                                          		<?php /**/ $getlogopartner = $url.$getLogo /**/ ?>
+                                          		
+                                          		
+                                          		
+                                          		
+                                          		<?php if($ga==1): ?>
+                                          			<?php /**/ $active = 'active' /**/ ?>
+                                          		<?php endif; ?>
+                                          		
+                                          		
+                                          		 <?php if($g%5 == 1): ?>
+											      
+											     <div class="item <?php echo e($active); ?>">
+                                                <ul>   
+											    <?php endif; ?>
+											    
+											    <?php if($getLogo != ''): ?>
+												    <?php if(\File::exists($getlogopartner)): ?>
+												    
+												    <?php /**/ $getlogopartner =  $commoncomponent::str_replace_last( '.' , '_124_73.' , $getlogopartner ) /**/ ?>
+												    <a href='<?php echo e(url($partner_id_profile)); ?>'>
+												    <li class ='descriptionuser' id ='<?php echo e($getLogoPartner->partner_user_id); ?>'>
+												    <img id ='<?php echo e($getLogoPartner->partner_user_id); ?>' src="<?php echo e(url($getlogopartner)); ?>"></li>
+												    </a>
+												    <?php else: ?>
+												    <a href='<?php echo e(url($partner_id_profile)); ?>'>
+												    <li class ='descriptionuser' id ='<?php echo e($getLogoPartner->partner_user_id); ?>'>
+												    <img id ='<?php echo e($getLogoPartner->partner_user_id); ?>' src="../images/profile-pic.png">
+												    </li>
+												    </a>
+												    <?php endif; ?>
+												<?php else: ?>
+											    <a href='<?php echo e(url($partner_id_profile)); ?>'>
+											    <li class ='descriptionuser' id ='<?php echo e($getLogoPartner->partner_user_id); ?>'>
+											    <img id ='<?php echo e($getLogoPartner->partner_user_id); ?>' src="../images/profile-pic.png">
+											    </li>
+											    </a>
+											    <?php endif; ?>
+											   <?php if($g%5 == 0): ?>
+											    
+											    </ul>
+											    </div>
+											    <?php endif; ?>
+											    <?php /**/ $g++; $ga++/**/ ?>
+											  <?php endforeach; ?>
+											
+											<?php if($g%5 != 1): ?>
+												</ul>
+                                                </div>
+                                             <?php endif; ?>
+                                             </div>
+                                             <!-- Left and right controls -->
+                                             <a class="left carousel-control" href="#myCarousel1" role="button" data-slide="prev">
+                                             <i class="fa fa-chevron-left"></i>
+                                             </a>
+                                             <a class="right carousel-control" href="#myCarousel1" role="button" data-slide="next">
+                                             <i class="fa fa-chevron-right"></i>
+                                             </a>
+                                          </div>
+                                          <div class="clearfix"></div>
+                                          <div id='partner-div'>
+                                          <h3>Description</h3>
+                                          <p id='desctiption_partner'></p>
+                                          </div>
+                                          <div class ='nodata-partners'>No Partners are Available</div>
+                                       </div>
+                                       
+                                    </div>
+                                    <div id="following" class="tab-pane fade">
+                                    <?php /**/ $countFollowers = count($getLogoFollowers) /**/ ?>
+                                       <div class="inner-block-bg">
+                                          <div class="col-md-6 form-control-fld padding-none">
+                                             <div class="input-prepend">
+                                                <span class="add-on"><i class="fa fa-search"></i></span>
+                                                <input type="text" placeholder="Search" name="follwing_search" id="follwing_search" class="form-control">
+                                              </div>
+                                          </div>
+                                          <div class="col-md-2 form-control-fld">
+                                             <button class="btn add-btn" id="btnfollwing" type="submit">Go</button>
+                                          </div>
+                                          <div class="clearfix"></div>
+                                          <div id="myCarousel2" class="carousel slide" data-ride="carousel2">
+                                             <!-- Wrapper for slides -->
+                                             <div class="carousel-inner" role="listbox">
+                                                 <?php /**/ $f = 1; $fa=1; /**/ ?>
+                                             <?php foreach($getLogoFollowers as $key=>$getLogoFollower): ?>
+                                          	 <?php /**/ $getLogo = $getLogoFollower->logo; $active=''; /**/ ?>
+                                          	 
+                                          	 <?php /**/ $follower_user_id_profile = "network/profile/$getLogoFollower->follower_user_id" /**/ ?>
+                                          	 
+                                          	 <?php if($getLogoFollower->lkp_role_id == 2): ?>
+                                          		<?php /**/ $url = "uploads/seller/$getLogoFollower->follower_user_id/" /**/ ?>
+                                          		<?php else: ?>
+                                          		<?php /**/ $url = "uploads/buyer/$getLogoFollower->follower_user_id/" /**/ ?>
+                                          		<?php endif; ?>
+                                          		<?php /**/ $getlogofollower = $url.$getLogo /**/ ?>
+                                          	 
+                                          	 
+                                          	 
+                                          	 
+                                          		<?php if($fa==1): ?>
+                                          			<?php /**/ $active = 'active' /**/ ?>
+                                          		<?php endif; ?>
+                                          		
+                                          		
+                                          		 <?php if($f%5 == 1): ?>
+											      
+											     <div class="item <?php echo e($active); ?>">
+                                                <ul>   
+											    <?php endif; ?>
+											    
+											    
+											     <?php if($getLogo != ''): ?>
+												     <?php if(\File::exists($getlogofollower)): ?>
+												     
+												     <?php /**/ $getlogofollower =  $commoncomponent::str_replace_last( '.' , '_124_73.' , $getlogofollower ) /**/ ?>
+												     <a href='<?php echo e(url($follower_user_id_profile)); ?>'>
+												    <li class ='descriptionfollows' id ='<?php echo e($getLogoFollower->follower_user_id); ?>'>
+												    <img id ='<?php echo e($getLogoFollower->follower_user_id); ?>' src="<?php echo e(url($getlogofollower)); ?>"></li>
+												    </a>
+												     <?php else: ?>
+												     
+												    <a href='<?php echo e(url($follower_user_id_profile)); ?>'>
+												    <li class ='descriptionfollows' id ='<?php echo e($getLogoFollower->follower_user_id); ?>'>
+												    <img id ='<?php echo e($getLogoFollower->follower_user_id); ?>' src="../images/profile-pic.png">
+												    </li>
+												    </a>
+												    <?php endif; ?>
+											    
+											     <?php else: ?>
+											     
+											    <a href='<?php echo e(url($follower_user_id_profile)); ?>'>
+											    <li class ='descriptionfollows' id ='<?php echo e($getLogoFollower->follower_user_id); ?>'>
+											    <img id ='<?php echo e($getLogoFollower->follower_user_id); ?>' src="../images/profile-pic.png">
+											    </li>
+											    </a>
+											    <?php endif; ?>
+											   <?php if($f%5 == 0): ?>
+											    
+											    </ul>
+											    </div>
+											    <?php endif; ?>
+											    <?php /**/ $f++; $fa++/**/ ?>
+											  <?php endforeach; ?>
+											
+											<?php if($f%5 != 1): ?>
+												</ul>
+                                                </div>
+                                             <?php endif; ?>
+                                             </div>
+                                             <!-- Left and right controls -->
+                                             <a class="left carousel-control" href="#myCarousel2" role="button" data-slide="prev">
+                                             <i class="fa fa-chevron-left"></i>
+                                             </a>
+                                             <a class="right carousel-control" href="#myCarousel2" role="button" data-slide="next">
+                                             <i class="fa fa-chevron-right"></i>
+                                             </a>
+                                          </div>
+                                          <div class="clearfix"></div>
+                                          <div id='follows-div'>
+                                          <h3>Description</h3>
+                                          <p id='desctiption_follows'></p>
+                                       </div>
+                                       <div class ='nodata-followers'>No Followers are Available</div>
+                                       </div>
+                                       
+                                       
+                                    </div>
+                                    
+                                   
+                                    
+                                    <div id="groups" class="tab-pane fade">
+                                    
+                                    <?php /**/ $count_groups = count($getLogoCommunitygroups) /**/ ?>
+                                       <div class="inner-block-bg">
+                                          <div class="col-md-6 form-control-fld padding-none">
+                                             <div class="input-prepend">
+                                                <span class="add-on"><i class="fa fa-search"></i></span>
+                                                <input type="text" placeholder="Search" name="group_search" id="group_search" class="form-control">
+                                             </div>
+                                          </div>
+                                          <div class="col-md-2 form-control-fld">
+                                             <button class="btn add-btn" id="btngroup" type="submit">Go</button>
+                                          </div>
+                                          <div class="clearfix"></div>
+                                          <div id="myCarousel3" class="carousel slide" data-ride="carousel3">
+                                             <!-- Wrapper for slides -->
+                                             <div class="carousel-inner" role="listbox">
+                                             <?php /**/ $id = Auth::User()->id /**/ ?>
+                                             <?php /**/ $p = 1; $pa=1; $url = "uploads/community/groups/$id/" /**/ ?>
+                                             <?php foreach($getLogoCommunitygroups as $key=>$getLogoCommunitygroup): ?>
+                                          	 	<?php /**/ $getLogogroup = $getLogoCommunitygroup->logo_file_name; $active=''; /**/ ?>
+                                          	 	<?php /**/ $getLogogroup = $url.$getLogogroup /**/ ?>
+                                          	 	
+                                          	 	<?php /**/ $group_user_id_profile = "community/groupdetails/$getLogoCommunitygroup->id" /**/ ?>
+                                          	 	
+                                          	 	
+                                          		<?php if($pa==1): ?>
+                                          			<?php /**/ $active = 'active' /**/ ?>
+                                          		<?php endif; ?>
+                                          		<?php if($p%5 == 1): ?>
+											         <div class="item <?php echo e($active); ?>">
+                                                	 	<ul>   
+											    <?php endif; ?>
+											    <?php if($getLogogroup != ''): ?>
+												    <?php if(\File::exists($getLogogroup)): ?>
+												    
+												    <a href='<?php echo e(url($group_user_id_profile)); ?>'>
+												    <li class ='descriptiongroups' id ='<?php echo e($getLogoCommunitygroup->id); ?>'>
+												    <img id ='<?php echo e($getLogoCommunitygroup->id); ?>' src="<?php echo e(url($getLogogroup)); ?>"></li>
+												    </a>
+												     <?php else: ?>
+												     <a href='<?php echo e(url($group_user_id_profile)); ?>'>
+												    <li class ='descriptiongroups' id ='<?php echo e($getLogoCommunitygroup->id); ?>'>
+												    <img id ='<?php echo e($getLogoCommunitygroup->id); ?>' src="../images/profile-pic.png">
+												    </li>
+												    </a>
+												    <?php endif; ?>
+											    
+											     <?php else: ?>
+											     <a href='<?php echo e(url($group_user_id_profile)); ?>'>
+											    <li class ='descriptiongroups' id ='<?php echo e($getLogoCommunitygroup->id); ?>'>
+											    <img id ='<?php echo e($getLogoCommunitygroup->id); ?>' src="../images/profile-pic.png">
+											    </li>
+											    </a>
+											    <?php endif; ?>
+											    <?php if($p%5 == 0): ?>
+											    </ul>
+                                                </div>
+											    <?php endif; ?>
+											    
+											    <?php /**/ $p++; $pa++/**/ ?>
+											<?php endforeach; ?>
+											
+											<?php if($p%5 != 1): ?>
+													</ul>
+                                                </div>
+                                             <?php endif; ?>
+                                             </div>
+                                             <!-- Left and right controls -->
+                                             <a class="left carousel-control" href="#myCarousel3" role="button" data-slide="prev">
+                                             <i class="fa fa-chevron-left"></i>
+                                             </a>
+                                             <a class="right carousel-control" href="#myCarousel3" role="button" data-slide="next">
+                                             <i class="fa fa-chevron-right"></i>
+                                             </a>
+                                          </div>
+                                          <div class="clearfix"></div>
+                                          <div id='groups-div'>
+                                          <h3 id='desctiption_groups_head'>Description</h3>
+                                          <p  id='desctiption_groups'></p>
+                                       </div>
+                                       <div class ='nodata-groups'>No Groups are Available</div>
+                                       </div>
+                                       
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+
+                  <div id="services" class="tab-pane fade">
+                     <ul class="nav-tabs inner-tabs">
+                        <li class="active"><a data-toggle="tab" href="#offered">Services Offered</a></li>
+                        <li><a data-toggle="tab" href="#required">Services Required</a></li>
+                     </ul>
+                     <div class="clearfix"></div>
+                     <div class="tab-content feed-tab-content">
+                        <div id="offered" class="tab-pane fade in active">
+                           <div class="inner-block-bg padding-10">
+                              <?php /**/ $count_services_offered = count($servicesOfferlists) /**/ ?>
+                              
+                              <?php if($count_services_offered>0): ?>
+                              <div>
+								<ul>
+                              <?php foreach($servicesOfferlists as $key=>$servicesOfferlist): ?>
+											            
+							<li><a onclick="return subcriptionuserservice(<?php echo e($key); ?>,'/sellerlist')"><?php echo e($commoncomponent::getGroupName($key)); ?> <?php echo e($servicesOfferlist); ?></a></li>
+											    
+
+							<?php endforeach; ?>
+								</ul>
+							</div>
+							<?php else: ?>
+							
+							<div>This User No Services Offered</div>
+							
+							<?php endif; ?>
+                           </div>
+                        </div>
+                        <div id="required" class="tab-pane fade">
+                           <div class="inner-block-bg padding-10">                              
+                              <?php /**/ $count_services_required = count($servicesRequriedlists) /**/ ?>
+                              
+                              <?php if($count_services_required>0): ?>
+                              <div>
+								<ul>
+                              <?php foreach($servicesRequriedlists as $key=>$servicesRequriedlist): ?>
+											            
+							<li><a onclick="return buyersetservice(<?php echo e($key); ?>,'/buyerposts')"><?php echo e($commoncomponent::getGroupName($key)); ?> <?php echo e($servicesRequriedlist); ?></a></li>
+											    
+
+							<?php endforeach; ?>
+								</ul>
+							</div>
+							<?php else: ?>
+							
+							<div>This User No Services Required</div>
+							
+							<?php endif; ?>
+                              
+                              
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="clearfix"></div>
+		
+</div>
+<?php echo $__env->make('partials.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('network_app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

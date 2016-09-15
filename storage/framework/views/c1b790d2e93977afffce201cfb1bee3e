@@ -1,0 +1,288 @@
+<?php /**/ $routeName = strtolower(substr(class_basename(Route::currentRouteAction()), (strpos(class_basename(Route::currentRouteAction()), '@') + 1))) /**/ ?>
+<!-- Header Content Starts Here-->
+<?php $common = app('App\Components\CheckoutComponent'); ?>
+<?php $common = app('App\Components\CommonComponent'); ?>
+<style>
+    .cart-head{ font-size: 30px; margin: 3px 0px;}
+</style>
+<?php /**/ $pageServiceId = Session::get('service_id')  /**/ ?>
+<?php if($pageServiceId == 0 || $pageServiceId == ''): ?>
+<?php /**/ $pageServiceId = '0'  /**/ ?>
+<?php endif; ?>
+
+<!-- <div class="col-md-12 col-sm-12 col-xs-12 main-header">	 -->
+<!--     <div class="row"> -->
+    
+    
+
+	<?php if(isset(Auth::user()->id) && Auth::user()->id != ''): ?>
+    <div class="main-outer">
+    <?php else: ?>
+    <div class="main-outer beforeLogin">
+    <?php endif; ?>
+    
+    <header>
+    			<div class="container">
+				<div class="logo-div">
+				 
+					<a href="/home"><img src="<?php echo e(asset('/images/logo.png')); ?>" alt="Logistiks" class="logo" /></a>
+				</div>
+				<div class="nav-block">
+					<nav>
+						<div class="container-fluid padding-none">
+							<div class="navbar-responsive">
+								<button class="nav-icon" type="button">
+						        	<span class="icon-bar"></span>
+						        	<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+							</div>
+                                                    
+                                                    
+                                                    <?php if($routeName == 'communityhome' || $routeName == 'communityindividualsearch' || $routeName == 'communityorganizationsearch'
+                                                                            || $routeName == 'communitygroupsearch' || $routeName == 'communitycreategroupform' || $routeName == 'displaygroupdetails'
+                                                                            || $routeName == 'editcommunitynewgroupform' || $routeName == 'communityindividualsearch'|| $routeName == 'communityorganizationsearch'
+                                                                            || $routeName == 'editcommunitynewgroupform'): ?>
+                                                      <?php /**/  $communityActiveClass = '1'  /**/ ?>
+                                                      <?php /**/   $marketplaceActiveClass = '0'  /**/ ?>
+                                                      <?php else: ?>
+                                                      <?php /**/   $communityActiveClass = '0'  /**/ ?>
+                                                      <?php /**/  $marketplaceActiveClass = '1'  /**/ ?>
+                                                    <?php endif; ?>  
+                                                    
+							<div class="main-navigation">
+								<ul class="navigation-list pull-left">									
+									<li <?php if($marketplaceActiveClass == 1): ?> class="active" <?php endif; ?>><a href="/home">Market Place</a></li>									                                                                     
+									<li <?php if($communityActiveClass == 1): ?> class="active" <?php endif; ?>><a href="/community/home">Community</a></li>                                                                        
+                                    <li><a href="#">Dealers</a></li>
+									<li><a href="#">Tools</a></li>								
+								</ul>
+							</div>
+						</div>
+					</nav>
+
+					
+					
+				</div>
+
+				<div class="search-area">
+					<div class="search">
+
+						
+
+
+						<div class="dropdown">
+						    <button class="btn add-btn dropdown-toggle" type="button" data-toggle="dropdown">
+						    	<span class="change-search-icon"><i class="fa fa-bars"></i></span>
+						    	<span class="caret"></span>
+						    </button>
+						    <ul class="dropdown-menu">
+						        <li><a><i class="fa fa-area-chart"></i> Market Place</a></li>
+						        <li><a><i class="fa fa-bank"></i> Community</a></li>
+						        <li><a><i class="fa fa-apple"></i> Dealers</a></li>
+						        <li><a><i class="fa fa-beer"></i> Tools</a></li>
+						    </ul>
+						</div>
+
+						<input type="text" class="form-control input-sm" maxlength="64" placeholder="Search" />
+						<button type="submit" class="btn add-btn-search btn-sm"><i class="fa fa-search"></i></button>
+					</div>
+				</div>	
+                            <?php if(Auth::guest()): ?>	
+				<?php else: ?>
+                            <a class="mobile-hide login_name" title="<?php echo e(Auth::user()->username); ?>" style="display:none;">
+                    <?php if(isset(Auth::user()->username) && !empty(Auth::user()->username)): ?>
+                        <?php echo e(ucfirst(Auth::user()->username)); ?>
+
+                    <?php endif; ?>
+                </a><?php endif; ?>
+				<div class="log-div-inner">
+					<ul class="nav pull-right log-dropdown">
+						
+						   <?php if(Auth::guest()): ?>					
+
+						   	
+						   	<div class="log-div">
+					<button class="login" type="button" data-toggle="modal" data-target="#login-modal">Login</button>
+					<a href="/register"><button class="signup">Sign Up</button></a>
+				</div>
+               
+              
+
+            <?php else: ?>
+            
+            <li class="dropdown">
+                    <a href="<?php echo e(url('/messages')); ?>" ><!--class="dropdown-toggle" data-toggle="dropdown"-->
+                        <span>					
+                            <span class="count msg_count"> 
+								<?php if(Session::get('service_id') == 0): ?>
+                                <?php echo e($common->getBuyerSellerMessageCountDefualt()); ?>
+
+                                <?php else: ?>
+                                <?php echo e($common->getBuyerSellerMessageCount()); ?>
+
+                                <?php endif; ?>
+                            </span>
+			</span>
+                            <span>
+                                    <i class="fa fa-envelope-o log-icon"></i>
+                                    
+                                    <!--b class="caret"></b-->
+                            </span>
+                            <span class="log-name">Messages</span>
+
+                    </a>
+                    <!--ul class="dropdown-menu">
+<li><a href="<?php echo e(url('/messages')); ?>">Inbox</a></li>
+<li><a href="<?php echo e(url('/sentmessages')); ?>">Sent Messages</a></li>
+                    </ul-->
+				<?php echo $__env->make('partials.header_dashboard', array(
+					'type' => 'messages',
+				), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            </li>
+
+						<li class="plain-menu">
+							<?php if( (Auth::user()->lkp_role_id == BUYER && (Session::get('last_login_role_id')== 0)) || (Session::get('last_login_role_id')== BUYER) ): ?>
+								<a href="#"  data-toggle="modal" data-target="#change-service" onclick="setTabsPage('/buyerposts')">
+							<?php elseif( (Auth::user()->lkp_role_id == SELLER && (Session::get('last_login_role_id')== 0)) || (Session::get('last_login_role_id')== SELLER) ): ?>
+								<a href="#"  data-toggle="modal" data-target="#change-service" onclick="setTabsPage('/sellerlist')">
+							<?php endif; ?>
+								<span>
+									<i class="fa fa-clipboard log-icon"></i>
+									<span class="count">
+									 <?php if(Auth::guest()): ?>	
+									 <?php else: ?>
+							            <?php if(Session::get('service_id') == 0): ?>
+							                   <?php echo e($common->getBuyerSellerCount(Auth::user()->id, Auth::user()->lkp_role_id, ROAD)); ?>
+
+							               <?php else: ?>
+							                   <?php echo e($common->getBuyerSellerCount(Auth::user()->id, Auth::user()->lkp_role_id, Session::get('service_id'))); ?>
+
+							               <?php endif; ?>							                
+							        <?php endif; ?>
+           </span>
+								</span>
+								<span class="log-name">Posts</span>
+							</a>
+								<?php echo $__env->make('partials.header_dashboard', array(
+									'type' => 'posts',
+								), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+						</li>
+						<li class="plain-menu">
+							<?php if( (Auth::user()->lkp_role_id == BUYER && (Session::get('last_login_role_id')== 0)) || (Session::get('last_login_role_id')== BUYER) ): ?>
+								<a href="#"  data-toggle="modal" data-target="#change-service" onclick="setTabsPage('/orders/buyer_orders')">
+							<?php elseif( (Auth::user()->lkp_role_id == SELLER && (Session::get('last_login_role_id')== 0)) || (Session::get('last_login_role_id')== SELLER) ): ?>
+								<a href="#"  data-toggle="modal" data-target="#change-service" onclick="setTabsPage('/orders/seller_orders')">
+							<?php endif; ?>
+								<span>
+									<i class="fa fa-rupee log-icon"></i>
+									<span class="count"> 
+									 <?php if(Auth::guest()): ?>	
+									 <?php else: ?>
+						          		<?php if(Session::get('service_id') == 0): ?>
+						                    <?php echo e($common->getBuyerSellerCount(Auth::user()->id, Auth::user()->lkp_role_id, ORDERSCOUNT)); ?>
+
+						                <?php else: ?>
+						                    <?php echo e($common->getBuyerSellerCount(Auth::user()->id, Auth::user()->lkp_role_id, ORDERSINVUDUAL)); ?>
+
+						                <?php endif; ?>
+						            <?php endif; ?></span>
+								</span>
+								<span class="log-name">Orders</span>
+							</a>
+							<?php echo $__env->make('partials.header_dashboard', array(
+								'type' => 'orders',
+							), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+						</li>
+						<li class="plain-menu">
+							<a href="<?php echo e(url('/network')); ?>">
+								<span>
+									<i class="fa fa-users log-icon"></i>
+									<span class="count"><?php echo e($common->getNetworkRequestCount()); ?></span>
+								</span>
+								<span class="log-name">Network</span>
+							</a>
+						</li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown">
+								<span>
+									<i class="fa fa-user log-icon"></i>
+									<b class="caret"></b>
+								</span>
+								<span class="log-name">Profile</span>
+								
+							</a>
+							<ul class="dropdown-menu">
+							<li><span class="login-name" title="<?php echo e(Auth::user()->username); ?>">
+						    <?php if( (Auth::user()->lkp_role_id == BUYER && (Session::get('last_login_role_id')== 0)) || (Session::get('last_login_role_id')== BUYER) ): ?>
+								<?php echo e(ucfirst(trans($common->getUserNameFromRole(BUYER,Auth::user()->id)))); ?>
+
+							<?php elseif((Auth::user()->lkp_role_id == SELLER && Session::get('last_login_role_id')== 0) || (Session::get('last_login_role_id')== SELLER)): ?>
+								<?php echo e(ucfirst(trans($common->getUserNameFromRole(SELLER,Auth::user()->id)))); ?>
+
+							<?php endif; ?>                    
+                </span></li>
+                <?php if($routeName != 'seller' && $routeName != 'buyerbusiness' && $routeName != 'sellerbusiness' 
+                            && $routeName != 'buyer' && $routeName != 'selectuser'): ?>
+                            <li><a href="<?php echo e(url('/editmyprofile')); ?>">My Profile</a></li>
+                            <?php endif; ?>
+                            <?php if(((Auth::user()->lkp_role_id == SELLER && Session::get('last_login_role_id')== 0) || (Session::get('last_login_role_id')== SELLER)) && ($routeName != 'seller' 
+                            && $routeName != 'buyerbusiness' && $routeName != 'sellerbusiness' 
+                            && $routeName != 'buyer' && $routeName != 'selectuser')): ?>
+                                <li><a href="<?php echo e(url('/list')); ?>">Manage Equipments</a></li>
+                                <li><a href="<?php echo e(url('/warehouselist')); ?>">Manage Warehouses</a></li>
+                                <li><a href="<?php echo e(url('/vehiclelist')); ?>">Manage Vehicles</a></li>
+                            <?php endif; ?>
+                            <li><a href="<?php echo e(url('/changepassword')); ?>">Change Password</a></li>
+							<!--li><a href="#">Search History</a></li-->
+                            <li><a href="<?php echo e(url('/auth/logout')); ?>">Logout</a></li>
+                
+								
+							
+							</ul>
+						</li>
+						<?php endif; ?>
+           
+					</ul>
+				</div>
+			</div>
+			
+		</header>
+		</header>
+
+    
+
+
+		<div class="clearfix"></div>
+ <!-- login popup -->
+			<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    	  <div class="modal-dialog">
+
+				<div class="loginmodal-container">
+				 <button type="button" class="close" data-dismiss="modal">&times;</button>
+				 
+					<h1>Login to Your Account</h1><br>
+				 <form class="form-horizontal" role="form" method="POST" action="<?php echo e(url('/auth/login')); ?>">
+                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                    <input type="hidden" name="user_clicked_service" id="user_clicked_service" value="">  
+                    <input type="hidden" name="user_clicked_page" id="user_clicked_page" value="">          
+                    <input type="text" name="email" placeholder="Username *"  value="<?php echo e(old('email')); ?>" class="copy_email_to_phone_popup form-control form-control1 margin-bottom">
+					 <input type="hidden" class="form-control form-control1" name="phone" value="" placeholder="Phone *" id="login_phone_popup">
+                    <input type="password" name="password" placeholder="Password *"  class="form-control form-control1 margin-bottom">
+                    <input type="hidden" name="is_active" id="is_active" value="1"/>
+
+                    <input type="submit" value="Login" class="login loginmodal-submit">
+                </form>
+                
+					
+				  <div class="login-help">
+					  <a href="<?php echo e(url('/register')); ?>">Register</a> - <a href="<?php echo e(url('/password/email')); ?>">Forgot Password?</a>
+				  </div>
+				</div>
+			</div>
+		  </div>
+		<!-- Inner Menu Starts Here -->  
+    
+<!-- </div> 
+
+<!-- Header Content Ends Here-->

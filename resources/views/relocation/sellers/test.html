@@ -1,0 +1,48 @@
+<form  id='reloc_submit_quote_{{$id}}' name='reloc_submit_quote_{{$id}}' class='relocation_submit_quote' method="get">
+    <input type="hidden" name="buyerquoteid_{{$id}}" value="{{$id}}" test="test"/>
+    <input type='hidden' name='buyer_id' id='buyer_id_{{$id}}' value="{!! $enquiry->created_by !!}">
+    <input type="hidden" name="crating_cft_{{$id}}" id="crating_cft_{{$id}}"  value="{!! $commoncomponent->getCratingVolumeCft($id) !!}"/>
+    <input type="hidden" name="total_cft_{{$id}}" id="total_cft_{{$id}}"  value="{!! $commoncomponent->getVolumeCft($id) !!}"/>
+    <input type="hidden" name="total_price_{{$id}}" id="total_price_{{$id}}"  value=""/>
+    <input type="hidden" name="post_rate_card_type_{{$id}}" id="post_rate_card_type_{{$id}}"  value="{{$ratecard_type}}"/>
+
+    <div class='col-md-3 padding-left-none'>
+        <input type='text' class='form-control form-control1' placeholder='O & D Charges (per CFT)' id='od_charges_{{$id}}' name='od_charges_{{$id}}'/>
+    </div>
+    <div class='col-md-3 padding-left-none'>
+        <input type='text' class='form-control form-control1' placeholder='Transport Charges' id='transport_charges_{{$id}}' name='transport_charges_{{$id}}'/>
+    </div>
+    <div class='col-md-3 padding-left-none'>
+        <input type='text' class='form-control form-control1' placeholder='Transit Days' id='transport_days_{{$id}}' name='transport_days_{{$id}}' />
+    </div>
+    <div class='clearfix'></div>
+    <div class='col-md-3 padding-left-none'>
+        <span class='data-head'><u>Additional Charges</u></span>
+    </div>
+    <div class='clearfix'></div>
+    <div class='col-md-3 padding-left-none'>
+        <input type='text' class='form-control form-control1' placeholder='Crating Charges (per CFT)' id='creating_charges_{{$id}}' name='creating_charges_{{$id}}'/>
+    </div>
+    <div class='col-md-3 padding-left-none'>
+        <input type='text' class='form-control form-control1' placeholder='Storage Charges (CFT/Day)' id='storage_charges_{{$id}}' name='storage_charges_{{$id}}'/>
+    </div>
+    <div class='col-md-3 padding-left-none'>
+        <input type='text' class='form-control form-control1' placeholder='Escort Charges (per Day)' id='escort_charges_{{$id}}' name='escort_charges_{{$id}}' />
+    </div>
+    <div class='col-md-3 padding-left-none'>
+        <input type='text' class='form-control form-control1' placeholder='Handyman Charges (per Hour)' id='handyman_charges_{{$id}}' name='handyman_charges_{{$id}}' />
+    </div>
+    <div class='clearfix'></div>
+    <div class='col-md-3 padding-left-none'>
+        <input type='text' class='form-control form-control1' placeholder='Property Search (Rs)' id='property_search_{{$id}}' name='property_search_{{$id}}' />
+    </div>
+    <div class='col-md-3 padding-left-none'>
+        <input type='text' class='form-control form-control1' placeholder='Brokerage (Rs)' id='brokerage_charges_{{$id}}' name='brokerage_charges_{{$id}}' />
+    </div>
+    <div class='col-md-3 padding-left-none padding-top-8'>
+        <span class='data-head'>Total Charges : <span id="total_price_display_{{$id}}">--</span></span>
+    </div>
+    <div class='col-md-3 padding-none'>
+        <button type="button" class='btn pull-right btn add-btn relocation_quote_submit' name='submitform_quote_{{$id}}' id='submitform_quote_{{$id}}'>Submit</button>
+    </div>
+</form>

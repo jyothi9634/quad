@@ -1,0 +1,975 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/style.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 5, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../../../../Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/* -------------------- FONT FAMILY ---------------------*/
+@font-face {
+  font-family: 'NeoSansPro-Regular';
+  src: url("../../../fonts/NeoSansPro-Regular.woff") format("woff"), url("../../../fonts/NeoSansPro-Regular.ttf") format("truetype"), url("../../../fonts/NeoSansPro-Regular.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NeoSansPro-Bold';
+  src: url("../../../fonts/NeoSansPro-Bold.woff") format("woff"), url("../../../fonts/NeoSansPro-Bold.ttf") format("truetype"), url("../../../fonts/NeoSansPro-Bold.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NeoSansPro-Italic';
+  src: url("../../../fonts/NeoSansPro-Italic.woff") format("woff"), url("../../../fonts/NeoSansPro-Italic.ttf") format("truetype"), url("../../../fonts/NeoSansPro-Italic.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NeoSansPro-Light';
+  src: url("../../../fonts/NeoSansPro-Light.woff") format("woff"), url("../../../fonts/NeoSansPro-Light.ttf") format("truetype"), url("../../../fonts/NeoSansPro-Light.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NeoSansPro-Medium';
+  src: url("../../../fonts/NeoSansPro-Medium.woff") format("woff"), url("../../../fonts/NeoSansPro-Medium.ttf") format("truetype"), url("../../../fonts/NeoSansPro-Medium.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NeoSansPro-MediumItalic';
+  src: url("../../../fonts/NeoSansPro-MediumItalic.woff") format("woff"), url("../../../fonts/NeoSansPro-MediumItalic.ttf") format("truetype"), url("../../../fonts/NeoSansPro-MediumItalic.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* -------------------- VARIABLES ---------------------*/
+/* -------------------- MIXINS ---------------------*/
+/* line 80, ../sass/style3sep2015.scss */
+.select, .main-middle select, .main-right select {
+  font-family: "NeoSansPro-Regular";
+  border: 1px solid #cecece;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 5px;
+  width: 90%;
+  font-size: 12px;
+}
+
+/* line 88, ../sass/style3sep2015.scss */
+.input_txt, .main-middle input[type='text'], .main-right input[type='text'], .main-middle input[type="text"] {
+  font-family: "NeoSansPro-Regular";
+  border: 1px solid #cecece;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 5px;
+  width: 90%;
+  font-size: 12px;
+}
+
+/* line 96, ../sass/style3sep2015.scss */
+.textarea, .main-right textarea {
+  font-family: "NeoSansPro-Regular";
+  border: 1px solid #cecece;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 5px;
+  width: 100%;
+  resize: none;
+  height: 150px;
+  font-size: 12px;
+}
+
+/* -------------------- MAIN CSS ---------------------*/
+/* line 109, ../sass/style3sep2015.scss */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "NeoSansPro-Regular" !important;
+  font-size: 12px !important;
+  color: #727376 !important;
+}
+
+/* line 116, ../sass/style3sep2015.scss */
+a {
+  text-decoration: none;
+  color: #727376 !important;
+}
+/* line 119, ../sass/style3sep2015.scss */
+a:hover {
+  color: #cc0000 !important;
+  text-decoration: none !important;
+}
+
+/* line 124, ../sass/style3sep2015.scss */
+.top-strip {
+  background: #eeeeee;
+}
+
+/* line 127, ../sass/style3sep2015.scss */
+.top-strip-inner, .header-inner, .container-inner {
+  padding: 7px;
+}
+
+/* line 130, ../sass/style3sep2015.scss */
+.top-strip-inner {
+  text-align: right;
+  font-size: 13px;
+}
+
+/* line 134, ../sass/style3sep2015.scss */
+.main-header, .main-container {
+  width: 100%;
+}
+
+/* line 137, ../sass/style3sep2015.scss */
+.main-header {
+  border-bottom: 1px solid #cecece;
+}
+/* line 140, ../sass/style3sep2015.scss */
+.main-header .main-nav ul {
+  margin: 0;
+  padding: 0;
+}
+/* line 143, ../sass/style3sep2015.scss */
+.main-header .main-nav ul li {
+  float: left;
+  margin: 0 35px 0 0;
+}
+/* line 146, ../sass/style3sep2015.scss */
+.main-header .main-nav ul li a {
+  line-height: 84px;
+}
+
+/* line 154, ../sass/style3sep2015.scss */
+.top-strip-inner .top-devider {
+  display: inline-block;
+  padding: 0 6px;
+}
+/* line 158, ../sass/style3sep2015.scss */
+.top-strip-inner .top-text-fld {
+  font-family: "NeoSansPro-Regular";
+  margin: 0 10px;
+  border: 1px solid #eaeaea;
+  padding: 7px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
+/* line 165, ../sass/style3sep2015.scss */
+.top-strip-inner a {
+  color: #727376;
+}
+/* line 167, ../sass/style3sep2015.scss */
+.top-strip-inner a:hover {
+  color: #cc0000;
+}
+/* line 170, ../sass/style3sep2015.scss */
+.top-strip-inner a:focus {
+  border: 1px solid #dadada;
+}
+
+/* line 175, ../sass/style3sep2015.scss */
+.main-left {
+  float: left;
+  padding: 15px 0 10px;
+}
+/* line 179, ../sass/style3sep2015.scss */
+.main-left h2.block-title {
+  font-size: 15px;
+  font-family: 'NeoSansPro-Medium';
+  margin: 15px 0 10px;
+}
+/* line 184, ../sass/style3sep2015.scss */
+.main-left .rating {
+  margin: 5px 0;
+}
+/* line 187, ../sass/style3sep2015.scss */
+.main-left .followers, .main-left .partners {
+  margin: 5px 0;
+  padding: 5px 0;
+  border-top: 1px solid #dadada;
+}
+/* line 193, ../sass/style3sep2015.scss */
+.main-left .profile-block span {
+  margin: 2px 0 10px;
+  display: inline-block;
+  font-family: 'NeoSansPro-Medium';
+  color: #555555;
+}
+/* line 199, ../sass/style3sep2015.scss */
+.main-left .profile-block a {
+  margin: 3px 0 20px;
+  display: block;
+  clear: both;
+}
+/* line 204, ../sass/style3sep2015.scss */
+.main-left .profile-block p {
+  margin: 3px 0 0;
+}
+/* line 207, ../sass/style3sep2015.scss */
+.main-left .profile-block .profile-bar {
+  height: 12px;
+  width: 115px;
+  background: #bbbdbf;
+}
+/* line 211, ../sass/style3sep2015.scss */
+.main-left .profile-block .profile-bar .profile-complete {
+  width: 73px;
+  height: 12px;
+  background: #ed3237;
+}
+
+/* line 219, ../sass/style3sep2015.scss */
+.block {
+  margin: 20px 0 30px;
+}
+
+/* line 222, ../sass/style3sep2015.scss */
+.main-middle {
+  float: left;
+  width: 940px;
+  padding: 15px 0 10px 10px;
+}
+/* line 226, ../sass/style3sep2015.scss */
+.main-middle .bread-crumb {
+  display: block;
+}
+/* line 230, ../sass/style3sep2015.scss */
+.main-middle .tab-nav ul#tabs {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+/* line 235, ../sass/style3sep2015.scss */
+.main-middle .tab-nav ul#tabs > li {
+  display: inline-block;
+  padding: 3px 0;
+  margin: 0 43px 10px 0;
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
+}
+/* line 243, ../sass/style3sep2015.scss */
+.main-middle .tab-nav ul#tabs > li.active {
+  color: #cc0000;
+}
+/* line 246, ../sass/style3sep2015.scss */
+.main-middle .tab-nav div#tab {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+/* line 251, ../sass/style3sep2015.scss */
+.main-middle .tab-nav div#tab > div {
+  display: block;
+  padding: 10px 10px 0;
+  background: #f0f1f1;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+/* line 258, ../sass/style3sep2015.scss */
+.main-middle .tab-nav div#tab > div h2 {
+  font-weight: 400;
+  margin: 0px 0 10px;
+}
+/* line 263, ../sass/style3sep2015.scss */
+.main-middle select {
+  width: 100%;
+  margin-bottom: 10px;
+}
+/* line 268, ../sass/style3sep2015.scss */
+.main-middle input[type='text'] {
+  width: 100%;
+  margin-bottom: 10px;
+}
+/* line 273, ../sass/style3sep2015.scss */
+.main-middle .new_msg_link {
+  padding-top: 5px;
+}
+/* line 275, ../sass/style3sep2015.scss */
+.main-middle .new_msg_link a {
+  font-family: "NeoSansPro-Bold";
+  font-size: 12px;
+  text-decoration: underline;
+}
+/* line 281, ../sass/style3sep2015.scss */
+.main-middle .table {
+  margin-bottom: 25px;
+}
+/* line 285, ../sass/style3sep2015.scss */
+.main-middle .table thead tr th {
+  border-bottom: 1px solid #dddddd;
+  font-family: "NeoSansPro-Medium";
+  padding-left: 0;
+}
+/* line 294, ../sass/style3sep2015.scss */
+.main-middle .table tbody tr td {
+  padding-left: 0;
+}
+/* line 300, ../sass/style3sep2015.scss */
+.main-middle ul.bottom_text {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+/* line 304, ../sass/style3sep2015.scss */
+.main-middle ul.bottom_text li {
+  width: 100%;
+}
+/* line 306, ../sass/style3sep2015.scss */
+.main-middle ul.bottom_text li ol {
+  margin: 0 0 20px 15px;
+  width: 100%;
+}
+/* line 309, ../sass/style3sep2015.scss */
+.main-middle ul.bottom_text li ol li {
+  width: 100%;
+  list-style-type: decimal;
+  text-decoration: underline;
+  margin-bottom: 2px;
+}
+/* line 318, ../sass/style3sep2015.scss */
+.main-middle .bottom_link {
+  text-decoration: underline;
+}
+
+/* line 322, ../sass/style3sep2015.scss */
+.main-right {
+  float: left;
+  padding: 58px 0 10px;
+}
+/* line 325, ../sass/style3sep2015.scss */
+.main-right .left-top-text {
+  margin: 0 0 10px 15px;
+  display: block;
+}
+/* line 329, ../sass/style3sep2015.scss */
+.main-right h3.block-head {
+  font-size: 12px;
+  font-family: "NeoSansPro-Regular";
+  margin: 0;
+  background: #f0f1f1 none repeat scroll 0 0;
+  box-sizing: border-box;
+  padding: 9px 15px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+/* line 339, ../sass/style3sep2015.scss */
+.main-right h3.block-head.dark {
+  background: #666666 none repeat scroll 0 0;
+  color: #ffffff;
+  font-family: "NeoSansPro-Regular";
+  margin-bottom: 5px;
+}
+/* line 345, ../sass/style3sep2015.scss */
+.main-right .left-dropdown-text {
+  font-family: "NeoSansPro-Bold";
+  letter-spacing: normal;
+  display: block;
+  margin-bottom: 10px;
+}
+/* line 350, ../sass/style3sep2015.scss */
+.main-right .left-dropdown-text i {
+  margin: 3px 5px 0 0;
+  font-size: 12px;
+  color: #727376 !important;
+}
+/* line 356, ../sass/style3sep2015.scss */
+.main-right .block {
+  margin: 14px 0 15px;
+  clear: both;
+  display: block;
+}
+/* line 360, ../sass/style3sep2015.scss */
+.main-right .block i {
+  font-size: 20px;
+  color: #cfcfcf;
+}
+/* line 365, ../sass/style3sep2015.scss */
+.main-right select {
+  margin-bottom: 10px;
+}
+/* line 369, ../sass/style3sep2015.scss */
+.main-right input[type='text'] {
+  margin-bottom: 10px;
+}
+/* line 373, ../sass/style3sep2015.scss */
+.main-right textarea {
+  margin-bottom: 10px;
+}
+/* line 377, ../sass/style3sep2015.scss */
+.main-right p {
+  font-family: "NeoSansPro-Regular";
+}
+
+/* line 381, ../sass/style3sep2015.scss */
+.padding-none {
+  padding: 0 !important;
+}
+
+/* line 384, ../sass/style3sep2015.scss */
+.padding-right-none {
+  padding-right: 0 !important;
+}
+
+/* line 387, ../sass/style3sep2015.scss */
+.padding-left-none {
+  padding-left: 0 !important;
+}
+
+/* line 391, ../sass/style3sep2015.scss */
+.underline ul li {
+  text-decoration: underline;
+}
+
+/* line 394, ../sass/style3sep2015.scss */
+.calendar {
+  background-color: #fff !important;
+  background-image: url("../../../images/calendar-icon.png") !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important;
+  background-position: right center !important;
+  margin-bottom: 0px !important;
+}
+
+/* line 402, ../sass/style3sep2015.scss */
+.table-top {
+  padding: 10px 0px !important;
+}
+/* line 404, ../sass/style3sep2015.scss */
+.table-top input[type="checkbox"] {
+  margin: 0 10px 0 0;
+}
+/* line 407, ../sass/style3sep2015.scss */
+.table-top a {
+  margin-right: 10px;
+}
+
+/* line 411, ../sass/style3sep2015.scss */
+.fa-star {
+  color: #ff4b39;
+}
+
+/* line 414, ../sass/style3sep2015.scss */
+.table-slide {
+  display: none;
+}
+/* line 416, ../sass/style3sep2015.scss */
+.table-slide td {
+  border: none !important;
+  padding-bottom: 10px;
+  padding-right: 10px;
+}
+/* line 422, ../sass/style3sep2015.scss */
+.table-slide tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+/* line 428, ../sass/style3sep2015.scss */
+.border-none, .border-none td {
+  border: none !important;
+}
+
+/* line 431, ../sass/style3sep2015.scss */
+td {
+  position: relative;
+}
+
+/* line 434, ../sass/style3sep2015.scss */
+.btn {
+  background: #808184 none repeat scroll 0 0;
+  border: medium none;
+  color: #fff;
+  font-size: 13px;
+  padding: 4px 10px;
+}
+
+/* line 441, ../sass/style3sep2015.scss */
+.superscript {
+  position: absolute;
+  top: -4px;
+}
+
+/* line 445, ../sass/style3sep2015.scss */
+.red {
+  color: red;
+}
+
+/* line 448, ../sass/style3sep2015.scss */
+.medium-font {
+  font-family: "NeoSansPro-Medium";
+}
+
+/* line 452, ../sass/style3sep2015.scss */
+.padding-top-bottom {
+  padding: 10px 0px !important;
+}
+
+/* line 455, ../sass/style3sep2015.scss */
+.margin-bottom {
+  margin-bottom: 10px !important;
+}
+
+/* line 456, ../sass/style3sep2015.scss */
+.padding-top {
+  padding: 10px 0px 0px 0px !important;
+}
+
+/* line 459, ../sass/style3sep2015.scss */
+.post-button a {
+  border: 1px solid red;
+  border-radius: 5px;
+  display: block;
+  font-family: "NeoSansPro-Medium";
+  font-size: 14px;
+  margin-bottom: 6px;
+  padding: 5px 10px;
+}
+
+/* line 468, ../sass/style3sep2015.scss */
+label {
+  font-weight: normal !important;
+}
+
+/* line 471, ../sass/style3sep2015.scss */
+.table-control {
+  width: 70% !important;
+}
+
+/* line 474, ../sass/style3sep2015.scss */
+.superscript-table {
+  position: absolute;
+  top: 0px;
+  left: 58%;
+}
+
+/* line 479, ../sass/style3sep2015.scss */
+.form-inline .form-group {
+  display: inherit !important;
+}
+
+/* line 483, ../sass/style3sep2015.scss */
+.main-middle select {
+  width: 100%;
+}
+/* line 487, ../sass/style3sep2015.scss */
+.main-middle input[type="text"] {
+  width: 100%;
+}
+
+/* line 492, ../sass/style3sep2015.scss */
+.border-top {
+  border-top: 1px solid #dddddd;
+  padding-top: 10px !important;
+}
+
+/* line 496, ../sass/style3sep2015.scss */
+.heading {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* line 500, ../sass/style3sep2015.scss */
+.space-10px {
+  padding: 10px;
+  width: 100%;
+  float: left;
+}
+
+/* line 506, ../sass/style3sep2015.scss */
+.right-menu li {
+  width: 100%;
+  float: left;
+  padding: 5px 0px;
+}
+/* line 510, ../sass/style3sep2015.scss */
+.right-menu li .fa {
+  margin: 0px 10px 0px 0px;
+}
+
+/* line 515, ../sass/style3sep2015.scss */
+.font-bold {
+  font-family: "NeoSansPro-Medium";
+}
+
+/* line 518, ../sass/style3sep2015.scss */
+.margin-left {
+  margin-left: 10px;
+}
+
+/* line 521, ../sass/style3sep2015.scss */
+.responsive_sidebars {
+  display: none;
+}
+
+/* line 525, ../sass/style3sep2015.scss */
+.profile-block span {
+  margin: 2px 0 20px;
+  display: inline-block;
+  font-family: 'NeoSansPro-Medium';
+  color: #555555;
+}
+/* line 531, ../sass/style3sep2015.scss */
+.profile-block a {
+  margin: 3px 0 20px;
+  display: block;
+  clear: both;
+}
+/* line 536, ../sass/style3sep2015.scss */
+.profile-block p {
+  margin: 3px 0 2px;
+}
+/* line 539, ../sass/style3sep2015.scss */
+.profile-block .profile-bar {
+  height: 12px;
+  width: 115px;
+  background: #bbbdbf;
+}
+/* line 543, ../sass/style3sep2015.scss */
+.profile-block .profile-bar .profile-complete {
+  width: 73px;
+  height: 12px;
+  background: #ed3237;
+}
+/* line 549, ../sass/style3sep2015.scss */
+.profile-block h3.block-head {
+  background: #f0f1f1 none repeat scroll 0 0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: "NeoSansPro-Regular";
+  font-size: 12px;
+  margin: 0 0 10px;
+  padding: 9px 15px;
+}
+
+/* line 559, ../sass/style3sep2015.scss */
+.bg-red {
+  background: #ff0000 none repeat scroll 0 0 !important;
+  color: #fff;
+}
+
+/* line 564, ../sass/style3sep2015.scss */
+.profile-block ul {
+  line-height: 22px;
+  margin: 0px 10px;
+}
+/* line 567, ../sass/style3sep2015.scss */
+.profile-block ul li {
+  padding-left: 15px;
+}
+/* line 570, ../sass/style3sep2015.scss */
+.profile-block ul li.active {
+  background: url(../../../images/right-arrow.png) no-repeat left center;
+  font-family: "NeoSansPro-Medium";
+}
+
+/*select style css start*/
+/* line 579, ../sass/style3sep2015.scss */
+.btn-default {
+  border-color: #cccccc !important;
+}
+
+/* line 582, ../sass/style3sep2015.scss */
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+  width: 100%  !important;
+}
+
+/* line 585, ../sass/style3sep2015.scss */
+.btn-default:hover, .btn-default:focus {
+  background: #fff !important;
+  border-color: #cccccc !important;
+}
+
+/* line 589, ../sass/style3sep2015.scss */
+.bootstrap-select .dropdown-toggle:focus {
+  background: none !important;
+  outline: 0px !important;
+}
+
+/* line 593, ../sass/style3sep2015.scss */
+* {
+  outline: none;
+}
+
+/* line 596, ../sass/style3sep2015.scss */
+.open > .dropdown-toggle.btn-default {
+  background: none !important;
+}
+
+/* line 599, ../sass/style3sep2015.scss */
+.btn-group.open .dropdown-toggle {
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  -ms-box-shadow: none;
+  -o-box-shadow: none;
+}
+
+/* line 606, ../sass/style3sep2015.scss */
+span.text {
+  font-size: 12px !important;
+}
+
+/* line 611, ../sass/style3sep2015.scss */
+.dropdown-menu li a {
+  padding: 3px 12px !important;
+}
+/* line 613, ../sass/style3sep2015.scss */
+.dropdown-menu li a:focus {
+  outline: 0px auto -webkit-focus-ring-color !important;
+}
+
+/* line 619, ../sass/style3sep2015.scss */
+.btn-group.bootstrap-select {
+  margin-bottom: 10px;
+}
+
+/* line 622, ../sass/style3sep2015.scss */
+.dropdown-menu {
+  padding: 0px !important;
+  overflow: hidden !important;
+}
+
+/* line 626, ../sass/style3sep2015.scss */
+.main-right .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+  width: 90%  !important;
+}
+
+/* line 629, ../sass/style3sep2015.scss */
+.btn-group.open .dropdown-toggle {
+  box-shadow: none !important;
+  background: #fff !important;
+}
+
+/* line 633, ../sass/style3sep2015.scss */
+.bootstrap-select.btn-group .dropdown-menu {
+  background: #fff !important;
+}
+
+/* line 634, ../sass/style3sep2015.scss */
+.selected {
+  background: #fff;
+}
+
+/*select style css end*/
+/* line 641, ../sass/style3sep2015.scss */
+.mobile-show {
+  display: none !important;
+}
+
+/* line 642, ../sass/style3sep2015.scss */
+.mobile-nav {
+  display: none;
+}
+
+/* line 643, ../sass/style3sep2015.scss */
+.table-details > div {
+  text-align: right;
+}
+
+/* line 645, ../sass/style3sep2015.scss */
+.main-right select {
+  width: 90%;
+}
+
+/* line 646, ../sass/style3sep2015.scss */
+.profile-bar {
+  height: 10px;
+  width: 100%;
+  background: #bbbdbf;
+}
+/* line 650, ../sass/style3sep2015.scss */
+.profile-bar .profile-complete {
+  width: 59%;
+  height: 10px;
+  background: #ed3237;
+}
+
+/* line 657, ../sass/style3sep2015.scss */
+.gray_bg {
+  background: #f0f1f1;
+  padding: 10px 10px 0;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+/* line 666, ../sass/style3sep2015.scss */
+.radio-inline, .checkbox-inline {
+  padding: 0 !important;
+}
+
+/* line 669, ../sass/style3sep2015.scss */
+.radio label, .checkbox label {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* line 673, ../sass/style3sep2015.scss */
+.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
+  margin: 0 5px 0 0 !important;
+  position: relative !important;
+}
+
+/* line 677, ../sass/style3sep2015.scss */
+.align-padding-div {
+  padding-bottom: 11px !important;
+}
+
+/* line 681, ../sass/style3sep2015.scss */
+.bootstrap-select .btn {
+  font-size: 12px !important;
+  padding-left: 7px !important;
+  padding-top: 8px !important;
+  padding-bottom: 7px !important;
+}
+
+/* line 689, ../sass/style3sep2015.scss */
+.margin-top.bold p {
+  margin-bottom: 10px !important;
+}
+
+/* line 692, ../sass/style3sep2015.scss */
+.margin-bottom {
+  margin-bottom: 10px !important;
+}
+
+/* line 695, ../sass/style3sep2015.scss */
+.margin-none {
+  margin: 0 !important;
+}
+
+/* line 698, ../sass/style3sep2015.scss */
+.black-btn {
+  background: #808184 none repeat scroll 0 0 !important;
+  border: 1px solid #808184 !important;
+  color: #fff;
+  font-size: 13px;
+  padding: 7px 20px;
+}
+/* line 704, ../sass/style3sep2015.scss */
+.black-btn:hover {
+  background: #fff !important;
+}
+
+/* line 708, ../sass/style3sep2015.scss */
+.low-top-padding {
+  padding-top: 7px !important;
+}
+
+/* line 711, ../sass/style3sep2015.scss */
+input[type="radio"], input[type="checkbox"] {
+  margin: 0 5px 0 0 !important;
+}
+
+/* line 714, ../sass/style3sep2015.scss */
+.post-button {
+  margin: 0 !important;
+}
+
+/* line 717, ../sass/style3sep2015.scss */
+.form-group {
+  margin-bottom: 10px !important;
+}
+
+/* line 720, ../sass/style3sep2015.scss */
+.form-group1 {
+  margin-bottom: 10px !important;
+  clear: both !important;
+  display: table;
+  width: 100%;
+}
+/* line 725, ../sass/style3sep2015.scss */
+.form-group1 ul {
+  margin-bottom: 0 !important;
+}
+
+/* line 730, ../sass/style3sep2015.scss */
+.form-group select {
+  margin-bottom: 0 !important;
+}
+/* line 733, ../sass/style3sep2015.scss */
+.form-group input {
+  margin-bottom: 0 !important;
+}

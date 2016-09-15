@@ -1,0 +1,310 @@
+<?php
+/**
+ * @category    design
+ * @package     enterprise_axalta
+ * @author      Ameri & Partners
+ */
+?>
+<?php
+/**
+ * Shopping cart template
+ *
+ * @see Mage_Checkout_Block_Cart
+ */
+?>
+
+<?php
+$customerSession=Mage::getSingleton('customer/session');
+$priceListName=$customerSession->getPriceListName();
+$cartDetailsarray=$this->getCartItems();
+/*$cartDetails=$this->getCartItems();
+if(empty($cartDetails[0]))
+{
+    $cartDetails[]=$cartDetails;
+}*/
+
+
+$cartDetails = array();
+$cartAlliedDetails = array();
+//echo "<pre>"; print_R($cartDetailsarray); echo "</pre>";
+foreach($cartDetailsarray as $key => $cartArray){
+
+	
+	$getDetails=Mage::getModel('catalog/product')->load($cartArray['product_id']);
+	$sapMaterial= $getDetails->getSapmaterialnumber();
+	
+	$coreResource=Mage::getSingleton('core/resource');
+	$connection = $coreResource->getConnection('core_write');
+	$productManufacturer = trim(Mage::helper('mso_customorder')->getPartManufacturer($cartArray['sku']));
+	if($productManufacturer == "Axalta"){
+		$cartDetails[] = $cartArray;
+		
+		$itemTableName = $coreResource->getTableName('mso_pricelist_material');
+		$select = $connection->select()->from($itemTableName)
+		->where('pricelist_code ="'.$priceListName.'" AND sap_material_number ='."'$sapMaterial'");
+		$result=$connection->fetchRow($select);
+	}else{
+		$cartAlliedDetails[] = $cartArray;
+		$result = $this->getAlliedPrice($cartArray['sku']);
+	}
+	$rate = $result['rate'];
+	$unitPrice=$rate;
+	$totalPrice= $rate * $cartArray['qty'];
+	
+	$grandTotal +=$totalPrice;
+}
+
+
+
+
+unset($_SESSION['checkids']); ?>
+<?php echo $this->getChildHtml('orderprocessbar') ?>
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml(); ?>
+<?php echo $this->getChildHtml('form_before'); ?>
+
+<?php
+echo $this->getChildHtml('addtocartoptions');
+?>
+
+<form action="<?php echo $this->getUrl('proceedcheckout/cart/updatePost') ?>" name="shopcartform" id="shopcartform" method="post" onsubmit="updateCartAction(1);">
+    <input type="hidden" name="is_la" id="is_la" value="<?php echo $jsIsLa?>" />
+    <input type="hidden" name="soldtoid_hidden" value="<?php echo Mage::getSingleton('customer/session')->getSapCustomerId();
+    ?>" />
+    <input type="hidden" name="order_type_1" id="order_type_1" value="" />
+    <input type="hidden" name="payment_terms_stock_1" id="payment_terms_stock_1" value="" />
+    <input type="hidden" name="payment_terms_truckload_1" id="payment_terms_truckload_1" value="" />
+    <input type="hidden" name="transp_name_1" id="transp_name_1" value="" />
+    <input type="hidden" name="po_1" id="po_1" value="" />
+    <input type="hidden" name="delivery_type_1" id="delivery_type_1" value="" />
+    <input type="hidden" name="shipping_instruction_1" id="shipping_instruction_1" value="" />
+    <input type="hidden" name="delivery_date_1" id="delivery_date_1" value="" />
+    <input type="hidden" name="return_flag" id="return_flag" value="1" />
+    <input type="hidden" name="calculated_delivery_date" id="calculated_delivery_date" value="" />
+    <input type="hidden" name="delivery_date_validate_url" id="delivery_date_validate_url" value="<?php echo Mage::getUrl("proceedcheckout/proceedcheckout/getDeliveryDate",array('_secure'=>$_SERVER['HTTPS']==='on')); ?>" />
+    <input type="hidden" name="websiteCodeForDeliveryDate" id="websiteCodeForDeliveryDate" value="<?php echo $_SERVER['MAGE_RUN_CODE'];?>" />
+    <div class="section result gapBottom14">
+        <!--h3 class="gapBottom14">
+		<?php $catUrl = Mage::getUrl('customorder/catalogorder/');?>
+            <span><?php echo Mage::Helper('axaltacore_usermanagement')->__('Current cart item(s)');?></span>
+			<span style="float: left; position: absolute; margin: 34px 85px;"><button value="CONTINUE SHOPPING" onclick="window.location='<?php echo $catUrl ?>'" class="btn_l basic jqTransformButton" type="button" name="" id="save_order"><span><span>CONTINUE SHOPPING</span></span></button></span>
+        </h3-->
+	<div class="cart-order-total">
+		<?php 
+			$quote = Mage::getModel('checkout/session')->getQuote();
+			$quoteData= $quote->getData();
+			//$quoteData =  Mage::getSingleton('checkout/cart')->getData();
+			//echo "<pre>"; 
+			//print_r($quoteData);
+			//echo "</pre>";
+			
+			//$grandTotal=$quoteData['grand_total'];
+			
+			echo $this->__("Order Total ")."&nbsp;<span id='cart-grand-total-price'>".Mage::helper('core')->currency($grandTotal, true, false)."</span>"; 
+			
+			
+		?>
+        </div>
+	
+        
+            <!--div class="action-links  grid_4">
+                <?php $cartUrl = Mage::getUrl('proceedcheckout/proceedcheckout/cart/');?>
+                <a href="javascript:void(0)" class="iconSprite iconTrash" onclick="deleteAllCartItem('<?php echo  Mage::getUrl('proceedcheckout/proceedcheckout/mutlideletecartitem', array('_secure'=>$_SERVER['HTTPS']==='on')) ;?>','<?php echo $cartUrl;?>');" title='<?php echo Mage::Helper('axaltacore_usermanagement')->__('Remove Selected Item(s)');?>'><?php echo Mage::Helper('axaltacore_usermanagement')->__('Remove Selected Item(s)');?></a>
+            </div>
+            <div class="action-links blueColor grid_8" style="float: right">
+                <div class="prefix_1">
+                    <a href="javascript:void(0)" class=""  name="update_cart_action" title="<?php echo $this->__('Update Shopping Cart'); ?>" onclick="updateCartAction(1)"><?php echo Mage::Helper('axaltacore_usermanagement')->__('Update Shopping Cart'); ?></a>
+                    <span class="lDotline"></span>
+                    <a href="javascript:void(0)" class="" name="empty_cart_button" title="<?php echo $this->__('Clear Shopping Cart'); ?>" id="empty_cart_button" onclick="emptycart('<?php echo  Mage::getUrl('proceedcheckout/cart/updatePost', array('_secure'=>$_SERVER['HTTPS']==='on')); ?>', '<?php echo Mage::getBaseUrl(); ?>');">
+                        <?php echo Mage::Helper('axaltacore_usermanagement')->__('Clear Shopping Cart'); ?>
+                    </a>
+                </div>
+            </div-->
+	     <!-- Axalta Products -->
+        <?php if(count($cartDetails) > 0){ ?>
+	    <p class="mini-cart-table-head">AXALTA PRODUCTS</p>
+        <div class="table blockContainer curProductlist curProductlist_a">
+            <table id="shopping-cart-table" class="data-table cart-table pager-only review-table_a">
+
+
+                <?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+                <thead>
+                <tr>
+                    <!--th rowspan="1"><input type="checkbox" name="select_cartitem" id="select_cartitem" value="1" onClick="selectAllCartItem(this);"/></th-->
+                    <th rowspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo Mage::Helper('axaltacore_usermanagement')->__('Code') ?></span></th>
+                    <th rowspan="1"><span class="nobr"><?php echo Mage::Helper('axaltacore_usermanagement')->__('Description') ?></span></th>
+                    <th rowspan="<?php echo $mergedCells; ?>" class="a-center"><?php echo Mage::Helper('axaltacore_usermanagement')->__('Qty') ?></th>
+                    <th><span class="nobr"><?php echo Mage::Helper('axaltacore_usermanagement')->__('UOM') ?></span></th>
+                    <th rowspan="<?php echo $mergedCells; ?>" ><?php echo Mage::Helper('axaltacore_usermanagement')->__('Unit Price') ?></th>
+                    <th rowspan="<?php echo $mergedCells; ?>" ><?php echo Mage::Helper('axaltacore_usermanagement')->__('Total Price') ?></th>
+                    <th rowspan="<?php echo $mergedCells; ?>" ><?php echo Mage::Helper('axaltacore_usermanagement')->__('') ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $_itemIdStr= '';
+                $subTotal='';
+                $customerSession=Mage::getSingleton('customer/session');
+                $priceListName=$customerSession->getPriceListName();
+                foreach($cartDetails as $k=>$val){
+                    $getDetails=Mage::getModel('catalog/product')->load($val['product_id']);
+                    $sapMaterial= $getDetails->getSapmaterialnumber();
+                    $result=$this->getPrice($sapMaterial,$priceListName);
+                    $unitPrice=$result['rate'];
+                    $totalPrice= $result['rate'] * $val['qty'];
+                    $cartDetails[$k]['custom_unit_price']=$unitPrice;
+                    $cartDetails[$k]['custom_total_price']=$totalPrice;
+                    $cartDetails[$k]['axalta_desc']=$this->htmlEscape($val['name']);
+                    $subTotal +=$totalPrice;
+                    ?>
+                    <tr>
+                        <!--td><input type="checkbox" class="" name="cartitem_<?php echo $val['item_id']?>" id="cartitem_<?php echo $val['item_id']?>" value="<?php echo $val['item_id'];?>" /></td-->
+                        <td><?php echo $this->htmlEscape($val['sku']) ?></td>
+                        <td class="breakWord">
+                            <?php echo $this->htmlEscape($val['name']) ?>
+                        </td>
+
+                        <td class="a-center">
+                            <input name="cart[<?php echo $val['item_id'] ?>][qty]" onfocus="jQuery(this).val('');jQuery(this).parents('td:first').find('div.validation-advice').remove();" onblur='validateSingleQty(this);' id="qty_<?php echo $val['item_id']; ?>" value="<?php echo (int)$val['qty']; ?>" size="5" title="<?php echo Mage::Helper('axaltacore_usermanagement')->__('Qty') ?>" class="qty text_small a-center text_box_bt_shadow review-table-qty" maxlength="12" />
+                            <span class="qty-validation" id="validation_qty_<?php echo $val['item_id']; ?>"></span>
+                        </td>
+                        <td><?php echo $val['unitofmeasure']?></td>
+                        <td><?php echo '$'.sprintf('%0.2f', $unitPrice);?></td>
+                        <td><?php echo '$'.sprintf('%0.2f', $totalPrice);?></td>
+                        <td><a href="#" title="<?php echo Mage::Helper('axaltacore_usermanagement')->__('Remove item')?>" class="remove-item" onclick="conformDlt('<?php echo $this->getDeleteUrl($val['item_id']);?>')"><?php echo Mage::Helper('axaltacore_usermanagement')->__('Remove item')?></a></td>
+                    </tr>
+                    <?php
+                    if($_itemIdStr == '') {
+                        $_itemIdStr = $val['item_id'];
+                    }
+                    else {
+                        $_itemIdStr .= ','. $val['item_id'];
+                    }
+                }
+                ?>
+
+                </tbody>
+            </table>
+	    </div>
+        <p class="cart-show-all"><?php echo $this->__('Show All'); ?></p>
+        <p class="cart-hide-all"><?php echo $this->__('Hide'); ?></p>
+<script type="text/javascript">
+                jQuery(document).ready(function(){
+                    //var subTotal = "<?php echo Mage::helper('core')->currency($subTotal, true, false); ?>";
+                    //alert(subTotal);
+                    jQuery("#cart-grand-total-price").html(subTotal); 
+               });
+        </script>
+        <p class="cart-sub-total"><?php echo $this->__('SubTotal'); ?>&nbsp;<?php echo '$'.sprintf('%0.2f',$subTotal); ?></p>
+        <?php } ?>
+        
+        <!-- Allied Products -->
+        <?php if(count($cartAlliedDetails) > 0){ ?>
+        <p class="mini-cart-table-head">ALLIED PRODUCTS</p>
+        <div class="table blockContainer curProductlist curProductlist_b">
+            <table id="shopping-cart-table" class="data-table cart-table pager-only review-table_b">
+                
+                <?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+                <thead>
+                <tr>
+                    <!--th rowspan="1"><input type="checkbox" name="select_cartitem" id="select_cartitem" value="1" onClick="selectAllCartItem(this);"/></th-->
+                    <th rowspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo Mage::Helper('axaltacore_usermanagement')->__('Code') ?></span></th>
+                    <th rowspan="1"><span class="nobr"><?php echo Mage::Helper('axaltacore_usermanagement')->__('Description') ?></span></th>
+                    <th rowspan="<?php echo $mergedCells; ?>" class="a-center"><?php echo Mage::Helper('axaltacore_usermanagement')->__('Qty') ?></th>
+                    <th><span class="nobr"><?php echo Mage::Helper('axaltacore_usermanagement')->__('UOM') ?></span></th>
+                    <th rowspan="<?php echo $mergedCells; ?>"><?php echo Mage::Helper('axaltacore_usermanagement')->__('Unit Price') ?></th>
+                    <th rowspan="<?php echo $mergedCells; ?>"><?php echo Mage::Helper('axaltacore_usermanagement')->__('Total Price') ?></th>
+                    <th rowspan="<?php echo $mergedCells; ?>"><?php echo Mage::Helper('axaltacore_usermanagement')->__('') ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $_itemIdStr= '';
+                $alliedsubTotal='';
+                $customerSession=Mage::getSingleton('customer/session');
+                $priceListName=$customerSession->getPriceListName();
+                foreach($cartAlliedDetails as $k=>$val){
+                    $getDetails=Mage::getModel('catalog/product')->load($val['product_id']);
+                    $sapMaterial= $getDetails->getSapmaterialnumber();
+                    //$result=$this->getPrice($sapMaterial,$priceListName);
+                    $result=$this->getAlliedPrice($val['sku']);
+                    $unitPrice=$result['rate'];
+                    $totalPrice= $result['rate'] * $val['qty'];
+                    $cartAlliedDetails[$k]['custom_unit_price']=$unitPrice;
+                    $cartAlliedDetails[$k]['custom_total_price']=$totalPrice;
+                    $cartAlliedDetails[$k]['axalta_desc']=$this->htmlEscape($val['name']);
+                    $alliedsubTotal +=$totalPrice;
+                    ?>
+                    <tr>
+                        <!--td><input type="checkbox" class="" name="cartitem_<?php echo $val['item_id']?>" id="cartitem_<?php echo $val['item_id']?>" value="<?php echo $val['item_id'];?>" /></td-->
+                        <td><?php echo $this->htmlEscape($val['sku']) ?></td>
+                        <td class="breakWord">
+                            <?php echo $this->htmlEscape($val['name']) ?>
+                        </td>
+
+                        <td class="a-center">
+                            <input name="cart[<?php echo $val['item_id'] ?>][qty]" onfocus="jQuery(this).val('');jQuery(this).parents('td:first').find('div.validation-advice').remove();" onblur='validateSingleQty(this);' id="qty_<?php echo $val['item_id']; ?>" value="<?php echo (int)$val['qty']; ?>" size="5" title="<?php echo Mage::Helper('axaltacore_usermanagement')->__('Qty') ?>" class="qty text_small a-center text_box_bt_shadow review-table-qty" maxlength="12" />
+                            <span class="qty-validation" id="validation_qty_<?php echo $val['item_id']; ?>"></span>
+                        </td>
+                        <td><?php echo $val['unitofmeasure']?></td>
+                        <td><?php echo '$'.sprintf('%0.2f', $unitPrice);?></td>
+                        <td><?php echo '$'.sprintf('%0.2f', $totalPrice);?></td>
+                        <td><a href="#" title="<?php echo Mage::Helper('axaltacore_usermanagement')->__('Remove item')?>" class="remove-item" onclick="conformDlt('<?php echo $this->getDeleteUrl($val['item_id']);?>')"><?php echo Mage::Helper('axaltacore_usermanagement')->__('Remove item')?></a></td>
+                    </tr>
+                    <?php
+                    if($_itemIdStr == '') {
+                        $_itemIdStr = $val['item_id'];
+                    }
+                    else {
+                        $_itemIdStr .= ','. $val['item_id'];
+                    }
+                }
+                ?>
+
+                </tbody>
+            </table>
+        </div>
+        <p class="cart-show-all1"><?php echo $this->__('Show All'); ?></p>
+        <p class="cart-hide-all1"><?php echo $this->__('Hide'); ?></p>
+        <script type="text/javascript">
+                jQuery(document).ready(function(){
+                    //var subTotal = "<?php echo Mage::helper('core')->currency($alliedsubTotal, true, false); ?>";
+                    //alert(subTotal);
+                    jQuery("#cart-grand-total-price").html(subTotal); 
+               });
+        </script>
+        <p class="cart-sub-total"><?php echo $this->__('SubTotal'); ?>&nbsp;<?php echo '$'.sprintf('%0.2f',$alliedsubTotal); ?></p>
+        <?php } ?>
+        	    
+           
+            <?php
+                Mage::getSingleton('checkout/session')->setShoppingCartDetails($cartDetails);
+                Mage::getSingleton('checkout/session')->setAlliedShoppingCartDetails($cartAlliedDetails);
+                
+                Mage::getModel('core/session')->setOrderTotal(sprintf('%0.2f',$grandTotal));
+                Mage::getModel('core/session')->setAxaltaItmesTotal(sprintf('%0.2f',$subTotal));
+                Mage::getModel('core/session')->setAlliedItmesTotal(sprintf('%0.2f',$alliedsubTotal));
+            ?>
+            <input type="hidden" name="itemidstr" id="itemidstr" value="<?php echo $_itemIdStr;?>" />
+            <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+
+      
+    </div>
+</form>
+
+<?php echo $this->getChildHtml('shopping.cart.table.after'); ?>
+
+
+<?php echo $this->getChildHtml('code.upload') ?>
+<?php echo $this->getChildHtml('file.upload');
+echo $this->getChildHtml('cartdatemessage');
+?>
+<script type="text/javascript">
+    var theForm = new VarienForm('order_form', true);
+    function conformDlt($dltUrl) {
+        if (confirm("Are you sure you want to delete this item?") == true) {
+            setLocation($dltUrl);
+        }
+    }
+
+</script>

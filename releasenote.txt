@@ -1,0 +1,531 @@
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Date & Time: 31-03-2016 & 9:00 PM
+Prepared by: Ramakoteswara
+Reviewed by: Krishna
+Release Version: 0.23
+
+Please test Resolved Bugs and new features as below
+
+
+1) Private post creation while submit quote (All services)
+2) Line item edit  (All services exclude buyer ptl and other four services) - We have issues with line items
+3) Buyer term post save as draft
+4) Term contract to single order
+5) Search price filter based on calculation
+6) Leads - details expand
+7) Search sumbit quote, capture fields like tracking and payment terms
+8) modify search   (All services exclude buyer ptl and other four services, advacned search in Relocation) - We have issues with line items
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Date & Time: 01-29-2016 & 2:00 PM	
+Prepared by: Swapna
+Reviewed by: Krishna
+Release Version: 0.22
+
+Please test the logistiks application for the below list:
+Spot & Term functionality for FTL & LTL
+Registration
+Spot/term for Air, Ocean, Rail.
+Spot for Intracity.
+Messages in Spot all services.
+
+Known Issues:
+
+Buyer Search and Seller Search - modify Search,filters
+Messages in term
+LTL Search Book Now
+
+Developer Comments:
+1.Please note that the social logins will work only in the live server going ahead as we need to create different port urls every time we build a new version ,instead we can test the social logins working functionality in the last stable build before we release the version to the client.
+2.We have uploaded the sample data for airports and seaports.If you need more for testing.Please provide the data in the updated docs sent to you.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Date & Time: 01-19-2016 & 8:00 PM	
+Prepared by: Swapna
+Reviewed by: Krishna
+Release Version: 0.20
+
+Please test the logistiks application for the below list:
+1. Intracity,LTL & AirDomestic & Rail(Buyer & Seller Leads & seller enquiries functionality)..And also resolved issues in the bug tracker..
+
+FTL Known issues:
+- Buyer and seller search results - sorting not working properly
+
+LTL & Remaining 4 services (rail,air,ocean) Known issues- 
+- Buyer and seller search results - sorting not working properly
+- Search - filters not working properly
+
+Developer Comments:
+1.Please note that the social logins will work only in the live server going ahead as we need to create different port urls every time we build a new version ,instead we can test the social logins working functionality in the last stable build before we release the version to the client.
+2.We have uploaded the sample data for airports and seaports.If you need more for testing.Please provide the data in the updated docs sent to you.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Date & Time: 01-09-2016 & 3:00 PM	
+Prepared by: Swapna
+Reviewed by: Krishna
+Release Version: 0.19
+
+Please test the logistiks application for the below list:
+1. LTL all services - ltl,rail,air domestic,air international,ocean
+
+FTL Known issues:
+- Leads
+- Buyer and seller search results - sorting not working properly
+
+LTL Known issues- 
+- Leads
+- Buyer and seller search results - sorting not working properly
+- Search - filters not working properly
+
+
+Developer Comments:
+1.The resolved issues in the bug tracker related to the Intracity module were resolved in the earlier builds not in the current build.As we have been working on other services we didin't release intracity for testing
+
+2.Please note that the social logins will work only in the live server going ahead as we need to create different port urls every time we build a new version ,instead we can test the social logins working functionality in the last stable build before we release the version to the client.
+3.We have uploaded the sample data for airports and seaports.If you need more for testing.Please provide the data in the updated docs sent to you.
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Date & Time: 01-07-2016 & 12:00 PM	
+Prepared by: Swapna
+Reviewed by: Krishna
+Release Version: 0.18
+
+Please test the logistiks application for the below list:
+1. Resolved issues in the bug tracker.
+
+FTL Known issues:
+- Leads -book now
+- Buyer and seller search results - sorting not working properly
+
+LTL Known issues- 
+- Leads -book now
+- Buyer and seller search results - sorting not working properly
+- Search - filters not working properly
+
+The resolved issues in the bug tracker related to the Intracity module were resolved in the earlier builds not in the current build.As we have been working only on FTL,LTL and other services we didin't release intracity for testing
+
+Please note that the social logins will work only in the live server going ahead as we need to create different port urls every time we build a new version ,instead we can test the social logins working functionality in the last stable build before we release the version to the client.
+
+As there are lots of changes in the database,we didn't migrate the QA Database to the current build.So,kindly test with the new data
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Date & Time: 12-21-2015 & 7:00 PM	
+Prepared by: Swapna
+Reviewed by: Krishna
+Release Version: 0.17
+
+Please test the logistiks application for the below list:
+1. FTL,LTL complete flow
+2. Resolved issues in the bug tracker.
+
+FTL Known issues:
+- Compare Quotes based on Lowest price
+
+LTL Known issues
+- Multi-location search
+- Matching Leads
+- Compare Quotes based on Lowest price
+- Seller zone search
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Date & Time: 12-18-2015 & 1:30 PM	
+Prepared by: Swapna
+Reviewed by: Krishna
+Release Version: 0.15
+
+Please test the logistiks application for the below list:
+1. FTL,LTL complete flow
+2. UI design changes as per feedback for FTL Seller/Buyer Post creation, edit and FTL Seller/Buyer Search
+3. Pagination completed in all grids/lists.   
+4. Resolved issues in the bug tracker.
+
+Known Issues:
+1. FTL
+        Compare quotes functionality works with Lowest transit days only
+2. LTL - 
+        Compare quotes
+        Search for multiple location
+        Leads
+        Filters in posts 
+        Pin code master import  
+3. Responsive design Least priority
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Date & Time: 12-14-2015 & 6:30 PM	
+Prepared by: Swapna
+Reviewed by: Krishna
+Release Version: 0.15
+
+Please test the logistiks application for the below list:
+
+1. FTL complete flow
+2. FTL feedback from client(Files attached & shared in Google Drive FTL Design HTML  Feedback Doc 18-Nov_Updated.xlsx)
+3. Breadcrumbs
+5. Resolved issues in the bug tracker.
+
+Known issues:
+1. Display selected search parameter in search result page.
+2. Book Now- Consignment value- don't allow alphabet in consignment value
+3. Selected sub menu should be in bold in list like quotes.
+4. Alert/Confirmation dialogs to be made consistent
+5. Order details- Display + Icon for expansions Swapna Team
+6.. FTL- After clicking Compare Ranking should be displayed in the list
+
+1. Leads not working
+2. Sorting is not working in search grid
+3. Bulk Uploads
+----------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Date & Time: 12-12-2015 & 6:30 PM	
+Prepared by: Swapna
+Reviewed by: Krishna
+Release Version: 0.13
+
+Please test the logistiks application for the below list:
+
+1. FTL complete flow
+2. FTL feedback from client(Files attached & shared in Google Drive FTL Design HTML  Feedback Doc 18-Nov_Updated.xlsx)
+3. Breadcrumbs
+4. LTL complete flow
+5. Resolved issues in the bug tracker.
+6. Order numbering format: FTL/2015/6 digit number
+
+Known issues:
+1. Leads not working
+2. Sorting is not working in search grid
+3. Bulk Uploads
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Date & Time: 09-12-2015 & 8:30 PM	
+Prepared by: Ram
+Reviewed by: Krishna
+Release Version: 0.12
+
+Please test the logistiks application for the FTL features with responsive ,resolved issues in the bug tracker.
+
+FTL Known Issues :-
+1) Sorting is not working in search grid
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Date & Time: 07-12-2015 & 6:30 PM	
+Prepared by: Swapna
+Reviewed by: Krishna
+Release Version: 0.11
+
+Please test the logistiks application for the PTL features with responsive ,resolved issues in the bug tracker.
+
+PTL Known Issues :-
+In Orders created from Search, the order line items are not displayed.
+Zone handling in filters/search not working correctly
+Edit Private Seller list in Buyer quotes
+Manage Masters: Pincode details are not being taken from the domain
+In Counter offer Form for PTL services-Compare -- Ned to be clarified
+View static text in all the grids
+Bulk Uploads not working
+
+FTL Known Issues:
+Flexible date filters are not working
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Date & Time: 04-12-2015 & 4:50 PM	
+Prepared by: Swapna
+Reviewed by: Krishna
+Release Version: 0.10
+
+Please test the logistiks application for the PTL features with responsive ,Intracity HTML feedback ,resolved issues in the bug tracker.
+
+PTL Known Issues :-
+	BUYERS : Search is working fine except below
+	1) Buyer search results page filters functionality not completed.
+	2) Buyer search results page - book now and counter offer not completed.
+	3) Edit post is not working
+
+	SELLERS : Search is working fine except below
+	1) Sellers search results page filters not done.
+	2) Seller search results page - intial quote and final quote not completed.
+
+	In Counter offer Form for PTL services-Compare -- Ned to be clarified
+
+	View static text in all the grids
+
+Intracity Known Issues:
+	Invoice generation
+	Compare
+	Search and post page - Based on weight,vehicle dropdown display is not done.	
+
+-----------------------------------------------------------------------------
+Date & Time: 02-12-2015 & 7:30 PM	
+Prepared by: Swapna
+Reviewed by: Krishna
+Release Version: 0.8
+
+Please test the FTL,intracity with complete responsive theme and the resolved issues in the bug tracker.
+For the FTL changes please find the tasks updated as done in the sheet as shared by Harathi.
+
+Known Issues :-
+
+All Modules:
+1. Breadcrumbs
+2. Invoice generation
+3. Compare
+4. Date filters,flexible dates are not working properly in search results and post listing pages.
+5. Check all cancel functionality not completed in buyer side.	
+6. FTL changes tasks which are marked as not done and with some comments.
+7. Intracity: Search and post page - Based on weight,vehicle dropdown display is not done.
+
+Helpdesk should be centre aligned similar as HTML.
+
+Seller Post list
+In rate cards listing display Messages, Enquiries, Market Analytics and Views as non-clickable items. Display the aggregate count for each of these. Aggregate is sum of all the counts for the individual routes in the rate card.
+Cancel button is to cancel the rate card as a whole. On clicking Cancel, will display a confirmation dialog.
+Once Rate card is cancelled then buyer should not allow responding to that particular rate card.
+
+Buyer Post List- Book Now(Book now shouldn't be available for a cancelled post in quotes)
+Display deleted post to buyer/seller who owns and deleted the post.
+
+Cart - Breadcrumb should be there.
+
+Make payment-Invoice computation logic to be provided by client for both buyer and seller.
+
+Buyer Orders List-Buyer & seller Order list filter and sort consistency should be maintained.
+
+Seller Order List-Upon clicking Status, display tracking info from seller consignment pick up  and when online tracking is in place then Long code SMS (sent by driver) & GPS Tracking details.
+
+After login, by default display buyer home page.
+
+MSP Links:
+
+http://20.0.0.9:999/msp/seller_quotes
+http://20.0.0.9:999/msp/update_orders
+http://20.0.0.9:999/msp/order_confirmation
+
+
+	
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Date & Time: 27-11-2015 & 7:00 PM	
+Prepared by: Ramu
+Reviewed by: Krishna
+Release Version: 0.7
+
+Known Issues :-
+	BUYERS :
+
+	1) After post creation not completed  posts lists ,post list  items and post detail pages.(I got htmls yesterday).
+	2) Check all cancel functionality not completed in buyer side.
+	3) Buyer search results page filters functionality not completed.
+	4) Buyer search results page details not dynamic.
+	5) In Book Now Form for all services- Need Insurance – At present static field, in future there will be API integration from which insurance premium amount will be 		fetched and displayed.
+	6) For new buyer registered in qa is not coming with name for getquotebooknow page.
+	7) kg to gram conversion not working
+	8) Order listing page:
+    		->Message,Status,Documents in orders are not implemented.
+	    	->vehicle no filter not working.
+	9) order detail page
+	    	->documents block is static,approval static.
+    		->Message,Status,Documents in orders are not implemented.
+	10) Search results
+	        ->filters not working properly.
+	11) quotes count is static
+	12) Ptl order prefix is wrong
+	13 ) PTL masters pending
+
+	SELLERS :
+
+	1) Sellers search results page filters not done.
+	2) Seller post creation that post private and post public it's not done as per html.
+
+
+
+
+
+In Counter offer Form for PTL services-
+I am dependent on Srinivas as he has to add one column which will convert any  unit to KG. 
+Clarifications :-
+The bellow thing has to be clarified by BA team.
+Compare -- Ned to be clarified
+
+
+
+
+	
+-----------------------------------------------------------------------------
+Date & Time: 23-11-2015 & 2:30 PM	
+Prepared by: Swathi
+Release Version: 0.6
+	
+	Please test the intracity service(buyer quote flow) with ui and responsive in logistiks application..
+
+Developer Comments:  
+
+    Please test the application in firefox or chrome.Please mark the IE as the last priority and post the bugs related to it.
+    
+    please use this path for External pages(like )
+    http://log.quad1test.com:777/msp/seller_quotes(to give counter offer against quote)
+    http://log.quad1test.com:777/msp/order_confirmation(to assign vehicle against order)
+    Please test the application in the browsers other than IE initially.then please report the bugs in IE.
+    
+
+Known Issues:
+    
+    1)BUYER POSTS LIST PAGE:
+	    ->checkbox,selectall & cancel links are DUMMY
+	    ->text "View 1-50" is Static link and Static count
+	    ->Search functionality is not incorporated as stated by KRISHNA & according to requirement.
+
+    2)BUYER POST ITEM DETAILS:
+	-> "Edit" & 10000 Views link is dummy.
+	-> "Compare | View 1-50" is static links and Static count
+	->Vehicle rating stars are dummy and static.
+    3)Order listing page:
+    	->Message,Status,Documents in orders are not implemented.
+    	->filters are not working.
+    4)order detail page
+    	->documents block is static,approval static.
+    	->Message,Status,Documents in orders are not implemented
+    	
+    5)search page:not implemented.
+    
+    SMS is not integrated.idea integration is not done.
+    Payment gateway is not integrated.
+    seller side funtionality not yet implemented.
+
+    Seller update the previous order details even seller subscription period ends. -- not an issue we should allow them to update even if the seller subscription date ends
+-----------------------------------------------------------------------------
+Date & Time: 10-11-2015 & 3:00 PM	
+Prepared by: Swapna
+Release Version: 0.5
+	
+	Please test the logistiks application for all the resolved issues,Book now from search..
+
+Developer Comments:  
+    Please test the application in firefox or chrome.Please mark the IE as the last priority and post the bugs related to it.
+    Please test the facebook social logins with the below email
+    facebook:
+    email:
+    dick_fyeugvr_letuchysen@tfbnw.net
+    pushpa_ckqzvkr_kamsali@tfbnw.netpassword:swathi
+    please use this path for social login
+    http://log.quad1test.com:555
+	Please test the application in the browsers other than IE initially.then please report the bugs in IE.
+    Please dont test responsive functionality
+
+Known Issues:
+
+    Mobile registration and login is not implemented completely.
+    Sellers are activated after payment.And we are not restricting to login for inactive users as we dont any approval process till date.
+    Registrations screens are not responsive    
+    SMS is not integrated.
+    Payment gateway is not integrated.
+
+    Buyer leads functionality and to book now directly is pending
+    While testing the social logins functionality,if its an issue with the server and internet.Please contact system administrator
+    Seller update the previous order details even seller subscription period ends. -- not an issue we should allow them to update even if the seller subscription date ends
+-----------------------------------------------------------------------------
+Date & Time: 03-11-2015 & 3:30 PM	
+Prepared by: Swapna
+Release Version: 0.4
+	
+	Please test the logistiks application for all the Registration and FTL Spot features updated with status as shared in the RTM and status sheet.
+
+Developer Comments:  
+    Please test the application in firefox or chrome.Please mark the IE as the last priority and post the bugs related to it.
+    Please test the facebook social logins with the below email
+    facebook:
+    email:
+    dick_fyeugvr_letuchysen@tfbnw.net
+    pushpa_ckqzvkr_kamsali@tfbnw.netpassword:swathi
+    please use this path for social login
+    http://log.quad1test.com:555
+	Please test the application in the browsers other than IE initially.then please report the bugs in IE.
+    Please dont test responsive functionality
+
+Known Issues:
+
+    Mobile registration and login is not implemented completely.
+    Sellers are activated after payment.And we are not restricting to login for inactive users as we dont any approval process till date.
+    Registrations screens are not responsive
+    Seller edit is implemented as per single line item,we are waiting for clarification from the client whether it should be rendered in edit mode for all posts.
+    Vehicle,warehouse,equipment registration - Few fields are not integrated in bulk upload
+    SMS is not integrated.
+    Payment gateway is not integrated.
+    Upon any action the page is taking time to load and show the alert because we are sending mail.It would be fixed very soon as it's a global issue
+    Buyer leads functionality and to book now directly is pending
+    Buyer search results book now is not working
+    While testing the social logins functionality,if its an issue with the server and internet.Please contact system administrator
+    Seller update the previous order details even seller subscription period ends. -- not an issue we should allow them to update even if the seller subscription date ends
+
+-----------------------------------------------------------------------------
+Date & Time: 28-10-2015 & 3:30 PM	
+Prepared by: Swapna
+Release Version: 0.3
+	
+	Please test the logistiks application for all the Registration and FTL Spot features updated with status as shared in the RTM and status sheet.
+
+	Known Issues:-
+
+	1) Mobile login is not working.
+	2) Vehicle,warehouse,equipment registration - Few fields are not integrated in bulk upload
+	3) Every User can login into the system as we dont have any admin to approve
+	4) SMS is not integrated
+	5) Payment gateway is not integrated.
+
+	Developer comments :- 	
+	1) Please test the application in firefox or chrome.Please mark the IE as the last priority and post the bugs related to it.
+    2) Please test the facebook social logins with the below email
+    3) facebook:
+		email:
+		dick_fyeugvr_letuchysen@tfbnw.net
+		pushpa_ckqzvkr_kamsali@tfbnw.netpassword:swathi
+		please use this path for social login
+		http://log.quad1test.com:555
+		-----------------------------------------------------------------------------
+Date & Time: 16-10-2015 & 6:30 PM	
+Prepared by: Swapna
+Release Version: 0.2
+	
+	Please test the logistiks application for all the features updated with status as shared in the RTM and status sheet.
+
+	Known Issues:-
+
+	1) Mobile login is not working.
+	2) The navigation links are not proper.
+	3) The buyer posts list filters are not working.
+	4) UI needs to be fixed.
+	5) Subscription Date needs to be validated when creating a seller post
+	6) Flexible dates is pending.
+	7) Vehicle,warehouse,equipment registration - Few fields are not integrated in bulk upload
+	8) Every User can login into the system as we dont have any admin to approve
+
+	Developer comments :- 
+	
+	1) Please test the application in firefox or chrome.Please mark the IE as the last priority and post the bugs related to it.
+    2) Please test the facebook social logins with the below email
+    3) facebook:
+		email:
+		dick_fyeugvr_letuchysen@tfbnw.net
+		pushpa_ckqzvkr_kamsali@tfbnw.netpassword:swathi
+		please use this path for social login
+		http://log.quad1test.com:555
+
+-----------------------------------------------------------------------------
+Date & Time: 15-10-2015 & 5:00 PM	
+Prepared by: Swapna
+Release Version: 0.1
+
+	Please test the logistiks application for all the features updated with status as shared in the RTM and status sheet.
+
+	Known Issues:
+
+	1) Mobile login is not working.
+	2) The edit profile link is shown after login eventhough the user has not completed the registration steps completely..
+	3) The navigation links are not proper.
+	4) The buyer posts list filters are not working.
+	5) UI needs to be fixed.
+	6) Subscription Date needs to be validated when creating a seller post
+	7) Flexible dates is pending.
+	8) Vehicle,warehouse,equipment registration - Few fields are not integrated in bulk upload
+	
+-----------------------------------------------------------------------------

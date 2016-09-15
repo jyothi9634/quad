@@ -1,0 +1,20 @@
+<?php $__env->startSection('content'); ?>
+<?php $commonComponent = app('App\Components\CommonComponent'); ?>
+<!-- Page top navigation Starts Here-->
+<?php echo $__env->make('partials.page_top_navigation', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<div class="main">
+	<div class="container container-inner">
+
+		<!-- Left Nav Starts Here -->
+		<div class="home-search gray-bg margin-bottom-none padding-bottom-none border-bottom-none margin-top-none">
+
+			<?php echo $__env->make('seller.trucklease.search._form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+		</div>
+		<div class="clearfix"></div>
+
+	</div>
+</div>
+<?php echo $__env->make('partials.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

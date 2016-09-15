@@ -1,0 +1,20 @@
+FTl,rail,ptl,ocean invoices done
+
+Resolved
+
+Quality@123456
+
+
+
+0050477 -> Done
+0049861 -> Done
+0050821 -> Done
+
+Need to do:
+1) Need to chnage vehicle type not defaulted in edit get quote
+2) in truck haul payment terms accept count offer page design issue
+
+
+In LTL code price Needed :
+
+$('#buyer_post_price_'+id).text(totalAmount.toFixed(2));

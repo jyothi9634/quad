@@ -1,0 +1,80 @@
+
+<div style="display:none">
+<?php echo $__env->make('rapyd::toolbar', array('label'=>$label, 'buttons_right'=>$buttons['TR']), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+</div>
+<span class="pull-right view-count">
+<?php if(count($dg->rows) > 0): ?>
+    <?php if(isset($_REQUEST['page']) &&  $_REQUEST['page'] != ''): ?>
+        <?php if(count($dg->rows) >= 5): ?>
+            <?php /**/ $Pagefrom = (($_REQUEST['page']-1) * 5) + 1/**/ ?>
+            <?php /**/ $Pageto = (($_REQUEST['page']-1) * 5) + 5 /**/ ?>       
+        <?php else: ?>
+            <?php /**/ $Pagefrom = (($_REQUEST['page']-1) * 5) + 1 /**/ ?>
+            <?php /**/ $Pageto = ($_REQUEST['page']-1) * 5 + count($dg->rows) /**/ ?>
+        <?php endif; ?>    
+    <?php else: ?>
+        <?php if(count($dg->rows) >= 5): ?>
+            <?php /**/ $Pagefrom = 1 /**/ ?>
+            <?php /**/ $Pageto = 5 /**/ ?>
+        <?php else: ?>
+            <?php /**/ $Pagefrom = 1 /**/ ?>
+            <?php /**/ $Pageto = 0 + count($dg->rows) /**/ ?>
+        <?php endif; ?>
+    <?php endif; ?>
+    View <?php echo $Pagefrom; ?>-<?php echo $Pageto; ?>
+
+<?php endif; ?>
+<?php if(count($dg->rows) == 0): ?>
+View 0-0
+<?php endif; ?>
+</span>
+<div class="table-heading inner-block-bg" width="100%">
+    
+     <?php foreach($dg->columns as $column): ?>
+            <div  <?php echo $column->buildAttributes(); ?>>
+            <?php if($column->orderby): ?>
+                <?php if($dg->onOrderby($column->orderby_field, 'asc')): ?>
+					<a href="<?php echo $dg->orderbyLink($column->orderby_field,'desc'); ?>">
+						<span class="fa fa-caret-down"></span>
+						<span class="columm_elabel_text"><?php echo $column->label; ?></span>
+					<a>
+                <?php else: ?>
+                    <a href="<?php echo $dg->orderbyLink($column->orderby_field,'asc'); ?>">
+                        <span class="fa fa-caret-up"></span>
+						<span class="columm_elabel_text"><?php echo $column->label; ?></span>
+                    </a>
+                <?php endif; ?> 
+						
+             	<?php else: ?>
+						<span class="columm_elabel_text"><?php echo $column->label; ?></span>
+				<?php endif; ?>
+                
+            </div>
+     <?php endforeach; ?>
+</div> 
+	<?php if(count($dg->rows) == 0): ?>
+			<div class="table-data">
+                <div class="col-md-12 padding-left-none padding-right-none table-data">			
+				<div class="table-row inner-block-bg text-center"><span class="nocontent">No Records Found</span></div>
+            </div></div>
+	<?php else: ?>
+        <div class="table-data">
+		<?php foreach($dg->rows as $row): ?>
+            <div class="table-row inner-block-bg">
+
+                <div <?php echo $row->buildAttributes(); ?>>
+                    <?php foreach($row->cells as $cell): ?>
+                    <div <?php echo $cell->buildAttributes(); ?>><?php echo $cell->value; ?></div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+		<?php endforeach; ?>
+       </div>
+	<?php endif; ?>
+
+<?php if($dg->havePagination()): ?>
+    <div class="pagination pull-right">
+    <?php echo $dg->links(); ?>
+
+    </div>
+<?php endif; ?>

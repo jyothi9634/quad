@@ -1,0 +1,32 @@
+@CHARSET "ISO-8859-1";
+.bottom_left{height: 65px;width:200px;}
+.controls {margin-top: 16px;border: 1px solid transparent;border-radius: 2px 0 0 2px;box-sizing: border-box;-moz-box-sizing: border-box;height: 32px;outline: none;box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);}
+.home_control_button_chrome {margin-left: auto;margin-right: auto;background:-webkit-radial-gradient(top, #449def, #2f6699);textAlign:center;border: 1px solid #ccc;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px;outline: 0;-webkit-appearance: none;}
+.home_control_button_mozilla {background:green;textAlign:center;border-radius: 10px;}
+.home_control_prev_next {background:-webkit-radial-gradient(top, #8dc63f, #39b54a);textAlign:center;cursor:pointer;border: 1px solid #ccc;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px;-moz-box-shadow: 2px 2px 3px #666;-webkit-box-shadow: 2px 2px 3px #666;box-shadow: 2px 2px 3px #666;outline: 0;-webkit-appearance: none;}
+.home_control_button {margin-left:10px; margin-right:10px;color:white;height:18px;width:50px;text-align:center;paddingLeft:8px;fontSize:12px;line-height:18px;}
+.chrome_insidebutton {display:inline;background:-webkit-radial-gradient(top, #449def, #2f6699);text-align: center;cursor: pointer;border: 1px solid #ccc;border-radius: 15px;}
+.mozilla_insidebutton{display:inline;background: green;text-align: center;cursor: pointer;border-radius: 10px;border:none;}
+.ctrl_bground {background: none;border:none;}
+.bottom_right {margin-left:10px; margin-right:10px;color:white;height:42px;width:auto;text-align:left;paddingLeft:8px;fontSize:12px;line-height:18px;}
+.top_center {text:bold;margin-left:10px; margin-right:10px;color:white;height:18px;width:auto;text-align:center;paddingLeft:20px;paddingRight:4px;fontSize:16px;line-height:18px;}
+.bottom_left {margin-left:10px; margin-right:10px;color:white;height:auto;width:auto;text-align:center;paddingLeft:8px;fontSize:12px;line-height:18px;}
+.infobox-wrapper {display:none;}
+#infobox {border:0px solid black;margin-top: 8px;background:rgba(0,0,0,0.7) !important;color:#FFF;font-family:Arial, Helvetica, sans-serif;font-size:12px;padding: .5em 1em;text-shadow:0 -1px #000000;-webkit-box-shadow: 0 0  8px #000;box-shadow: 0 0 8px #000;line-height: 150%;}
+#infobox input{color:black;}
+.infobox_ul{ padding:0px; list-style:none;}
+.infobox_ul li{padding: 2px 6px 2px 5px;margin-bottom: 2px;border-radius: 4px;}
+.infobox_ul li a{color:white !important;}
+.infobox_ul li a input{width:50%;}
+.infobox_ul select{width:50%;height:22px;}
+/* .vehicles-list li a:hover{ color: #e20404;}  */
+.infobox_ul li a{color:#424242;}
+
+
+.gm-style div {
+    background: transparent none repeat scroll 0 0 !important;
+    box-shadow: none !important;
+}
+
+
+
