@@ -4021,6 +4021,15 @@ class RegisterController extends Controller {
 		endif;
 	}
 	
+	public function getPincodeDetails(){
+		$pin = Input::get('prop_pinid');
+		$getPrincipalPlace = DB::table('lkp_ptl_pincodes as lpp')
+		->where('lpp.pincode', '=', $pin)
+		->select('lpp.districtname','lpp.id','lpp.divisionname','lpp.statename','lpp.postoffice_name')
+		->first();
+		return Response::json($getPrincipalPlace);
+	}
+	
 	public function buyerSwitchSeller(){
 
 		Log::info ( 'Seller has viewed seller individual registration page:' . $this->user_pk, 

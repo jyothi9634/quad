@@ -110,12 +110,19 @@ $(document).ready(function() {
 		    };
 		 $.ajax({
 		        type: "GET",
-		        url: '/getprincipalplace',
+		        url: '/getPincodeDetails',
 		        data: data,
-		        dataType: 'text',
+		        dataType: 'json',
+				
 		        success: function(data) {	   	        	
-		        	$("#principal_place").val(data);
-		        	$("#hidden_user_pincode").val(data);
+					
+		        	$("#principal_place").val(data.districtname);
+		        	$("#hidden_user_pincode").val(data.districtname);
+					$("#city").val(data.divisionname);
+					$("#state").val(data.statename);
+					$("#location").val(data.postoffice_name);
+					$("#district").val(data.districtname);
+               
 		        },
 		        error: function(request, status, error) {	            
 		        },
@@ -629,6 +636,10 @@ $(function() {
 				accept : "[0-9]+",
 				rangelength : [ 10, 15 ]
 			},
+			'location' : {
+				required : true
+			},
+			
 		},
 		errorPlacement: function(error, element) {
         	$(element).parent().parent().after(error);
