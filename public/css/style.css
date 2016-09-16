@@ -4554,3 +4554,7 @@ div.hide-final input[type='text'] {
     border-left: 1px solid #bababa;
 
 }
+
+a.link-red{ color:#ff0000; text-decoration:none;}
+.registration-individual-row2{ padding:20px 0px 0px 0px;}
+.reg_text_align {margin-top:15px; }

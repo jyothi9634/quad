@@ -693,3 +693,12 @@ background: transparent none repeat scroll 0 0 !important;
 }
 .service_19 .status-block,.service_19 .status-block .status-bar{width: 175px;}
 #otp-field .loginmodal-submit{padding:5px 8px;}
+
+label.error-1,.errorMessage {
+	color: #e21127;
+	font-size: 11px;
+	line-height: 15px;
+	display: block;
+	clear: both;
+    margin-top: 3px;
+}

@@ -112,7 +112,7 @@ class RegisterController extends Controller {
 		$userEmail = $data ['user_email'];
 
 		if (is_numeric ( $userEmail )) {
-			$coloumn = 'phone';
+			$coloumn = 'email';
 			$option = 1;
 		} elseif (strpos ( $userEmail, '@' )) {
 			$coloumn = 'email';
@@ -144,12 +144,14 @@ class RegisterController extends Controller {
 		$createdIp = $_SERVER ["REMOTE_ADDR"];
 		
 		$users->$coloumn = $userEmail;
+		$users->phone = $data ['phone'];
 		$users->password = bcrypt ( $data ['password'] );
 		$users->lkp_role_id = '1';
 		$users->primary_role_id = '1';
 		$users->is_business = $data ['is_business'];
 		$users->created_at = $createdAt;
 		$users->created_ip = $createdIp;
+		
 		if($coloumn == "phone"){
 			$users->is_active = '1';
 			$users->is_confirmed = '1';
@@ -158,31 +160,12 @@ class RegisterController extends Controller {
 		}
 		
 		if ($users->save ()) {
+			
+			$newRole = RegisterController::sendActivationMail ( '1' , $users );
 			// Maintaining a log of data for buyer quotes
 			CommonComponent::auditLog ( $users->id, 'users' );
 			
 			$lastInsertedId = $users->id;
-			Session::put ( 'user_id', $users->id );
-			Session::put ( 'phone', $users->email );
-			Session::put ( 'email', $users->email );
-			
-			/*if ($coloumn == 'phone') {
-				$otp = rand ( 100, 999 ) . "" . time ();
-				// insert otp in user_otps table and
-				// reload the register page with otp alert
-				DB::table ('user_otps' )->insert ( array (
-						'user_id' => $lastInsertedId,
-						'otp' => $otp,
-						'validity' => date ( "Y-m-d H:i:s", strtotime ( "+7 days" ) ),
-						'is_active' => '1',
-						'created_at' => date ( 'Y-m-d H:i:s' ),
-						'created_by' => $lastInsertedId,
-						'created_ip' => $_SERVER ["REMOTE_ADDR"] 
-				) );
-				CommonComponent::auditLog ( $this->user_pk, 'user_otps' );
-				
-				return $otp;
-			}*/
 			
 			return '1';
 		} else {
@@ -210,15 +193,19 @@ class RegisterController extends Controller {
 				$data = Input::only ( [ 
 						'user_email',
 						'password',
-						'is_business' 
+						'is_business',
+						'phone'
 				] );
 				RegisterController::validator ( $data );
+				
+				
 
 				$newUser = RegisterController::create ( $data );
 				
+				
 				if ($newUser == 1) {
 					
-					return Redirect ( 'register/buyer' )->with ( 'message', 'User credentials saved successfully.' );
+					return Redirect ( '/thankyou' )->with ( 'message', 'Member registration created successfully.' );
 				} elseif ($newUser == 401) {
 					return Redirect ( '/register' )->with ( 'message', 'Email already exist' );
 				} 
@@ -244,6 +231,44 @@ class RegisterController extends Controller {
 			) );
 		}
 	}
+	
+	/*
+	|
+	| Method: checkExistence
+	| Purpose: check email and mobile are already exists or not, This service is used in jquery
+	| return : true || false
+	|
+	*/
+	public function checkExistence() {
+		if(isset($_POST ['user_email'])){
+			$userEmail = $_POST ['user_email'];
+			$field = 'email';
+		} else {
+			$userEmail = $_POST ['phone'];
+			$field = 'phone';
+		}
+		$exists = User::where ( $field, $userEmail )->get ();
+
+			if (count ( $exists ) > 0) {
+
+				return "false";
+			} else {
+
+				return "true";
+			}
+	}
+	
+	/*
+	|
+	| Method: Individual Registeration
+	| Purpose: After user member registration continue to next step
+	| return: true || false
+	|
+	*/
+	public function individualRegistration() {
+		return view("auth.individual_register");
+	}
+	
 	protected function checkUnique($userEmail = '', $optionValue = '') {
 
 		Log::info ( 'Email / Phone uniqueness check triggers for Anonymous user :' . $this->randomId, array (
@@ -1130,7 +1155,65 @@ class RegisterController extends Controller {
 		}
 	}
 	
-	
+	public function sendActivationMail($userRole,$data = NULL) {
+		
+		Log::info ( 'User selected an option BUYER / SELLER:' . $data->id, array (
+				'c' => '1' 
+		) );
+		
+		CommonComponent::activityLog ( "USER_SELECT_ROLE", USER_SELECT_ROLE, 0, HTTP_REFERRER, CURRENT_URL );
+		
+		if (isset ( $userRole ) && $userRole != '') {
+			
+			// getting role_id posted by user
+			$roleId = $userRole;
+			
+			// for generating the random string
+			// Chars
+			$chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+			
+			// Parametres
+			$string_length = 10;
+			$random_string = '';
+			
+			// Gererating a random string of length of 10
+			for($i = 1; $i <= $string_length; $i ++) {
+				$rand_number = rand ( 0, 59 );
+				$random_string .= $chars [$rand_number];
+			}
+			
+			$stored_uid = $data->id;
+			
+			DB::table ( 'users' )->where ( 'id', $data->id )->update ( array (
+					'lkp_role_id' => $roleId,
+					'primary_role_id'=>$roleId,
+					'mail_sent' => 1,
+					'activation_key' => $random_string 
+			) );
+			CommonComponent::auditLog ( $data->id, 'users' );
+			
+			if ($roleId == 1) {
+				$user = 'Buyer';
+				$redirect = '/thankyou';
+				// Mail functionality to send email to buyer
+				$userData = DB::table ( 'users' )->where ( 'id', $data->id )->select ( 'users.*' )->get ();
+				
+
+				if ($userData [0]->email) {
+					$activation_url = url () . '/user_activation?key=' . $random_string . '&u_id=' . $stored_uid . '&role_id=' . $roleId;
+					$userData [0]->activation_url = $activation_url;
+					CommonComponent::send_email ( BUYER_ACCOUNT_ACTIVATION_MAIL, $userData );
+				} elseif ($userData [0]->phone) {
+					$user = 'Buyer';
+			
+			$redirect = '/thankyou';
+				}
+				return 1;
+			} else {
+				return 1;
+			}
+		}
+	}
 	
 	/**
 	 * Choosing role will redirect the users accordingly
@@ -4354,7 +4437,7 @@ class RegisterController extends Controller {
 		try{
 			if (! empty ( Input::all () )) {
 				$phone = Input::get ( 'phone' );
-				$six_digit_random_number = mt_rand(100000, 999999);
+				$six_digit_random_number = mt_rand(1000, 9999);
 				$msg_params = array(
 					'otp' => $six_digit_random_number,
 				);
@@ -4373,6 +4456,7 @@ class RegisterController extends Controller {
 
 	public function validateotp()
 	{
+		
 		try {
 			$results = array();
 			if (!empty (Input::all())) {

@@ -1,11 +1,15 @@
 /**
  * 
  */
+
+
+ 
 $(document).ready(function() {
 
 	// submit every form by hiting "ENTER"
-	$('#login-form input').keydown(function(e) {
+	$('#login-formq input').keydown(function(e) {
 		var key = e.which;
+		
 		if (key == 13) {
 			// As ASCII code for ENTER key is "13"
 			// Submit that particular form only
@@ -18,7 +22,16 @@ $(document).ready(function() {
 			}
 		}
 	});
-
+	
+	
+	$("#regenrateOtp").on("click",function(event){
+		event.preventDefault();
+		sendOneTimePassword();
+		$(".resend_otp").css('display','block');
+		setTimeout(function() { $(".resend_otp").css('display','none'); }, 5000);
+	});
+	
+	
 	function sendOtp(email_or_mobile){
 		$.ajax({
 			type: "POST",
@@ -37,26 +50,27 @@ $(document).ready(function() {
 				'phone': email_or_mobile,
 			},
 			success: function(jsonData) {
-				alert(jsonData);
+				//alert(jsonData);
 				$('#otp-field').modal('show');
 			}
 		}, "json");
 	}
 
-	$('#resend_otp').click(function(){
-		var email_or_mobile = document.getElementById('user_email').value;
+	$('#resend_otp').click(function(event){
+		event.preventDefault();
+		var email_or_mobile = document.getElementById('phone').value;
 		sendOtp(email_or_mobile);
 		$(".resend_otp").html("OTP Sent successfully").show();
 		setTimeout(function() { $(".resend_otp").hide(); }, 5000);
 		return false;
 	});
-	$('#registerSubmit').click(function(){
+	$('#registerSubmitq').click(function(){
 		$returnValue = userRegistration();
 		if($returnValue != false){
-			var email_or_mobile = document.getElementById('user_email').value;
+			var email_or_mobile = document.getElementById('phone').value;
 			email_true = isemail(email_or_mobile);
 			if(email_true < 0){
-				sendOtp(email_or_mobile);
+				sendOneTimePassword();
 				return false;
 			}
 
@@ -65,7 +79,44 @@ $(document).ready(function() {
 			return false;
 		}
 	});
-
+	
+	$('#registerSignup').click(function(event){
+		
+		event.preventDefault();
+		var otp = $("#otp").val();
+		
+		$.ajax({
+			type: "POST",
+			url: "/register/validateotp",
+			data: {
+				'otp': otp,
+			},
+			
+			success: function(jsonData) {
+				console.log(jsonData.status);
+				if(jsonData.status == 'failed'){
+					document.getElementById("error_otp").innerHTML = "Please enter valid OTP";	
+					document.getElementById("otp").style.borderColor = "red";
+					document.getElementById("otp").style.borderColor = "red";
+					return false;
+				} else {
+					document.getElementById("error_otp").innerHTML = "";	
+					document.getElementById("otp").style.borderColor = "";
+					document.getElementById("otp").style.borderColor = "";
+					$( "#login-form" ).submit();
+				}
+				$returnValue = userRegistration();
+				if($returnValue != false){
+					$( "#login-form" ).submit();
+					
+				}
+				
+			}
+		});
+		
+		
+		
+	});
 
 	$(document).on('click', '#confirm_otp', function() {
 		var otp = document.getElementById('otp').value;
@@ -1084,7 +1135,7 @@ jQuery.validator.addMethod("lettersonly", function(value, element) {
 				});
 	});
 
-	$("#user_email").blur(function() {
+	$("#user_email1").blur(function() {
 		var currVal = $(this).val();
 		//if(verifyEmail(currVal)){
 			uniquenessCheck();
@@ -1284,7 +1335,7 @@ function uniquenessCheck() {
 	} else {
 		 option_value = 0;
 	}
-	var email_or_mobile = document.getElementById('user_email').value;
+	/*var email_or_mobile = document.getElementById('user_email').value;
 	email_true = isemail(email_or_mobile);
 
 	if(email_true >= 0){
@@ -1301,7 +1352,7 @@ function uniquenessCheck() {
 			document.getElementById('user_email').focus();
 			return false;
 		}
-	}
+	}*/
 	// passing the data to the ajax function
 	// that is further passed to the controller
 
@@ -1318,8 +1369,10 @@ function uniquenessCheck() {
 		success : function(html) {
 			if(html != "200"){
 				$("#error_user_email").html(html);
+				$('#registerSubmit').prop('disabled', true);
 			}else{
 				$("#error_user_email").html('');
+				$('#registerSubmit').prop('disabled', false);
 			}
 		}
 	});
@@ -1576,6 +1629,19 @@ function userRegistration() {
 		document.getElementById("conf_password").style.borderColor = "";
 		document.getElementById("password").style.borderColor = "";
 	}
+	
+	if (document.getElementById("phone").value == '') {
+		document.getElementById("error_phone").innerHTML = "Please enter valid mobile number";
+		document.getElementById("phone").style.borderColor = "red";
+		document.getElementById("phone").style.borderColor = "red";
+		return false;
+	} else {
+		document.getElementById("error_phone").innerHTML = "";
+		document.getElementById("phone").style.borderColor = "";
+		document.getElementById("phone").style.borderColor = "";
+	}
+	
+	
 
 }
 function uploadImage($uid) {
@@ -1732,3 +1798,94 @@ function verifyEmail(eVal){
     }
     return status;
 }
+
+
+function sendOneTimePassword() {
+		var phone = $("#phone").val();
+		$.ajax({
+			type: "POST",
+			url: "/register/otp",
+			data: {
+				'phone': phone,
+			},
+			beforeSend: function() {
+				$('#registerSubmit').text('Processing...');
+				$('#registerSubmit').prop('disabled', true);
+			},
+			success: function(jsonData) {
+				$('#enableOtp').css('display','block');
+				$('#registerSubmit').text('Submit');
+				$('#registerSubmit').prop('disabled', false);
+			}
+		}, "json");
+}
+
+$(document).ready(function(){
+	$("#phone").keypress(function (e) {
+        //if the letter is not digit then display error and don't type anything
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+               return false;
+        }
+   });
+
+   jQuery.validator.addMethod("pwscheck", function(value, element) {
+	return this.optional(element) || /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/i.test(value);
+}, "Password contain atleast one digit one special char and one alphabet");
+   
+  $("#registerSubmit").on("click",function() {
+	 if($("#login-form").valid()) {
+		if($("#phone") .valid()) {
+			sendOneTimePassword();
+		}
+	 }
+	 
+  });
+  
+  $('#login-form').validate({
+	  errorClass: "error-1",
+		rules:{
+			user_email:{
+				required:true,
+				email: true,
+				remote: {
+					url : '/checkExistence',
+					type: "post"
+				 }
+			},
+			conf_email:{
+				required:true,
+				email: true,
+				equalTo: '#user_email'
+			},
+			password:{
+				required:true,
+				minlength: 8,
+                maxlength: 30,
+                pwscheck: true
+			},
+			conf_password:{
+				required:true,
+				equalTo: '#password'
+			},
+			phone: {
+				required:true,
+				remote:{
+					url: '/checkExistence',
+					type: "post"
+				}
+			},
+			
+		},
+		messages: {
+			user_email:{
+				remote: "Email already in use!"
+			},
+			phone:{
+				remote: "Phone already in use!"
+			}
+		}
+		
+		
+	 });
+   
+});

@@ -70,8 +70,10 @@ Route::post('settermbuyerbooknow', [
 
 //Route::get('/', 'RegisterController@register');
 Route::get('/register', 'RegisterController@register');
+Route::get('/individualRegistration', 'RegisterController@individualRegistration');
 Route::get('/register/buyer', 'RegisterController@buyer');
 Route::post('checkunique', 'RegisterController@checkUnique');
+Route::any('checkExistence', 'RegisterController@checkExistence');
 Route::post('buyerregister', 'RegisterController@registerBuyer');
 Route::resource('userregister','RegisterController@register');
 Route::get('register/buyer_business', 'RegisterController@buyerBusiness');

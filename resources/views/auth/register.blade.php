@@ -50,14 +50,14 @@
 						<div class="center-width">
 							<div class="col-md-12 form-control-fld margin-bottom-none">
 								<div class="input-prepend">
-{!! Form:: text ('user_email', '', array ( 'class' => 'form-control form-control1 clsEmailAddr', 'id' => 'user_email', 'placeholder' =>'Email Id or Mobile Number *', 'maxlength' => '50' )) !!}
+{!! Form:: text ('user_email', '', array ( 'class' => 'form-control form-control1 clsEmailAddr', 'id' => 'user_email', 'placeholder' =>'Email Id*', 'maxlength' => '50' )) !!}
 								</div>
 								<span class="error validEmailCheck">
 			<p id="error_user_email"></p> </span> 
 							</div>
 							<div class="col-md-12 form-control-fld margin-bottom-none">
 								<div class="input-prepend">
-{!! Form::text ('user_email', '',array ( 'class' => 'form-control form-control1 clsEmailAddr', 'autocomplete'=> 'off', 'id' => 'conf_email', 'onpaste' => "return false", 'maxlength' => '50', 'placeholder' =>'Re-enter Email Id or Mobile Number *')) !!}
+{!! Form::text ('conf_email', '',array ( 'class' => 'form-control form-control1 clsEmailAddr', 'autocomplete'=> 'off', 'id' => 'conf_email', 'onpaste' => "return false", 'maxlength' => '50', 'placeholder' =>'Re-enter Email Id*')) !!}
 		
 								</div>
 								<span class="error"><p id="error_conf_email"></p> </span>
@@ -70,16 +70,46 @@
 							
 							<div class="col-md-12 form-control-fld margin-bottom-none">
 								<div class="input-prepend">
-									{!! Form::password ('password', array ( 'class' => 'form-control form-control1 clsPasswordVal', 'autocomplete' => 'off', 'id' =>'conf_password', 'onpaste' => "return false", 'maxlength' => '25', 'placeholder' => 'Re-enter Password *' )) !!}
+									{!! Form::password ('conf_password', array ( 'class' => 'form-control form-control1 clsPasswordVal', 'autocomplete' => 'off', 'id' =>'conf_password', 'onpaste' => "return false", 'maxlength' => '25', 'placeholder' => 'Re-enter Password *' )) !!}
 								</div>
 								<span class="error"><p id="error_conf_password"></p></span>
 							</div>
-
+							
 							<div class="col-md-12 form-control-fld margin-bottom-none">
-							{!! Form::submit('Sign Up', array( 'name'=>'submitRegister','id'=>'registerSubmit','class'=>'btn add-btn-2'))!!}
+								<div class="input-prepend">
+									{!! Form::text('phone', '', $attributes = array('class' => 'form-control form-control1 phone_number', 'autocomplete' => 'off', 'id' =>'phone', 'maxlength' => '10', 'placeholder' => 'Mobile Number *' )) !!}
+								</div>
+								<span class="error"><p id="error_phone"></p></span>
 							</div>
 							
 
+							<div class="col-md-12 form-control-fld margin-bottom-none">
+							{!! Form::button('Submit', array( 'name'=>'registerSubmit','id'=>'registerSubmit','class'=>'btn add-btn-2'))!!}
+							</div>
+							<div class="col-md-12 form-control-fld margin-bottom-none">
+							<p class="reg_text_align">
+									By clicking "<a href="#" class="link-red">Sign up</a>" or "<a href="#" class="link-red">Sign In</a>" <br>
+							I acknowledge and agree to the Terms of Use <br>
+							and <a href="#" class="normal-link-line"><i>Privacy Policy.</i></a>
+							</p>
+							</div>
+							
+							<div id="enableOtp" style="display:none;"> 
+							<div class="col-md-12 form-control-fld margin-bottom-none">
+								<div class="input-prepend">
+									{!! Form::text('otp', '', $attributes = array('class' => 'form-control form-control1 validateOtp', 'autocomplete' => 'off', 'id' =>'otp', 'maxlength' => '10', 'placeholder' => 'Enter OTP *' )) !!}
+								</div>
+								<span class="error"><p id="error_otp"></p></span>
+								<span class="resend_otp" style="display:none;">OTP Sent successfully</span>
+								<a href="#" id="regenrateOtp" class="link-red resendOtp">Re-Generate OTP</a><br>
+							</div>
+							
+							
+							{!! Form::submit('Sign up', array( 'name'=>'submitRegister','id'=>'registerSignup','class'=>'btn add-btn-2'))!!}
+							</div>
+							<div class="registration-individual-row2">
+								Need Help ? Helpdesk  | Call  (040) 394 12345 
+							</div>
 						</div>
 					</div>
 				</div>
@@ -99,7 +129,7 @@
 		'/register/validateotp','name'=>'otp_form', 'id'=>'otp_form')) !!} <br>
 
 		{!! Form::text ('otp',$otp, array ( 'class' => 'col-md-12 input_txt
-		margin-bottom', 'autocomplete' => 'off', 'id' => 'otp', 'placeholder'
+		margin-bottom', 'autocomplete' => 'off', 'id' => 'otp1', 'placeholder'
 		=> 'Enter OTP *' )) !!}
 </div></div>
 
