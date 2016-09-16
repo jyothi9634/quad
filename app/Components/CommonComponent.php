@@ -6134,6 +6134,7 @@ class CommonComponent{
 			
 			// Send SMS request
 			$curlresponse = CommonComponent::smsApiRequest($sms_params);
+			
 			$job_id = str_replace('OK:','',$curlresponse);
 
 			// Save in SMS LOG
@@ -6291,8 +6292,8 @@ class CommonComponent{
 	*/
 	public static function smsApiRequest($params=array()){
 		//Please Enter Your Details
-		$user="vmanuj"; //your username
-		$password="04897252"; //your password
+		$user="Logistiks"; //your username
+		$password= "$"."Marketplacelogi"; //your password
 
 		if($params['requestType']=='report'){
 			$fromdate = $params['from'];

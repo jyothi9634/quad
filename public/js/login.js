@@ -37,6 +37,7 @@ $(document).ready(function() {
 				'phone': email_or_mobile,
 			},
 			success: function(jsonData) {
+				alert(jsonData);
 				$('#otp-field').modal('show');
 			}
 		}, "json");
