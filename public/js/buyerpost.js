@@ -6613,6 +6613,7 @@ function GetCapacity() {
     });
 }
 
+
 /** ******** Below script ajax onchange capacity in FTl************ */
 function GetWeightType() {
 	
