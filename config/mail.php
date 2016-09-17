@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'swapna.g@quadone.com', 'name' => 'Logistiks'],
+    'from' => ['address' => 'phpsureshk11@gmial.com', 'name' => 'Logistiks'],
 
     /*
     |--------------------------------------------------------------------------
