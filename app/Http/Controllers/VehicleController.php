@@ -37,7 +37,10 @@ class VehicleController extends Controller {
     public function index() {
         Log::info('Vehicle Listing is initiated by user: ' . Auth::id(), array('c' => '1'));
         $vehicle = VehicleDetail::all()->where('owner_id', Auth::id())->where('is_active','1');
+        Log::info('Vehicle Listing is initiated by user: ' . Auth::id(), array('c' => '1'));
+        
         return view('users.vehicle_list', compact('vehicle'));
+
     }
 
     /**
