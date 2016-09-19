@@ -341,7 +341,7 @@
 											}
 										}
 										if($date1->format('Y-m-d') >= date('Y-m-d')){
-									   		echo "<div class='check-box'><input id ='date_flexiable_$i' type='radio' name='date_flexiable' ".$selected." value='".$date1->format('Y-m-d')."' onChange='this.form.submit()'/><label for='date_flexiable_$i'><span></span>".$date1->format('d-m-Y')."</label></div>";
+									   		
 										}
 									}
 									//echo "</select>";

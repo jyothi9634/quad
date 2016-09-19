@@ -3,6 +3,7 @@
 /public/storage
 Homestead.yaml
 Homestead.json
+<<<<<<< HEAD
 composer.lock
 config/database.php
 storage/framework/sessions/a49b542ed28125eafe46902e69c62cea4608a698
@@ -5253,3 +5254,8 @@ storage/logs/laravel-2016-09-15.log
 composer.lock
 config/database.php
 .gitignore
+=======
+.env
+
+storage/framework/views/e67b321cc16cf284c6584a8182d5a9c9
+>>>>>>> 81a039b18f3315a23f4f94841feaca6ae406c334

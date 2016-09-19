@@ -746,6 +746,14 @@ Route::get('warehouselist', [
 	'uses' => 'WarehouseController@index',
 	'roles' => [BUYER,SELLER] // Only a seller can access this route
 ]);
+
+
+Route::any('userSales', [
+	'middleware' => ['auth', 'roles'], // A 'roles' middleware must be specified
+	'uses' => 'WarehouseController@userSales',
+	'roles' => [BUYER,SELLER] // Only a seller can access this route
+]);
+
 Route::get('warehouse_destroy/{id}', [
 	'middleware' => ['auth', 'roles'], // A 'roles' middleware must be specified
 	'uses' => 'WarehouseController@destroy',

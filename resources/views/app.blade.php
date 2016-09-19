@@ -55,6 +55,7 @@
 
 <script src="{{ asset('/js/jquery.slimscroll.js') }}"></script>
 <script src="{{ asset('/js/equipment.js') }}"></script>
+<script src="{{ asset('/js/usersales.js') }}"></script>
 <script src="{{ asset('/js/sellerpost.js') }}"></script>
 <script src="{{ asset('/js/sellerofficepost.js') }}"></script>
 

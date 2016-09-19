@@ -70,7 +70,7 @@ class ActivationController extends Controller {
 			try {
 				DB::table ( 'users' )->where ( 'id', $person_id )->update ( array (
 						'is_confirmed' => 1,
-						'is_active' => 0,
+						'is_active' => 1,
 						'is_approved' => 1,
 						'activation_key' => NULL 
 				) );
@@ -80,7 +80,7 @@ class ActivationController extends Controller {
 			Session::flush (); // unset $_SESSION variable for the run-time
 			                    // destroy session data in storage
 			
-			return redirect ( '/individualRegistration?status=success&user_id='.$person_id )->with ( 'message', 'Congratulations ..!! Your account has been activated successfully.' );
+			return redirect ( '/auth/login?status=success' )->with ( 'message', 'Congratulations ..!! Your account has been activated successfully.' );
 		} 
 
 		elseif ($role_id == 2) {
