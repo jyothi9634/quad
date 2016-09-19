@@ -69,8 +69,12 @@ Route::post('settermbuyerbooknow', [
  */
 
 //Route::get('/', 'RegisterController@register');
+
+Route::get('/getPincodeDetails', 'RegisterController@getPincodeDetails');
 Route::get('/register', 'RegisterController@register');
 Route::get('/individualRegistration', 'RegisterController@individualRegistration');
+Route::any('/saveIndividual', 'RegisterController@saveIndividual');
+
 Route::get('/register/buyer', 'RegisterController@buyer');
 Route::post('checkunique', 'RegisterController@checkUnique');
 Route::any('checkExistence', 'RegisterController@checkExistence');

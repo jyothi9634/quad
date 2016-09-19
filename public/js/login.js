@@ -156,29 +156,41 @@ $(document).ready(function() {
 		}, "json");
 	});
 
-	$(document).on('focus click keyup keypress blur change', '#txt_user_pincode', function() {
-		var data = {
-		        'prop_pinid': $('#txt_user_pincode').val()
-		    };
-		 $.ajax({
-		        type: "GET",
-		        url: '/getPincodeDetails',
-		        data: data,
-		        dataType: 'json',
-				
-		        success: function(data) {	   	        	
+	//$(document).on('focus click keyup keypress blur change', '#pincode', function() {
+	$(document).on("keyup","#pincode",function(){
+		var pincodeVal = 0;
+		pincodeVal = $('#pincode').val();
+		if(pincodeVal.length > 5){
+			var data = {
+					'prop_pinid': $('#pincode').val()
+				};
+			 $.ajax({
+					type: "GET",
+					url: '/getPincodeDetails',
+					data: data,
+					dataType: 'json',
 					
-		        	$("#principal_place").val(data.districtname);
-		        	$("#hidden_user_pincode").val(data.districtname);
-					$("#city").val(data.divisionname);
-					$("#state").val(data.statename);
-					$("#location").val(data.postoffice_name);
-					$("#district").val(data.districtname);
-               
-		        },
-		        error: function(request, status, error) {	            
-		        },
-		    });
+					success: function(data) {	   	        	
+						$("#city").val(data.divisionname);
+						$("#state").val(data.statename);
+						$("#location").val(data.postoffice_name);
+						$("#district").val(data.districtname);
+						
+						$("#lkp_city_id").val(data.lkp_city_id);
+						$("#lkp_state_id").val(data.state_id);
+						$("#lkp_location_id").val(data.id);
+						$("#lkp_district_id").val(data.lkp_district_id);
+				   
+					},
+					error: function(request, status, error) {	            
+					},
+				});
+		} else {
+			$("#city").val("");
+			$("#state").val("");
+			$("#location").val("");
+			$("#district").val("");
+		}	
 	});
 	
 	$( "#txt_user_pincode" ).keyup(function(e) {
@@ -1889,3 +1901,4 @@ $(document).ready(function(){
 	 });
    
 });
+

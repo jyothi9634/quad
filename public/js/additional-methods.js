@@ -1054,5 +1054,42 @@ $.validator.addMethod( "ziprange", function( value, element ) {
 }, "Your ZIP-code must be in the range 902xx-xxxx to 905xx-xxxx" );
 
 
+jQuery.validator.addMethod("pincode", function(value, element) {
+  return this.optional(element) || /^\d{6}(?:-\d{4})?$/.test(value);
+}, "Please provide a valid pincode.");
+
+jQuery.validator.addMethod("landlineNumber", function(value, element) {
+  return this.optional(element) || /^[0-9]\d{2,4}-\d{6,8}$/.test(value);
+}, "Please enter valid landline number.");
+
+jQuery.validator.addMethod("idProofFormate", function(value, element) {
+    var message;
+    if($("#id_proof").val()==1) {
+       return this.optional(element) || /^\d{12}$/.test(value); // Adhar card regex
+   } else if($("#id_proof").val()==4) {
+       return this.optional(element) || /^[A-Za-z]{5}\d{4}[A-Za-z]{1}$/.test(value); // Pan card regex
+   } else {
+	   return true;
+   }
+  
+}, function(params, element) {
+    var message;
+    if($("#id_proof").val()==1) {
+       message = "Please enter valid Adhar card";
+       
+   } else if($("#id_proof").val()==4) {
+       message = "Please enter valid PAN card";
+       
+   } 
+  return message
+});
+
+jQuery.validator.addMethod("notEqulToMobileNumber", function(value, element) {
+   return this.optional(element) ||  $('#alternative_mobile').val() != $('#mobile').val();
+}, "Alternative mobile number should not be same as mobile number");
+jQuery.validator.addMethod("notEqulToEmail", function(value, element) {
+   return this.optional(element) ||  $('#alternative_email').val() != $('#email').val();
+}, "Alternative Email should not be same as email");
+
 
 }));

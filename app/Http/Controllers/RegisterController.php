@@ -54,13 +54,14 @@ class RegisterController extends Controller {
 	 */
 	public $user_pk;
 	public $randomId;
-	public function __construct() {
+	public function __construct(BuyerDetail $buyerDetail) {
 		if (isset ( Auth::User ()->id )) {
 			$this->user_pk = Auth::User ()->id;
 		} elseif (Session::get ( 'user_id' ) != '') {
 			$this->user_pk = Session::get ( 'user_id' );
 		}
 		$this->randomId = rand ( 100, 999 );
+		$this->buyerDetail = $buyerDetail;
 	}
 	
 	/**
@@ -266,7 +267,40 @@ class RegisterController extends Controller {
 	|
 	*/
 	public function individualRegistration() {
-		return view("auth.individual_register");
+		
+		$userRes = User::where ( 'id', $_REQUEST['user_id'] )->first();
+		
+		return view("auth.individual_register")->with('user',$userRes);
+	}
+	
+	public function saveIndividual() {
+		
+		try{
+			
+          $registration_fields = Input::all();
+		  
+		  $finalArray = [
+						'user_id' => $registration_fields['user_id'],
+						'firstname' => $registration_fields['firstname'],
+						'lastname' => $registration_fields['lastname'],
+						'pincode' => $registration_fields['pincode'],
+						'lkp_location_id' => $registration_fields['lkp_location_id'],
+						'lkp_city_id' => $registration_fields['lkp_city_id'],
+						'lkp_district_id' => $registration_fields['lkp_district_id'],
+						'lkp_state_id' => $registration_fields['lkp_state_id'],
+						'address1' => $registration_fields['address1'],
+						'address2' => $registration_fields['address2'],
+						'landline' => $registration_fields['landline'],
+						'alternative_mobile' => $registration_fields['alternative_mobile'],
+						'id_proof' => $registration_fields['id_proof'],
+						'id_proof_value' => $registration_fields['id_proof_value']
+						];
+		  
+		  DB::table ( 'buyer_details' )->insert($finalArray);
+          
+      } catch (Exception $ex) {
+          $message = $ex->getMessage();
+      }
 	}
 	
 	protected function checkUnique($userEmail = '', $optionValue = '') {
@@ -4107,8 +4141,9 @@ class RegisterController extends Controller {
 	public function getPincodeDetails(){
 		$pin = Input::get('prop_pinid');
 		$getPrincipalPlace = DB::table('lkp_ptl_pincodes as lpp')
+		->join('lkp_cities', 'lkp_cities.lkp_district_id', '=', 'lpp.lkp_district_id')
 		->where('lpp.pincode', '=', $pin)
-		->select('lpp.districtname','lpp.id','lpp.divisionname','lpp.statename','lpp.postoffice_name')
+		->select('lpp.districtname','lpp.id','lpp.divisionname','lpp.statename','lpp.state_id','lpp.lkp_district_id','lkp_cities.id as lkp_city_id','lpp.postoffice_name')
 		->first();
 		return Response::json($getPrincipalPlace);
 	}
