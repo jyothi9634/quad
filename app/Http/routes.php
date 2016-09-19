@@ -2215,3 +2215,4 @@ Route::resource('getServiceTypeMeasurementUnit', 'BuyerController@getServiceType
 Route::post('checkuniquechasis', 'VehicleController@checkUniqueChasis');
 Route::post('checkuniqueengine', 'VehicleController@checkUniqueEngine');
 Route::post('getpackages', 'BuyerController@getPackages');
+Route::any('cancellationPolicy','RegisterController@cancellationPolicy');

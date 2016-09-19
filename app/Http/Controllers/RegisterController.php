@@ -4471,17 +4471,36 @@ class RegisterController extends Controller {
 	public function createOtp(){
 		try{
 			if (! empty ( Input::all () )) {
-				$phone = Input::get ( 'phone' );
-				$six_digit_random_number = mt_rand(1000, 9999);
-				$msg_params = array(
-					'otp' => $six_digit_random_number,
-				);
-				CommonComponent::sendSMS(array($phone),REGISTRATION_OTP_SMS,$msg_params);
-				Session::put ( 'register_phone', $phone );
-				Session::put ( 'six_otp', $six_digit_random_number );
+				//CommonComponent::sendSMS(array($phone),REGISTRATION_OTP_SMS,$msg_params);
+				$mobile_number = Input::get('phone');
+				$otp = rand(1000,9999);
+				
+				$user="Logistiks"; //your username
+				$password= "$"."Marketplacelogi"; //your password
+				$mobilenumbers= $mobile_number; //enter Mobile numbers comma seperated
+				$message = "Dear Logitiks customer, you OTP is ". $otp .". This is for one time use only and valid for 30 mins after receiving. Thank you. Team Logistiks"; //enter Your Message
+				$senderid="LSTIKS"; //Your senderid
+				$messagetype="N"; //Type Of Your Message
+				$DReports="Y"; //Delivery Reports
+				$url="http://www.smscountry.com/SMSCwebservice_Bulk.aspx";
+				$message = urlencode($message);
+				$ch = curl_init();
+				if (!$ch){die("Couldn't initialize a cURL handle");}
+				$ret = curl_setopt($ch, CURLOPT_URL,$url);
+				curl_setopt ($ch, CURLOPT_POST, 1);
+				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+				curl_setopt ($ch, CURLOPT_POSTFIELDS,
+				"User=$user&passwd=$password&mobilenumber=$mobilenumbers&message=$message&sid=$senderid&mtype=$messagetype&DR=$DReports");
+				$ret = curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+				
+				$curlresponse = curl_exec($ch); // execute
+				
+				Session::put ( 'register_phone', $mobile_number );
+				Session::put ( 'six_otp', $otp );
 				$results = array();
 				$results['status'] = "success";
-				$results['otp'] = $six_digit_random_number;
+				$results['otp'] = $otp;
 				return Response::json($results);
 			}
 		}catch (Exception $e) {
@@ -4508,4 +4527,10 @@ class RegisterController extends Controller {
 
 		}
 	}
+	
+	public function cancellationPolicy(){
+
+      return view('cancellationPolicy');
+
+  }
 }

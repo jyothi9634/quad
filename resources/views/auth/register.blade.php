@@ -28,18 +28,19 @@
 		'id' =>'login-form', 'class'=>'' )) !!}
 	
 				<div class="login-block">
-					<div class="radio-inline col-md-8 col-md-offset-2">
+				<input type="hidden"  value="0" name="is_business" id="option1" class="search-text" >
+					<!--<div class="radio-inline col-md-8 col-md-offset-2">
 						<label class="radio-inline text-big">Select Category </label>
 						<label class="radio-inline">
 <input type="radio"  checked="checked" value="0" name="is_business" id="option1" class="search-text" ><label for="option1"><span></span>Individual</label>
 </label>
 	<!-- <input type="radio" checked="checked" value="0" name="is_business" id="option1" class="search-text" ><span class="lbl padding-8">Individual</span> </label> -->
 						
-					<label class="radio-inline"> 
+					<!--<label class="radio-inline"> 
 					<input type="radio" class="search-text" value="1" name="is_business" id="option2" ><label for="option2"><span></span>Business</label>
 					</label>
 <!-- <input type="radio" class="search-text" value="1" name="is_business" id="option2"><span class="lbl padding-8">Business</span> </label> -->
-					</div>
+					<!--</div>-->
 					<div class="social-login">
 							<span class="bg"><a href="{{ url('/facebook?key=login') }}"  alt="Facebook" title="Facebook" ><img src="../images/facebook.jpg" alt=""></a></span>
                                                         <span class="bg"><a href="{{ url('/google?key=login') }}" alt="Linked In" title="Linked In"  ><img src="../images/google.jpg" alt=""></a></span>
@@ -86,13 +87,24 @@
 							<div class="col-md-12 form-control-fld margin-bottom-none">
 							{!! Form::button('Submit', array( 'name'=>'registerSubmit','id'=>'registerSubmit','class'=>'btn add-btn-2'))!!}
 							</div>
+							
 							<div class="col-md-12 form-control-fld margin-bottom-none">
+							<p class="reg_text_align">
+									By clicking "<a href="#" class="link-red">Sign up</a>" or "<a href="#" class="link-red">Sign In</a>" <br>
+							I acknowledge and agree to the <a href="memberRegistration/termsOfuse" class="normal-link-line" target="_blank"><i>Terms of use.</i></a> ,<br>
+							 <a href="{{url('privacypolicy')}}" class="normal-link-line" target="_blank"><i>Privacy Policy.</i></a>, 
+							 <a href="memberRegistration/cancellationPolicy" class="normal-link-line" target="_blank"><i>Cancellation Policy.</i></a> and
+							 <a href="memberRegistration/aboutUs" class="normal-link-line" target="_blank"><i>About Us.</i></a>
+							 </p>
+							</div>
+							
+							<!-- <div class="col-md-12 form-control-fld margin-bottom-none">
 							<p class="reg_text_align">
 									By clicking "<a href="#" class="link-red">Sign up</a>" or "<a href="#" class="link-red">Sign In</a>" <br>
 							I acknowledge and agree to the Terms of Use <br>
 							and <a href="#" class="normal-link-line"><i>Privacy Policy.</i></a>
 							</p>
-							</div>
+							</div> -->
 							
 							<div id="enableOtp" style="display:none;"> 
 							<div class="col-md-12 form-control-fld margin-bottom-none">

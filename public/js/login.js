@@ -1890,10 +1890,10 @@ $(document).ready(function(){
 		},
 		messages: {
 			user_email:{
-				remote: "Email already in use!"
+				remote: "Email already exists!"
 			},
 			phone:{
-				remote: "Phone already in use!"
+				remote: "Mobile No already exists"
 			}
 		}
 		

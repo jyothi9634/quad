@@ -93,7 +93,7 @@
 									</div>
 									<div class="col-md-6 form-control-fld">
 										<div class="input-prepend">
-											{!! Form:: text ('landline', '', array( 'class'=>'form-control form-control1','id'=>'landline','placeholder'=>'Landline number*', 'maxlength'=>'11' )) !!}
+											{!! Form:: text ('landline', '', array( 'class'=>'form-control form-control1','id'=>'landline','placeholder'=>'Landline number', 'maxlength'=>'11' )) !!}
 										</div>
 									</div>
 								</div>
@@ -137,6 +137,7 @@
 													<option value="4">Pancard</option>
 													<option value="5">Voter Id</option>
 												</select>
+												<p class="error" style="display:none" id="idProofError">Required</p>
 											</div>
 										</div>
 									<div class="col-md-6 form-control-fld idproofValue" style="display:none;">
@@ -181,12 +182,11 @@ $("#pincode,#landline,#alternative_mobile").keypress(function (e) {
    
 $(function() {
 	
+
+		
 	$("#individual_form").validate({
 		errorClass: "error-1",
 		rules : {
-			id_proof: {
-               required: true,
-            },
 			firstname: {
 				required: true,
 			},
@@ -217,6 +217,9 @@ $(function() {
             },
 			landline: {
 				integer:true
+			},
+			cdbaccept: {
+				required:true
 			}
 		},	
 		errorPlacement: function(error, element) {
@@ -224,6 +227,34 @@ $(function() {
 			$(element).parent('div').append(error);
 		},
 	});
+	
+
+	
+	$("#updateIndividual").on("click",function() {
+		if($("#id_proof").val() == "") {
+			$("#idProofError").css("display","block");
+			//return false;
+		} else {
+			$("#idProofError").css("display","none");
+		}
+	});
+	
+	$("#id_proof").on("change",function(){
+		if($("#id_proof").val() == "") {
+			$("#idProofError").css("display","block");
+			//return false;
+		} else {
+			$("#idProofError").css("display","none");
+		}
+	});
+	
+	$( "form" ).submit(function( event ) {
+		if($("#id_proof").val() == "") {
+			//$("#idProofError").css("display","block");
+			return false;
+		}
+		
+	});	
 	
 	$("#id_proof").on('change',function() {
 		if($(this).val() == "") {
