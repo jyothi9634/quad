@@ -267,12 +267,19 @@ class RegisterController extends Controller {
 	|
 	*/
 	public function individualRegistration() {
-		
 		$userRes = User::where ( 'id', $_REQUEST['user_id'] )->first();
 		
 		return view("auth.individual_register")->with('user',$userRes);
 	}
 	
+	/*
+	|
+	| Method: save Individual 
+	| Purpose: save individual registration
+	| return: display confirmation dialog
+	|
+	|
+	*/
 	public function saveIndividual() {
 		
 		try{
@@ -297,10 +304,216 @@ class RegisterController extends Controller {
 						];
 		  
 		  DB::table ( 'buyer_details' )->insert($finalArray);
+		  DB::table ( 'users' )->where('id',$registration_fields['user_id'])->update(['is_active'=>1]);
+		  
+		  session::put('user_id',$registration_fields['user_id']);
+		  
+		  return view("/auth.regConfirmation");
           
       } catch (Exception $ex) {
           $message = $ex->getMessage();
       }
+	}
+
+	public function marketplaceRegistration() {
+		//session
+		
+		$services =  \DB::table ( 'lkp_services' )->select ( 'service_name','group_name','service_crumb_name','service_image_path' , 'id')->get();
+		
+		$intracity_cities_list = \DB::table ( 'lkp_cities as lc' )
+						->join('lkp_ict_locations as ictl','ictl.lkp_city_id','=','lc.id')
+						->join('lkp_localities as ictlt','ictlt.id','=','ictl.lkp_locality_id')
+						->orderBy ( 'lc.city_name', 'asc' )
+						->select ( 'lc.city_name', 'lc.id' )->get();
+						
+						for($k=0;$k<count($intracity_cities_list);$k++){
+							$intracity_cities[$intracity_cities_list[$k]->id]= $intracity_cities_list[$k]->city_name;
+						}
+		$stateList = \DB::table ( 'lkp_states' )->orderBy ( 'state_name', 'asc' )->lists ( 'state_name', 'id' );
+
+		$business = \DB::table ( 'lkp_business_types' )->orderBy ( 'business_type_name', 'asc' )->lists ( 'business_type_name', 'id' );
+		
+		$lkp_industry = $this->getIndustries();
+		
+		$getEmployeeStrengths = $this->getEmployeeStrengths();
+						
+		return view("auth.marketplace_register",compact('services','intracity_cities','stateList','business','lkp_industry','getEmployeeStrengths'));
+	}
+
+
+	public function storeMarketplaceDetails() {
+		
+		$data = Input::all();
+		//dd($data);
+		Log::info ( 'User has submitted seller individual registration form:' . $this->user_pk, array (
+				'c' => '1' 
+		) );
+		
+		CommonComponent::activityLog ( "CREATE_SELLER_INDIVIDUAL", CREATE_SELLER_INDIVIDUAL, 0, HTTP_REFERRER, CURRENT_URL );
+		
+		
+		$getPrincipalPlace = DB::table('lkp_ptl_pincodes as lpp')
+		->where('lpp.pincode', '=', $data ['business_pincode'])
+		->select('lpp.lkp_district_id','lpp.id','lpp.divisionname','lpp.state_id','lpp.postoffice_name')
+		->first();
+		
+		//$sellerUpladFolder = 'uploads/seller/' . $this->user_pk . '/';
+		//$data ['profile_picture_file'] = str_replace($sellerUpladFolder,"",$data ['profile_picture']);
+		//$data ['logo_user_file'] = str_replace($sellerUpladFolder,"",$data ['logo_user']);		
+		
+		$sellerIndividual = new Seller();
+		$services = array ();
+		$createdAt = date ( 'Y-m-d H:i:s' );
+		$createdIp = $_SERVER ["REMOTE_ADDR"];
+		
+		$sellerIndividual->user_id = $this->user_pk;
+		$sellerIndividual->name = $data ['business_name'];
+		$sellerIndividual->uin_number = $data ['cin_no'];
+		$sellerIndividual->lkp_location_id = $data ['business_pincode'];
+		$sellerIndividual->pincode = $data ['business_pincode'];
+		//$sellerIndividual->lkp_city_id = $data ['business_city'];
+		$sellerIndividual->lkp_state_id = $getPrincipalPlace->state_id;
+		$sellerIndividual->lkp_district_id = $getPrincipalPlace->lkp_district_id;
+		$sellerIndividual->lkp_country_id = 1;
+		$sellerIndividual->address1 = $data ['address1'];
+		$sellerIndividual->address2 = $data ['address2'];
+		$sellerIndividual->established_in = $data ['year_of_est'];
+		$sellerIndividual->contact_firstname = $data ['contact_fname'];
+		$sellerIndividual->contact_lastname = $data ['contact_lname'];
+		$sellerIndividual->lkp_employee_strength_id = 1; //$data ['employee_strn'];
+		$sellerIndividual->contact_email = $data ['business_emailId'];
+		$sellerIndividual->contact_mobile = $data ['business_mobile_no'];
+		$sellerIndividual->contact_landline = $data ['business_landline'];
+		$sellerIndividual->lkp_business_type_id = 1; //$data ['business_type_id'];
+		$sellerIndividual->lkp_industry_id = 1;//$data ['industry_type_name'];
+		$sellerIndividual->service_tax_number = $data ['service_taxno'];
+		$sellerIndividual->pannumber = $data ['business_pan'];
+		$sellerIndividual->tin = $data ['tin_no'];
+		$sellerIndividual->current_turnover = $data ['current_turnover'];
+		$sellerIndividual->first_year_turnover = $data ['first_year_turnover'];
+		$sellerIndividual->second_year_turnover = $data ['second_year_turnover'];
+		$sellerIndividual->third_year_turnover = $data ['third_year_turnover'];
+		
+		$sellerIndividual->bankname = $data ['bank_name'];
+		$sellerIndividual->branchname = $data ['bank_branch'];
+		$sellerIndividual->gta = $data ['gta_number'];
+		//$sellerIndividual->joining_year = date('Y');
+		
+		$sellerIndividual->ifsc_code = $data ['ifsc_code'];
+		$sellerIndividual->bank_acc_no = $data ['account_no'];
+		$sellerIndividual->branchname = $data ['account_branch'];
+		/*$sellerIndividual->bankname = $data ['bankname'];
+		$sellerIndividual->branchname = $data ['branchname'];*/
+		//$sellerIndividual->in_corporation_file = $data ['in_corporation_file'];
+		//$sellerIndividual->tin_filepath = $data ['tin_filepath'];
+		//$sellerIndividual->gta_filepath = $data ['gta_filepath'];
+		//$sellerIndividual->pancard_filepath = $data ['pancard_filepath'];
+		//$sellerIndividual->service_tax_filepath = $data ['service_tax_filepath'];
+		//$sellerIndividual->central_excise_filepath = $data ['central_excise_filepath'];
+		//$sellerIndividual->sales_tax_filepath = $data ['sales_tax_filepath'];
+		$sellerIndividual->created_at = $createdAt;
+		$sellerIndividual->created_ip = $createdIp;
+		$sellerIndividual->created_by = $this->user_pk;
+		
+		try {
+			if ($sellerIndividual->save ()) {
+				$marketPlaceid = $sellerIndividual->id;
+				$updateUserInfo = ['marketplace_id'=>$marketPlaceid,'is_business'=>1,'is_admin'=>0,'business_email_id'=>$data['business_emailId']];
+				if(in_array($data['business_const'],[2,3,4])){ // if business const public private mnc then is_admin=1
+					$updateUserInfo['is_admin'] =  1;
+				}
+				DB::table('users')->where('id',$this->user_pk)->update($updateUserInfo);
+				CommonComponent::auditLog ( $sellerIndividual->id, 'sellers' );
+				Session::put ( 'company_name', $sellerIndividual->name ); // session for future use
+				$intracityArea = array ();
+				$pamArea = array ();
+				$services = array ();
+				
+				// see if value has been posted
+			if (isset ( $_POST ['services'] ) && (!empty ( $_POST ['services'] ))) {
+					$services = $_POST ['services'];
+					$seller_services = $services;
+					
+				}
+				if (! empty ( $seller_services )) {
+					foreach ( $seller_services as $service ) {
+						
+						$seller_services_save = new SellerService ();
+						$seller_services_save->user_id = $this->user_pk;
+						$seller_services_save->lkp_service_id = $service;
+						$seller_services_save->created_by = $this->user_pk;
+						$seller_services_save->created_at = $createdAt;
+						$seller_services_save->created_ip = $createdIp;
+						$seller_services_save->save ();
+						CommonComponent::auditLog ( $seller_services_save->id, 'seller_services' );
+					}
+				}
+				if (! empty ( $_POST ['intracity_locality'] [0] ) && $_POST ['intracity_locality'] [0] != '') {
+					
+					$intracityArea = $_POST ['intracity_locality'];
+					
+					foreach ( $intracityArea as $intracity ) {
+						
+						$intracityArea_save = new SellerIntracityLocality ();
+						$intracityArea_save->user_id = $this->user_pk;
+						$intracityArea_save->lkp_locality_id = $intracity;
+						$intracityArea_save->created_by = $this->user_pk;
+						$intracityArea_save->created_at = $createdAt;
+						$intracityArea_save->created_ip = $createdIp;
+						
+						$intracityArea_save->save ();
+						
+						CommonComponent::auditLog ( $intracityArea_save->id, 'seller_intracity_localities' );
+					}
+				}
+				if (! empty ( $_POST ['pm_city'] [0] ) && $_POST ['pm_city'] [0] != '') {
+					
+					$pamArea = $_POST ['pm_city'];
+					foreach ( $pamArea as $pam ) {
+						
+						$pam_save = new SellerPmCity ();
+						$pam_save->user_id = $this->user_pk;
+						$pam_save->lkp_city_id = $pam;
+						$pam_save->created_by = $this->user_pk;
+						$pam_save->created_at = $createdAt;
+						$pam_save->created_ip = $createdIp;
+						
+						$pam_save->save ();
+						
+						CommonComponent::auditLog ( $pam_save->id, 'seller_pm_cities' );
+					}
+				}
+				$username = $sellerIndividual->firstname . " " . $sellerIndividual->lastname;
+				
+			
+				User::where ( "id", $this->user_pk )->update ( array (
+						'username' => $username,
+						'lkp_role_id' => '2',
+						'primary_role_id'=>'2',
+						//'user_pic'=>$data ['profile_picture_file'],
+						//'logo'=>$data ['logo_user_file'],
+						'pannumber'=>$data ['business_pan'],
+						'updated_at' => $createdAt,
+						'updated_by' => $this->user_pk,
+						'updated_ip' => $createdIp 
+				) );
+				
+				CommonComponent::auditLog ( $this->user_pk, 'users' );
+				
+				# if user selected serverce offed and if he selected any one of service redirect to subscritionpage
+				  # else redirect to thankyou registration page.
+				  if(count($seller_services>0)) {
+					  return Redirect('thankyou_seller');
+				  } else {
+					  return view('auth.regConfirmation');
+				  }
+					
+
+			} else {
+				return '0';
+			}
+		} catch ( Exception $ex ) {
+		}
 	}
 	
 	protected function checkUnique($userEmail = '', $optionValue = '') {
@@ -4141,12 +4354,63 @@ class RegisterController extends Controller {
 	public function getPincodeDetails(){
 		$pin = Input::get('prop_pinid');
 		$getPrincipalPlace = DB::table('lkp_ptl_pincodes as lpp')
-		->join('lkp_cities', 'lkp_cities.lkp_district_id', '=', 'lpp.lkp_district_id')
 		->where('lpp.pincode', '=', $pin)
-		->select('lpp.districtname','lpp.id','lpp.divisionname','lpp.statename','lpp.state_id','lpp.lkp_district_id','lkp_cities.id as lkp_city_id','lpp.postoffice_name')
+		->select('lpp.districtname','lpp.id','lpp.divisionname','lpp.statename','lpp.postoffice_name')
 		->first();
 		return Response::json($getPrincipalPlace);
 	}
+
+	 public function validateUserEmail(){
+  		
+  		 $email = Input::get('business_emailId');
+            
+          $validator = DB::table('sellers')->where('contact_email',$email)->get();
+
+          if(!empty($validator)){
+          	
+          	return 'true';
+
+          }
+          else{
+
+          	return 'false';
+          
+          }
+
+          return $validator;
+     }
+
+      public function validatePancard(){
+  		
+  		 $pannumber = Input::get('business_pan');
+            
+          $validator = DB::table('sellers')->where('pannumber',$pannumber)->get();
+
+          if(!empty($validator)){
+          	
+          	return 'true';
+
+          }
+          else{
+
+          	return 'false';
+          
+          }
+
+          return $validator;
+     }
+
+    public function getSectorTypes($id){
+
+		$sectors = DB::table('sector_type')->where('industry_type',$id)->get();
+		$str  = '<option value=""></option>';
+		foreach($sectors as $sector) {
+			$str.='<option value="'.$sector->sector_id.'">'.$sector->sector_type.'</option>';
+		}
+		echo $str;
+    
+   }
+     
 	
 	public function buyerSwitchSeller(){
 

@@ -1881,6 +1881,7 @@ $(document).ready(function(){
 			},
 			phone: {
 				required:true,
+				minlength: 10,
 				remote:{
 					url: '/checkExistence',
 					type: "post"
@@ -1893,7 +1894,8 @@ $(document).ready(function(){
 				remote: "Email already exists!"
 			},
 			phone:{
-				remote: "Mobile No already exists"
+				remote: "Mobile No already exists",
+				minlength: "Please enter valid mobile number"
 			}
 		}
 		

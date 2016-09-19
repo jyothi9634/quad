@@ -987,6 +987,8 @@ $(window).load(function() {
 
 		</div>
 	</div>
+	
+	
 
 	<!-- Confirm Modal window for cancel buyer post -->
 	<div id="cancelbuyerpostmodal" class="modal fade" role="dialog">

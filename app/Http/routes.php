@@ -69,10 +69,18 @@ Route::post('settermbuyerbooknow', [
  */
 
 //Route::get('/', 'RegisterController@register');
+Route::get('/register', 'RegisterController@register');
+Route::any('/individualRegistration', 'RegisterController@individualRegistration');
+Route::any('/marketplaceRegistration', 'RegisterController@marketplaceRegistration');
+Route::any('/storeMarketplaceDetails', 'RegisterController@storeMarketplaceDetails');
+Route::any('/validateUserEmail','RegisterController@validateUserEmail');
+Route::any('/validatePancard','RegisterController@validatePancard');
+Route::any('/getSectorTypes/{id}','RegisterController@getSectorTypes');
+
 
 Route::get('/getPincodeDetails', 'RegisterController@getPincodeDetails');
-Route::get('/register', 'RegisterController@register');
-Route::get('/individualRegistration', 'RegisterController@individualRegistration');
+
+
 Route::any('/saveIndividual', 'RegisterController@saveIndividual');
 
 Route::get('/register/buyer', 'RegisterController@buyer');
