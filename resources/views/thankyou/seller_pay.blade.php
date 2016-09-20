@@ -37,21 +37,21 @@
 									id="subscriptionForm">
 									<h4>Choose your subscription *</h4>
 									
-									<div class="col-sm-3 padding-none">
+									<div class="col-sm-4 padding-none">
 										<input type="radio" name="selectPeriod" value='freeTrail' id="freeTrail" checked>
 										<label for="freeTrail">
-										<span></span>Free Trail</label>
+										<span></span>Free Trail&nbsp;&nbsp;(Up to December 31st)</label>
 
 									</div>
 									
-									<div class="col-sm-3 padding-none">
+									<div class="col-sm-4 padding-none">
 										<input type="radio" name="selectPeriod" value='quarterPeriod' id="quarterPeriod" disabled>
 										<label for="quarterPeriod">
 										
 										<span></span>Three Months  Rs.500.00</label>
 
 									</div>
-									<div class="col-sm-3 padding-none">
+									<div class="col-sm-4 padding-none">
 										<input type="radio" name="selectPeriod"
 											value='halfannualPeriod' id="halfannualPeriod" disabled>
 											
@@ -60,14 +60,14 @@
 										<span></span>Six Months  Rs.750.00</label>
 									</div>
 
-									<div class="col-sm-3 padding-none">
+									<div class="col-sm-4 padding-none">
 
 										<input type="radio" name="selectPeriod" value='annualPeriod' id="annualPeriod" disabled>
 										<label for="annualPeriod">
 										<span></span>One Year  Rs.1000.00</label>
 
 									</div>
-									<div class="col-sm-3 padding-none">
+									<div class="col-sm-4 padding-none">
 
 										<input type="radio" name="selectPeriod" value='phantomPeriod' id="phantomPeriod" disabled>
 										<label for="phantomPeriod">

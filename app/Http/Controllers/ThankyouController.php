@@ -106,6 +106,8 @@ class ThankyouController extends Controller {
 				$subscriptionEndsAt = date ( 'Y-m-d H:i:s', strtotime ( '+1 years' ) );
 			} else if ($timePeriod == 'phantomPeriod') {
 				$subscriptionEndsAt = date ( 'Y-m-d H:i:s', strtotime ( '+5 years' ) );
+			} else if ($timePeriod == 'freeTrail') {
+				$subscriptionEndsAt = date("2016-12-31 00:00:00");
 			}
 			
 			$userRecord = \DB::table ( 'users' )->where ( 'id', '=', $this->user_pk )->first ();

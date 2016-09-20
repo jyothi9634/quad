@@ -61,7 +61,7 @@
 									</div> -->
 									<div class="col-md-6 form-control-fld">
 										<div class="input-prepend">
-											{!!Form:: text ('cin_no', '', array( 'class'=>'form-control form-control1', 'id'=>'cin_no', 'placeholder'=>'CIN No', 'maxlength'=>'30' , 'style' => 'display:none;')) !!}
+											{!!Form:: text ('cin_no', '', array( 'class'=>'form-control form-control1 ignore', 'id'=>'cin_no', 'placeholder'=>'CIN No', 'maxlength'=>'30' , 'style' => 'display:none;')) !!}
 										</div>
 									</div>
 								</div>
@@ -189,18 +189,14 @@
 									&nbsp;&nbsp;&nbsp;
 								</div>
 								<div class="col-md-12 padding-none">
-								<!-- <div class="col-md-4 form-control-fld">
-								<div class="input-prepend"> -->
-								<label for="" class="col-md-4 padding-none">Contact Person</label>	
-								<!-- </div>
-								</div> -->
-								<div class="col-md-4 form-control-fld">
+								<label for="" class="col-md-12 padding-none">Contact Person</label>	
+								<div class="col-md-6 form-control-fld">
 									<div class="input-prepend">
 										{!! Form:: text ('contact_fname', '', array( 'class'=>'form-control form-control1','id'=>'contact_fname','placeholder'=>'FirstName', 'maxlength'=>'30' )) !!}
 										<!-- {!! Form:: text ('business_mobile_no', '', array( 'class'=>'form-control form-control1','id'=>'business_mobile_no','placeholder'=>'Business Mobile No*', 'maxlength'=>'55' )) !!} -->
 									</div>
 								</div>
-								<div class="col-md-4 form-control-fld">
+								<div class="col-md-6 form-control-fld">
 									<div class="input-prepend">
 										{!! Form:: text ('contact_lname', '', array( 'class'=>'form-control form-control1','id'=>'contact_lname','placeholder'=>'LastName', 'maxlength'=>'30' )) !!}
 										<!-- {!! Form:: text ('business_landline', '', array( 'class'=>'form-control form-control1','id'=>'business_landline','placeholder'=>'Business Landline*', 'maxlength'=>'55' )) !!} -->
@@ -238,7 +234,7 @@
 								<div class="col-md-6 form-control-fld">
 									<div class="input-prepend">
 										<!-- {!! Form:: text ('industry_type_name', '', array( 'class'=>'form-control form-control1','id'=>'industry_type_name','placeholder'=>'Industry Types*', 'maxlength'=>'55' )) !!} -->
-										{!! Form:: text ('business_landline', '', array( 'class'=>'form-control numberVal form-control1','id'=>'business_landline','placeholder'=>'Landline*', 'maxlength'=>'12' )) !!}
+										{!! Form:: text ('business_landline', '', array( 'class'=>'form-control numberVal form-control1','id'=>'business_landline','placeholder'=>'Landline', 'maxlength'=>'12' )) !!}
 
 									</div>
 								</div>
@@ -277,9 +273,9 @@
 
 								<div class="col-md-12 padding-none">
 								<div class="col-md-6 form-control-fld">
-									
+									<div class="normal-select">
 									{!! Form::select('sector_type', ([''=>'Select Sector']  ), null, ['class' => 'selectpicker','id' => 'sector_type']) !!}
-									
+									</div>
 								</div>
 								
 								<div class="col-md-6 form-control-fld">
@@ -810,14 +806,21 @@
 								<div class="col-md-12 padding-none">
 								<table width="75%" border="0" cellspacing="0" cellpadding="0">
 							        <tbody><tr>
+									
 							          <td width="200" valign="bottom">Are you GTA Registered</td>
-							          <td width="80" valign="bottom"><input type="checkbox" id="gta_yes"
-										name="gta_yes" value=""><span
-										class="lbl padding-8  pull-left">Yes</span></td>
-							          <td width="80" valign="bottom"><input type="checkbox" id="gta_no"
-										name="gta_no" value=""><span
-										class="lbl padding-8  pull-left">No</span></td>
-							          <td valign="bottom">{!! Form:: text ('gta_number', '', array( 'class'=>'form-control form-control1','id'=>'gta_number','placeholder'=>'GTA', 'maxlength'=>'55' )) !!}</td>
+
+							          <!--<td width="80" valign="bottom"><input type="checkbox" id="gta_yes" name="gta_yes" value="1"><span class="lbl padding-8">Yes</span></td>
+							          <td width="80" valign="bottom"><input type="checkbox" id="gta_no" name="gta_no" value="2" checked><span class="lbl padding-8">No</span></td>-->
+									  
+									  <td width="80"><div class="radio-block">
+										<input type="radio" name="is_gta" id="gta_yes"  value="1"/> 
+											<label for="gta_yes"><span></span>Yes</label></td>
+										<td width="80"><input type="radio" name="is_gta" id="gta_no" value="2" checked/>
+										 <label for="gta_no"><span></span>No</label>
+									</div></td>
+									  
+									 
+							          <td valign="bottom">{!! Form:: text ('gta_number', '', array( 'class'=>'form-control form-control1 displayToggle','id'=>'gta_number','placeholder'=>'GTA', 'maxlength'=>'55' )) !!}</td>
 							        </tr>
 							        <input type="hidden" id="is_seller" name="is_seller" value='0'>
 							      </tbody></table>
@@ -928,6 +931,8 @@ $(document).ready(function () {
     
   $('#individual-form').validate({ 
     errorClass: "error-1",
+	ignore: ':not(select:hidden, input:visible, textarea:visible)',
+	
         rules: {
       
            business_mobile_no: {
@@ -998,7 +1003,7 @@ $(document).ready(function () {
 
             cin_no: {
               required :true,
-              //CinNumber: true
+              CinNumber: true
             
             },
             current_turnover: {
@@ -1018,7 +1023,10 @@ $(document).ready(function () {
             third_year_turnover: {
             	
             	twoDecimalPlace: true
-            } 
+            },
+			cdbaccept: {
+				required: true
+			}
        },
     errorPlacement: function(error, element) {
           var parentTag = $(element).parent();
@@ -1050,8 +1058,9 @@ $(document).ready(function () {
 
     }
     else{
-
+	
       cin_no.style.display = 'none';
+
 
     }
   
@@ -1088,7 +1097,7 @@ $(document).ready(function () {
 	}, "Please enter valid integer or decimal number with 2 decimal places.");
 
      jQuery.validator.addMethod("serviceTaxNumber", function(value, element) {
-  return this.optional(element) || /^[A-Z]{5}\d{5}[S-T]{2}\d{5}$/.test(value);
+  return this.optional(element) || /^[A-Z]{5}\d{5}[A-Z]{2}\d{5}$/.test(value);
 }, "Please enter valid Service Tax Number"); 
 
      jQuery.validator.addMethod("tinNumber", function(value, element) {
@@ -1135,13 +1144,14 @@ $(document).ready(function () {
 
    
 
+   
      jQuery.validator.addMethod("businessName", function(value, element) {
   return this.optional(element) || /^\w+$/.test(value);
 }, "Letters and underscores only please");  
 
 
 
-     $("input[name='gta']").change(function(id){
+     /*$("input[name='gta']").change(function(id){
         
         var gta_number = document.getElementById('gta_number');
 
@@ -1159,7 +1169,7 @@ $(document).ready(function () {
 
           //service_taxno.style.display = 'none';
         }
-    });
+    });*/
 
 
     $("#business_mobile_no,#business_landline,#business_pincode").keypress(function (e) {
@@ -1293,6 +1303,7 @@ $(document).ready(function () {
   });
   $("#serviceTaxNo").on("click",function() {
 	 $("#serviceTaxModal").modal('hide');
+	 $("#individual-form").valid()
 	if($("#service_taxno").val() == "") { 
 		return false;
     }
@@ -1351,7 +1362,7 @@ $(document).ready(function () {
 
    $('#service_taxno').on("blur",function(){
 
-   	alert('here');
+   	
 
    });
 
@@ -1394,6 +1405,28 @@ $('#business_pincode').blur(function(){
             );
 
     });
+	
+$("#gta_yes").on("click",function(e) {
+	//$('#gta_yes').attr('checked', true);
+	
+	if($(this).is(':checked')){
+		
+		$('#gta_no').attr('checked', false);
+		$("#gta_number").addClass("displayToggleBlock");
+		$("#gta_number").removeClass("displayToggle");
+	} 
+	
+});
+
+$("#gta_no").on("click",function() {
+	$('#gta_no').attr('checked', true);
+	if($(this).is(':checked')){
+		
+		$('#gta_yes').attr('checked', false);
+		$("#gta_number").addClass("displayToggle");
+		$("#gta_number").removeClass("displayToggleBlock");
+	} 
+});
 
 
 

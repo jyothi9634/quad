@@ -4586,4 +4586,6 @@ a.link-red{ color:#ff0000; text-decoration:none;}
 .text-center{ text-align:center;}
 .button-red-1{ padding:8px 15px; background-color:#ec1a23; border-radius:2px; border:1px solid #fbc9cb; color:#fff; min-width:110px; font-weight:bold; font-size:15px;}
 .button-gray-1{ padding:8px 15px; background-color:#545659; border-radius:2px; border:1px solid #6d7589; color:#fff; min-width:110px; font-weight:bold; font-size:15px;}
-.button-gray-2{ padding:8px 15px; background-color:#e6e8eb; border-radius:2px; border:1px solid #d7d7d8; color:#6d7589; min-width:110px; font-weight:bold; font-size:15p
+.button-gray-2{ padding:8px 15px; background-color:#e6e8eb; border-radius:2px; border:1px solid #d7d7d8; color:#6d7589; min-width:110px; font-weight:bold; font-size:15p}
+.displayToggle { display:none !important; }
+.displayToggleBlock { display:block !important; }

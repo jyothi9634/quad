@@ -267,8 +267,18 @@ class RegisterController extends Controller {
 	|
 	*/
 	public function individualRegistration() {
+		if(!isset($_REQUEST['user_id'])) {
+			return Redirect ( '/register' );
+		}
 		$userRes = User::where ( 'id', $_REQUEST['user_id'] )->first();
-		
+		if($userRes == "") {
+			return Redirect ( '/register' );
+		}
+		if(count($userRes)>0) {
+			if($userRes->is_approved == 0) {
+				return Redirect ( '/register' );
+			}
+		}
 		return view("auth.individual_register")->with('user',$userRes);
 	}
 	
@@ -430,7 +440,7 @@ class RegisterController extends Controller {
 				$services = array ();
 				
 				// see if value has been posted
-			if (isset ( $_POST ['services'] ) && (!empty ( $_POST ['services'] ))) {
+				if (isset ( $_POST ['services'] ) && (!empty ( $_POST ['services'] ))) {
 					$services = $_POST ['services'];
 					$seller_services = $services;
 					
@@ -440,6 +450,7 @@ class RegisterController extends Controller {
 						
 						$seller_services_save = new SellerService ();
 						$seller_services_save->user_id = $this->user_pk;
+						$seller_services_save->is_service_offered = 1;
 						$seller_services_save->lkp_service_id = $service;
 						$seller_services_save->created_by = $this->user_pk;
 						$seller_services_save->created_at = $createdAt;
@@ -448,6 +459,28 @@ class RegisterController extends Controller {
 						CommonComponent::auditLog ( $seller_services_save->id, 'seller_services' );
 					}
 				}
+				
+				// see if value has been posted
+				if (isset ( $_POST ['servicesreq'] ) && (!empty ( $_POST ['servicesreq'] ))) {
+					$servicesReq = $_POST ['servicesreq'];
+					$seller_services_req = $servicesReq;
+					
+				}
+				if (! empty ( $seller_services_req )) {
+					foreach ( $seller_services_req as $requiredService ) {
+						
+						$req_seller_services_save = new SellerService ();
+						$req_seller_services_save->user_id = $this->user_pk;
+						$req_seller_services_save->is_service_required = 1;
+						$req_seller_services_save->lkp_service_id = $requiredService;
+						$req_seller_services_save->created_by = $this->user_pk;
+						$req_seller_services_save->created_at = $createdAt;
+						$req_seller_services_save->created_ip = $createdIp;
+						$req_seller_services_save->save ();
+						CommonComponent::auditLog ( $req_seller_services_save->id, 'seller_services' );
+					}
+				}
+				
 				if (! empty ( $_POST ['intracity_locality'] [0] ) && $_POST ['intracity_locality'] [0] != '') {
 					
 					$intracityArea = $_POST ['intracity_locality'];
@@ -4624,7 +4657,8 @@ class RegisterController extends Controller {
 			Session::put ( 'company_name', $sellerIndividual->name ); // session for future use
 			$intracityArea = array ();
 			$pamArea = array ();
-			$services = array ();			
+			$services = array ();
+			$seller_services = array();
 			// see if value has been posted
 			if (isset ( $_POST ['services'] ) && (!empty ( $_POST ['services'] ))) {
 				$services = $_POST ['services'];
