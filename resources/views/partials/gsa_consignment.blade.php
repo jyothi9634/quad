@@ -207,7 +207,7 @@
                         <ul class="popup-list">
                             <li><span>Seller Name<span class="right-doted">:</span></span>{{$userdetails->username}}</li>
                             <li><span>Year of ESTD.<span class="right-doted">:</span></span>{{$userdetails->est}}</li>
-                            <li><span>Seller Address<span class="right-doted">:</span></span>{{$userdetails->address}}</li>
+                            <li><span>Seller Address<span class="right-doted">:</span></span>{{$userdetails->address1}}</li>
                             <li><span>GTA Number<span class="right-doted">:</span></span>{{$userdetails->gat}}</li>
                             <li><span>Service Tax Number<span class="right-doted">:</span></span>{{$userdetails->service}}</li>
                             <li><span>TIN Number<span class="right-doted">:</span></span>{{$userdetails->tin}}</li>

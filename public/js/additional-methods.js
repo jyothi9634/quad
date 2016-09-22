@@ -1054,7 +1054,7 @@ $.validator.addMethod( "ziprange", function( value, element ) {
 }, "Your ZIP-code must be in the range 902xx-xxxx to 905xx-xxxx" );
 
 
-jQuery.validator.addMethod("pincode", function(value, element) {
+jQuery.validator.addMethod("pincodeLocation", function(value, element) {
   return this.optional(element) || /^\d{6}(?:-\d{4})?$/.test(value);
 }, "Please provide a valid pincode.");
 

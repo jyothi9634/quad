@@ -900,7 +900,7 @@ $(document).on("click",".paymentMode",function() {
                 	}
                     $('#error-add-item').text('');
                     var seller_location_id = from_location_value;
-                    //seller_id_list.unshift(seller_location_id);
+                    seller_id_list.unshift(seller_location_id);
                     var html = '<div class="table-row inner-block-bg request_row_' + num + '"><div class="col-md-2 padding-left-none" id="from_loc_'+ num +'">' + from_location + '</div><div class="col-md-2 padding-left-none" id="to_loc_'+ num +'">' + to_location + '</div><div class="col-md-3 padding-left-none" id="load_type_text_'+ num +'">' + load_type_value + '</div><div class="col-md-2 padding-left-none" id="vehicle_type_text_'+ num +'">' + vehicle_type_value + '</div><div class="col-md-2 padding-none" id="price_'+ num +'">' + price + '</div><div class="class="col-md-2 padding-none"><a class="edit_this edit" row_id="' + num + '"><i class="fa fa-edit red" title="Edit"></i></a>&nbsp;<a class="remove_this remove" row_id="' + num + '"><i class="fa fa-trash red" title="Delete"></i></a></div><input type="hidden" name="from_location[]" class="from_location"  value="' + from_location_value + '" id="from_location_id_'+num+'"><input type="hidden" name="to_location[]" value="' + to_location_value + '" id="to_location_id_'+num+'"><input type="hidden" name="delivery_date[]" value="' + delivery_date + '" id="delivery_date_'+num+'"><input type="hidden" name="dispatch_date[]" value="' + dispatch_date + '" id="dispatch_date_'+num+'"><input type="hidden" name="load_type[]" value="' + load_type + '" id="load_type_'+num+'"><input type="hidden" name="vehicle_type[]" value="' + vehicle_type + '" id="vehicle_type_'+num+'"><input type="hidden" name="capacity[]" value="' + units + '" id="unit_cap_'+num+'"><input type="hidden" name="quantity[]" value="' + quantity + '" id="quant_'+num+'"><input type="hidden" name="quote_id[]" value="' + Quotes_quote_type + '" id="quote_'+num+'"><input type="hidden" name="no_of_loads[]" value="' + noofloads + '" id="no_loads_'+num+'"><input type="hidden" name="price[]" value="' + price + '"><input type="hidden" name="is_dispatch_flexible[]" value="' + is_dispatch_flexible + '" id="dispach_flexible'+num+'"><input type="hidden" name="is_delivery_flexible[]" value="' + is_delivery_flexible + '" id="delivery_flexible'+num+'"></div>';
                     $('.request_rows').append(html);
                     $('#from_location').val("");
@@ -5438,7 +5438,7 @@ function arrayTostringValue(request_array){
         select: function(event, ui) {        	
         	$('#ptlFromLocation').val(ui.item.value);
             $('#ptlFromLocationId').val(ui.item.id);
-           // $(this).closest("form").validate().element($('#ptlFromLocationId'));
+            $(this).closest("form").validate().element($('#ptlFromLocationId'));
             /*Need to add this below class to every autocomplete: Shriram */
             $('#ptlFromLocation').addClass("clsAutoDisable");
             //$('#ptlFromLocation').removeClass("maxlimitsix_lmtVal");
@@ -5449,6 +5449,48 @@ function arrayTostringValue(request_array){
     
      
 });
+
+
+$(document).on('focus click keyup keypress blur change', '#pincodeLocation', function() {
+	   
+		   var service_courier_buyer_url_to = "/pincodesAutocomplete?pincode="+$('#pincodeLocation').val();
+	   
+	   
+                $("#pincodeLocation").autocomplete({
+                   source: service_courier_buyer_url_to,
+                   minLength: 1,
+                   select: function(event, ui) {
+                       $('#pincodeLocation').val(ui.item.value);
+                       $('#pincodeLocationId').val(ui.item.id);
+					   $("#lkp_state_id").val(ui.item.state_id);
+						$("#lkp_location_id").val(ui.item.id);
+						$("#lkp_district_id").val(ui.item.lkp_district_id);
+						$("#pincode").val(ui.item.pincode);
+						$("#region").val(ui.item.region);
+						
+						$("#business_city").val(ui.item.city);
+						$("#business_state").val(ui.item.statename);
+						$("#business_location").val(ui.item.postoffice_name);
+						$("#business_district").val(ui.item.districtname);
+						
+						$("#city").val(ui.item.city);
+						$("#state").val(ui.item.statename);
+						$("#location").val(ui.item.postoffice_name);
+						$("#district").val(ui.item.districtname);
+						
+                       //$(this).closest("form").validate().element($('#ptlToLocationId'));
+                       /*Need to add this below class to every autocomplete: Shriram */
+                       $('#pincodeLocation').addClass("clsAutoDisable");
+                    }
+                       
+                });
+    
+                
+            })
+
+
+
+
    $(document).on('focus click keyup keypress blur change', '#ptlToLocation', function() {
 	   var service_courier_buyer = $('#Service_ID').val();
 	   if(service_courier_buyer == 21){
@@ -6612,7 +6654,6 @@ function GetCapacity() {
         },
     });
 }
-
 
 /** ******** Below script ajax onchange capacity in FTl************ */
 function GetWeightType() {

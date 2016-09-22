@@ -45,11 +45,20 @@
 								</div>
 								
 								<div class="col-md-12 padding-none">
-									<div class="col-md-6 form-control-fld">
+									<!--<div class="col-md-6 form-control-fld">
 										<div class="input-prepend">
 											{!! Form:: text ('pincode', '', array( 'class'=>'form-control form-control1','id'=>'pincode','placeholder'=>'Pincode*', 'maxlength'=>'6' )) !!}
 										</div>
-									</div>
+									</div>-->
+									<div class="col-md-6 form-control-fld">
+									<div class="input-prepend">
+									<span class="add-on"><i class="fa fa-map-marker"></i></span>
+									{!! Form::text('pincodeLocation', '' , ['id' => 'pincodeLocation', 'class'=>'form-control numericvalidation_autopop maxlimitsix_lmtVal','placeholder' => 'Pincode*']) !!}
+	                           		{!! Form::hidden('pincodeLocationId', '' , array('id' => 'pincodeLocationId')) !!}
+									{!! Form::hidden('pincode', '' , array('id' => 'pincode')) !!}
+									{!! Form::hidden('region', '' , array('id' => 'region')) !!}
+								</div>
+								</div>
 									<div class="col-md-6 form-control-fld">
 										<div class="input-prepend">
 											{!!Form:: text ('location', '', array( 'class'=>'form-control form-control1', 'id'=>'location', 'placeholder'=>'Location*', 'maxlength'=>'30','readonly')) !!}
@@ -175,7 +184,7 @@
 <script src="/js/additional-methods.js"></script>
 <script>
 
-$("#pincode,#landline,#alternative_mobile").keypress(function (e) {
+$("#pincodeLocation,#landline,#alternative_mobile").keypress(function (e) {
         //if the letter is not digit then display error and don't type anything
         if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
                return false;
@@ -214,9 +223,9 @@ $(function() {
 				required: true,
 				idProofFormate: true
 			},
-			pincode: {
+			pincodeLocation: {
                 required: true,
-				pincode: true,
+				//pincode: true,
             },
 			landline: {
 				integer:true

@@ -392,10 +392,49 @@ $(window).load(function() {
 	@include('partials.header')
 	<!-- Header Ends Here-->
 	<!-- Main Container Starts Here-->
-	
+
 	<div class="main-container">
-	
-@yield('content')</div>
+			<?php /*?>
+			<button type="button" class="btn btn-primary btn-sm" 
+			        data-toggle="toggle" data-target="#left_collsp">
+			    <i class="glyphicon glyphicon-plus"></i>
+			</button>
+			
+			<script type="text/javascript">
+				$("[data-toggle='toggle']").click(function() {
+			    var selector = $(this).data("target");
+			    $(selector).toggleClass('in');
+			});
+			</script>
+			<style type="text/css">
+				#left_collsp {
+			    -webkit-transition: width 2s ease;
+			    -moz-transition: width 2s ease;
+			    -o-transition: width 2s ease;
+			    transition: width 2s ease;
+			    
+			    display: inline-block;
+			    overflow: hidden;
+			    white-space: nowrap;
+			   
+			    vertical-align: middle;
+			    line-height: 30px;
+			    height: auto;
+
+			    width: 0px;
+			}
+			#left_collsp.in {
+			    width: auto;
+			}
+			</style>
+			
+			<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12 main-left" id="left_collsp">
+			<!-- Left Nav-->
+			@include('partials.leftnav')
+			<!-- Left Nav-->		
+		</div><?ph */?>
+		@yield('content')
+	</div>
 	<!-- Main Container Ends Here-->
 
 	<!-- Modal -->

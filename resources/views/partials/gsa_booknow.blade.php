@@ -247,12 +247,13 @@
                             @endif
                         @endif                      
 						 {{--*/ $userdetails =   $sellerComp->getUserDetBooknow($sellerQuoteId); /*--}}
+                         {{--*/ $address     =   $userdetails->address1 . ' ' .$userdetails->address2 .' '.$userdetails->address3 /*--}}
 		                    <div class="col-sm-6 border-left-right custam-height">
 		                        <h3>Seller Details</h3>
 		                        <ul class="popup-list">
 		                            <li><span>Seller Name<span class="right-doted">:</span></span><span>{{$userdetails->username}}</span></li>
 		                            <li><span>Year of ESTD.<span class="right-doted">:</span></span><span>{{$userdetails->est}}</span></li>
-		                            <li><span>Seller Address<span class="right-doted">:</span></span><span>{{$userdetails->address}}</span></li>
+		                            <li><span>Seller Address<span class="right-doted">:</span></span><span>{{$address}}</span></li>
 		                            <li><span>GTA Number<span class="right-doted">:</span></span><span>{{$userdetails->gat}}</span></li>
 		                            <li><span>Service Tax Number<span class="right-doted">:</span></span><span>{{$userdetails->service}}</span></li>
 		                            <li><span>TIN Number<span class="right-doted">:</span></span><span>{{$userdetails->tin}}</span></li>

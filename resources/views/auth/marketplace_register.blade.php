@@ -73,18 +73,18 @@
 									</div>
 									
 									<div class="col-md-6 form-control-fld margin-none">
-								<!--<div class="input-prepend">
+								<div class="input-prepend">
 									<span class="add-on"><i class="fa fa-map-marker"></i></span>
-									{!! Form::text('ptlFromLocation', '' , ['id' => 'ptlFromLocation', 'class'=>'form-control numericvalidation_autopop maxlimitsix_lmtVal', 'placeholder' => 'From Pincode*']) !!}
-	                           		{!! Form::hidden('ptlFromLocationId', '' , array('id' => 'ptlFromLocationId')) !!}
-								</div>-->
-							</div>
 									
-									<div class="col-md-6 form-control-fld">
-										<div class="input-prepend">
-											{!!Form:: text ('business_pincode', '', array( 'class'=>'form-control form-control1', 'id'=>'business_pincode', 'placeholder'=>'Pincode*', 'maxlength'=>'30' )) !!}
-										</div>
-									</div>
+									{!! Form::text('pincodeLocation', '' , ['id' => 'pincodeLocation', 'class'=>'form-control numericvalidation_autopop maxlimitsix_lmtVal', 'placeholder' => 'Pincode*']) !!}
+	                           		{!! Form::hidden('pincodeLocationId', '' , array('id' => 'pincodeLocationId')) !!}
+									{!! Form::hidden('business_pincode', '' , array('id' => 'business_pincode')) !!}
+									{!! Form::hidden('region', '' , array('id' => 'region')) !!}
+								</div>
+							</div>
+							
+								
+									
 								</div>
 								<div class="col-md-12 padding-none">
 									<div class="col-md-6 form-control-fld">
@@ -928,9 +928,9 @@ $(document).ready(function () {
                 maxlength: 10
             },
 		 
-          business_pincode: {
+          pincodeLocation: {
                 required: true,
-                pincode:true
+                //pincode:true
             },
             
             address1: {
@@ -1167,7 +1167,7 @@ $(document).ready(function () {
     });*/
 
 
-    $("#business_mobile_no,#business_landline,#business_pincode").keypress(function (e) {
+    $("#business_mobile_no,#business_landline,#pincodeLocation").keypress(function (e) {
       
         if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && e.which == 46) {
                return false;
@@ -1374,7 +1374,7 @@ $(document).ready(function () {
   
     
   });
-$('#business_pincode').blur(function(){
+$('#business_pincode1').blur(function(){
           
           var prop_pinid = $('#business_pincode').val();
 

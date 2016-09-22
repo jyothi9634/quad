@@ -1028,4 +1028,7 @@ $(document).ready(function(){
 		$(".advanced-search-details-officemove").toggle();
 		$(".more-search-officemove, .less-search-officemove").toggle();
 	});
+
+	//$( ".main-container .main-left" ).detach().prependTo( ".main .main-inner" );
 });			
+

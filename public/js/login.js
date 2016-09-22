@@ -162,12 +162,12 @@ $(document).ready(function() {
 	});
 
 	//$(document).on('focus click keyup keypress blur change', '#pincode', function() {
-	$(document).on("keyup","#pincode",function(){
+	$(document).on("keyup","#pincodeLocation1",function(){
 		var pincodeVal = 0;
-		pincodeVal = $('#pincode').val();
+		pincodeVal = $('#pincodeLocation').val();
 		if(pincodeVal.length > 5){
 			var data = {
-					'prop_pinid': $('#pincode').val()
+					'prop_pinid': $('#pincodeLocation').val()
 				};
 			 $.ajax({
 					type: "GET",
@@ -181,7 +181,8 @@ $(document).ready(function() {
 						$("#location").val(data.postoffice_name);
 						$("#district").val(data.districtname);
 						
-						$("#lkp_city_id").val(data.lkp_city_id);
+						
+						//$("#lkp_city_id").val(data.lkp_city_id);
 						$("#lkp_state_id").val(data.state_id);
 						$("#lkp_location_id").val(data.id);
 						$("#lkp_district_id").val(data.lkp_district_id);

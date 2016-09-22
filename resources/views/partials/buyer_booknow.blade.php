@@ -187,7 +187,7 @@
         <div class="clearfix"></div>
         <div class="col-md-8 form-control-fld">
             <div class="input-prepend">
-                {!! Form::textarea($consignor_address.$buyerQuoteId,  $buyerDetails->address,
+                {!! Form::textarea($consignor_address.$buyerQuoteId,  $buyerDetails->address1,
                     array('id' => $consignor_address.$buyerQuoteId,'class'=>'form-control form-control1 clsAddress','placeholder'=>'Consignor Address *', 'rows' => 2)) !!}
             </div>
             <label class="error" id="buyer_counter_offer_consignor_address_error_{!! $buyerQuoteId !!}"></label>

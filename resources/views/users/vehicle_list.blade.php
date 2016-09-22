@@ -37,11 +37,13 @@
 								<!-- Table Head Starts Here -->
 
 								<div class="table-heading inner-block-bg">
-									<div class="col-md-1 padding-left-none">S.No</div>
-									<div class="col-md-4 padding-left-none">Vehicle Number</div>
-									<div class="col-md-4 padding-left-none">Owner Name</div> 
+									<div class="col-md-2 padding-left-none">States</div>
+                                                                        <div class="col-md-2 padding-left-none">Location</div>
+									<div class="col-md-2 padding-left-none">Vehicle Number</div>
+									<div class="col-md-2 padding-left-none">Truck Type</div>
+                                                                        <div class="col-md-2 padding-left-none">Capacity</div>
+									<div class="col-md-1 padding-left-none">Status </div> 
 									<div class="col-md-1 padding-left-none">Actions </div>  
-									 
 								</div>
 
 								<!-- Table Head Ends Here -->
@@ -52,10 +54,12 @@
                                                                         {{--*/ $i=0 /*--}}
                                                                         @foreach ($vehicle as $v)    {{--*/ $i++ /*--}}                                  
 									<div class="table-row inner-block-bg">
-										<div class="col-md-1 padding-left-none">{{ $i }}</div>
-										<div class="col-md-4 padding-left-none">{{ $v->vehicle_number }}</div>
-										<div class="col-md-4 padding-left-none">{{ $v->reg_owner_firstname }} {{$v->reg_owner_lastname}}</div>
-										  
+										<div class="col-md-2 padding-left-none"></div>
+                                                                                <div class="col-md-2 padding-left-none"></div>
+										<div class="col-md-2 padding-left-none">{{$v->vehicle_number}}</div>
+										<div class="col-md-2 padding-left-none">{{$v->vehicle_type}}</div>
+										<div class="col-md-2 padding-left-none">{{$v-> vehicle_capacity}}</div>
+                                                                                 <div class="col-md-1 padding-left-none">{{$v->status}}</div>
 										<div class="col-md-1 padding-left-none">
 										<a href="{{url('vehicle_edit/'.$v->id)}}" class=""><i class="fa fa-edit red" title="Edit"></i></a>
 										 <a href="{{url('vehicle_destroy/'.$v->id)}}" class="" onclick="return confirm('Are you sure, you want to delete?')"><i class="fa fa-trash-o red" title="Delete"></i></a>
