@@ -124,7 +124,7 @@ class RelocationSellerController extends Controller {
                 $subscription_end_date_end = date_format ( $subscription_end_date, "Y-m-d" );
                 $current_date_seller = date ( "Y-m-d" );
             } else {
-                $user_subcsriptions = DB::table ( 'sellers' )->where ( 'user_id', $userId )->first ();
+                $user_subcsriptions = DB::table ( 'seller_details' )->where ( 'user_id', $userId )->first ();
                 $subscription_start_date = date_create ( $user_subcsriptions->subscription_start_date );
                 $subscription_end_date = date_create ( $user_subcsriptions->subscription_end_date );
                 $subscription_start_date_start = date_format ( $subscription_start_date, "Y-m-d" );
@@ -205,7 +205,7 @@ class RelocationSellerController extends Controller {
             	$subscription_end_date_end = date_format ( $subscription_end_date, "Y-m-d" );
             	$current_date_seller = date ( "Y-m-d" );
             } else {
-            	$user_subcsriptions = DB::table ( 'sellers' )->where ( 'user_id', $userId )->first ();
+            	$user_subcsriptions = DB::table ( 'seller_details' )->where ( 'user_id', $userId )->first ();
             	$subscription_start_date = date_create ( $user_subcsriptions->subscription_start_date );
             	$subscription_end_date = date_create ( $user_subcsriptions->subscription_end_date );
             	$subscription_start_date_start = date_format ( $subscription_start_date, "Y-m-d" );
@@ -237,7 +237,7 @@ class RelocationSellerController extends Controller {
                 $subscription_end_date_end = date_format ( $subscription_end_date, "Y-m-d" );
                 $current_date_seller = date ( "Y-m-d" );
             } else {
-                $user_subcsriptions = DB::table ( 'sellers' )->where ( 'user_id', $userId )->first ();
+                $user_subcsriptions = DB::table ( 'seller_details' )->where ( 'user_id', $userId )->first ();
                 $subscription_start_date = date_create ( $user_subcsriptions->subscription_start_date );
                 $subscription_end_date = date_create ( $user_subcsriptions->subscription_end_date );
                 $subscription_start_date_start = date_format ( $subscription_start_date, "Y-m-d" );
@@ -296,7 +296,7 @@ class RelocationSellerController extends Controller {
                             $subscription_end_date_end = date_format ( $subscription_end_date, "Y-m-d" );
                             $current_date_seller = date ( "Y-m-d" );
                     } else {
-                            $user_subcsriptions = DB::table ( 'sellers' )->where ( 'user_id', $userId )->first ();
+                            $user_subcsriptions = DB::table ( 'seller_details' )->where ( 'user_id', $userId )->first ();
                             $subscription_start_date = date_create ( $user_subcsriptions->subscription_start_date );
                             $subscription_end_date = date_create ( $user_subcsriptions->subscription_end_date );
                             $subscription_start_date_start = date_format ( $subscription_start_date, "Y-m-d" );
@@ -360,7 +360,7 @@ class RelocationSellerController extends Controller {
                     $subscription_end_date_end = date_format ( $subscription_end_date, "Y-m-d" );
                     $current_date_seller = date ( "Y-m-d" );
                 } else {
-                    $user_subcsriptions = DB::table ( 'sellers' )->where ( 'user_id', $userId )->first ();
+                    $user_subcsriptions = DB::table ( 'seller_details' )->where ( 'user_id', $userId )->first ();
                     $subscription_start_date = date_create ( $user_subcsriptions->subscription_start_date );
                     $subscription_end_date = date_create ( $user_subcsriptions->subscription_end_date );
                     $subscription_start_date_start = date_format ( $subscription_start_date, "Y-m-d" );
@@ -1864,7 +1864,7 @@ class RelocationSellerController extends Controller {
                         $subscription_end_date_end = date_format ( $subscription_end_date, "Y-m-d" );
                         $current_date_seller = date ( "Y-m-d" );
                     } else {
-                        $user_subcsriptions = DB::table ( 'sellers' )->where ( 'user_id', $userId )->first ();
+                        $user_subcsriptions = DB::table ( 'seller_details' )->where ( 'user_id', $userId )->first ();
                         $subscription_start_date = date_create ( $user_subcsriptions->subscription_start_date );
                         $subscription_end_date = date_create ( $user_subcsriptions->subscription_end_date );
                         $subscription_start_date_start = date_format ( $subscription_start_date, "Y-m-d" );
@@ -2170,7 +2170,7 @@ class RelocationSellerController extends Controller {
                             $subscription_end_date_end = date_format ( $subscription_end_date, "Y-m-d" );
                             $current_date_seller = date ( "Y-m-d" );
                         } else {
-                            $user_subcsriptions = DB::table ( 'sellers' )->where ( 'user_id', $userId )->first ();
+                            $user_subcsriptions = DB::table ( 'seller_details' )->where ( 'user_id', $userId )->first ();
                             $subscription_start_date = date_create ( $user_subcsriptions->subscription_start_date );
                             $subscription_end_date = date_create ( $user_subcsriptions->subscription_end_date );
                             $subscription_start_date_start = date_format ( $subscription_start_date, "Y-m-d" );
@@ -2460,7 +2460,7 @@ class RelocationSellerController extends Controller {
     			$subscription_end_date_end = date_format ( $subscription_end_date, "Y-m-d" );
     			$current_date_seller = date ( "Y-m-d" );
     		} else {
-    			$user_subcsriptions = DB::table ( 'sellers' )->where ( 'user_id', $userId )->first ();
+    			$user_subcsriptions = DB::table ( 'seller_details' )->where ( 'user_id', $userId )->first ();
     			$subscription_start_date = date_create ( $user_subcsriptions->subscription_start_date );
     			$subscription_end_date = date_create ( $user_subcsriptions->subscription_end_date );
     			$subscription_start_date_start = date_format ( $subscription_start_date, "Y-m-d" );
@@ -2710,7 +2710,7 @@ class RelocationSellerController extends Controller {
     			$subscription_end_date_end = date_format ( $subscription_end_date, "Y-m-d" );
     			$current_date_seller = date ( "Y-m-d" );
     		} else {
-    			$user_subcsriptions = DB::table ( 'sellers' )->where ( 'user_id', $userId )->first ();
+    			$user_subcsriptions = DB::table ( 'seller_details' )->where ( 'user_id', $userId )->first ();
     			$subscription_start_date = date_create ( $user_subcsriptions->subscription_start_date );
     			$subscription_end_date = date_create ( $user_subcsriptions->subscription_end_date );
     			$subscription_start_date_start = date_format ( $subscription_start_date, "Y-m-d" );
@@ -2966,7 +2966,7 @@ class RelocationSellerController extends Controller {
                         $subscription_end_date_end = date_format ( $subscription_end_date, "Y-m-d" );
                         $current_date_seller = date ( "Y-m-d" );
                     } else {
-                        $user_subcsriptions = DB::table ( 'sellers' )->where ( 'user_id', $userId )->first ();
+                        $user_subcsriptions = DB::table ( 'seller_details' )->where ( 'user_id', $userId )->first ();
                         $subscription_start_date = date_create ( $user_subcsriptions->subscription_start_date );
                         $subscription_end_date = date_create ( $user_subcsriptions->subscription_end_date );
                         $subscription_start_date_start = date_format ( $subscription_start_date, "Y-m-d" );
@@ -3478,7 +3478,7 @@ class RelocationSellerController extends Controller {
                         $subscription_end_date_end = date_format ( $subscription_end_date, "Y-m-d" );
                         $current_date_seller = date ( "Y-m-d" );
                     } else {
-                        $user_subcsriptions = DB::table ( 'sellers' )->where ( 'user_id', $userId )->first ();
+                        $user_subcsriptions = DB::table ( 'seller_details' )->where ( 'user_id', $userId )->first ();
                         $subscription_start_date = date_create ( $user_subcsriptions->subscription_start_date );
                         $subscription_end_date = date_create ( $user_subcsriptions->subscription_end_date );
                         $subscription_start_date_start = date_format ( $subscription_start_date, "Y-m-d" );

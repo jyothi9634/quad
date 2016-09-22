@@ -1195,6 +1195,7 @@ Route::post('buyermainposts', [
 Route::resource('ptlPincodesAutocomplete', 'PtlBuyerController@ptlPincodesAutocomplete');
 Route::resource('ptlToPincodesCheckout', 'PtlBuyerController@ptlToPincodesCheckout');
 Route::resource('ptlPincodesAutocompleteCourier', 'PtlBuyerController@ptlPincodesAutocompleteCourier');
+Route::resource('pincodesAutocomplete', 'PtlBuyerController@pincodesAutocomplete');
 Route::resource('ptlZoneAutocomplete', 'PtlSellerController@ptlZoneAutocomplete');
 Route::resource('ptlZoneAutocompleteCourier', 'PtlSellerController@ptlZoneAutocompleteCourier');
 Route::resource('ptlZoneAutocompleteCourierSearch', 'PtlSellerController@ptlZoneAutocompleteCourierSearch');

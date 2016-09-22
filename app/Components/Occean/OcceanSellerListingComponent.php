@@ -754,7 +754,7 @@ class OcceanSellerListingComponent {
 				
 				
 			if($getUserrole->is_business == 1){
-				$stable = 'sellers';
+				$stable = 'seller_details';
 			}else{
 				$stable = 'seller_details';
 			}

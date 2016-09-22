@@ -588,7 +588,7 @@ public static function listTruckLeaseSellerPosts($statusId, $serviceId, $roleId,
 				
 				
 			if($getUserrole->is_business == 1){
-				$stable = 'sellers';
+				$stable = 'seller_details';
 			}else{
 				$stable = 'seller_details';
 			}
@@ -924,7 +924,7 @@ public static function listTruckLeaseSellerPosts($statusId, $serviceId, $roleId,
 			$getCounterQuotePrice = CommonComponent::getQuotePriceForSearch($buyer_id,$buyer_quote_id,Auth::user()->id,'counter_quote_price','trucklease_buyer_quote_sellers_quotes_prices');
 			$getFinalQuotePrice   = CommonComponent::getQuotePriceForSearch($buyer_id,$buyer_quote_id,Auth::user()->id,'final_quote_price','trucklease_buyer_quote_sellers_quotes_prices');
 			$getFirmQuotePrice   = CommonComponent::getQuotePriceForSearch($buyer_id,$buyer_quote_id,Auth::user()->id,'firm_price','trucklease_buyer_quote_sellers_quotes_prices');
-			$subscription  = DB::table('sellers')
+			$subscription  = DB::table('seller_details')
 			->where('sellers.user_id',Auth::user()->id)
 			->select('sellers.subscription_end_date','sellers.subscription_start_date')
 			->get();
@@ -1226,7 +1226,7 @@ public static function listTruckLeaseSellerPosts($statusId, $serviceId, $roleId,
 			$getCounterQuotePrice = CommonComponent::getQuotePriceForSearch($buyer_id,$buyer_quote_id,Auth::user()->id,'counter_quote_price','trucklease_buyer_quote_sellers_quotes_prices');
 			$getFinalQuotePrice   = CommonComponent::getQuotePriceForSearch($buyer_id,$buyer_quote_id,Auth::user()->id,'final_quote_price','trucklease_buyer_quote_sellers_quotes_prices');
 			$getFirmQuotePrice   = CommonComponent::getQuotePriceForSearch($buyer_id,$buyer_quote_id,Auth::user()->id,'firm_price','trucklease_buyer_quote_sellers_quotes_prices');
-			$subscription  = DB::table('sellers')
+			$subscription  = DB::table('seller_details')
 				->where('sellers.user_id',Auth::user()->id)
 				->select('sellers.subscription_end_date','sellers.subscription_start_date')
 				->get();

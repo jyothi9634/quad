@@ -431,14 +431,13 @@ class BuyerComponent {
         try {
             Log::info('Get leads for the buyer: ' . Auth::id(), array('c' => '2'));
             $sellerData = DB::table('seller_post_items')
-                    ->join('users', 'seller_post_items.created_by', '=', 'users.id')
-                    ->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+                    ->join('users', 'seller_post_items.created_by', '=', 'users.id')                    
                     ->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
                     ->distinct('seller_post_items.created_by')
                     ->where('seller_post_items.lkp_district_id', $districtId)
-                    ->whereNotIn('sellers.id', $sellerIds)
+                    ->whereNotIn('seller_details.id', $sellerIds)
                     ->where('users.lkp_role_id', SELLER)
-                    ->select('users.id', 'users.username', 'sellers.principal_place', 'sellers.name', 'seller_details.firstname')
+                    ->select('users.id', 'users.username', 'seller_details.principal_place', 'seller_details.name', 'seller_details.contact_firstname')
                     ->get();
             
             return $sellerData;

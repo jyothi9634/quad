@@ -787,34 +787,28 @@ class CheckoutController extends Controller {
     public function postPayment(Request $request) {
         try {
 			
-            $order_refference = $this->_createOrderPayment($request);
-            $request_data = $request->input();
-            $cash_delivery = array('C','COD','COP','NB');
-            
-            
-            $ordersDetails = OrderPayment::where('id','=',$order_refference)->first();
-			
-            // Check Credit / Cash on delivery / Cash on Pickup and confirm order
-            if(in_array($request_data['payment_method'], $cash_delivery)){
-                // Update Order Status
-                CheckoutController::confirmOrderStatus($order_refference);
+                $order_refference = $this->_createOrderPayment($request);
+                $request_data = $request->input();
+                $cash_delivery = array('C','COD','COP','NB');
+                $ordersDetails = OrderPayment::where('id','=',$order_refference)->first();			
+                // Check Credit / Cash on delivery / Cash on Pickup and confirm order
+                if(in_array($request_data['payment_method'], $cash_delivery)){                // Update Order Status
+                    CheckoutController::confirmOrderStatus($order_refference);
+                    return redirect('confirmorder/'.base64_encode($order_refference));
+                  //return $this->_confirmOrder($order_refference,$ordersDetails['base_amount_paid']);
+                }           
 
-                return redirect('confirmorder/'.base64_encode($order_refference));
-              //return $this->_confirmOrder($order_refference,$ordersDetails['base_amount_paid']);
-            }
-           
-
-            $params = array(
+                $params = array(
                     'amount' => $ordersDetails['base_amount_paid'],
                     'refference_id' => $order_refference,
-            //        'refference_id' => 456789
+                    //'refference_id' => 456789
                     'payment_mode' => $request_data['payment_method']
                 );
 
-            if($request_data['gatewayName']=='HDFC'){
-                $PaymentFields = CommonComponent::hdfcFields($params);
-                $PaymentURL = HDFC_PAYMENT_GATEWAY_URL;
-            }
+                if($request_data['gatewayName']=='HDFC'){
+                    $PaymentFields = CommonComponent::hdfcFields($params);
+                    $PaymentURL = HDFC_PAYMENT_GATEWAY_URL;
+                }
 
                 //Save Log Payment Gateway
                 $saveLogPayment = new LogPaymentGateway();

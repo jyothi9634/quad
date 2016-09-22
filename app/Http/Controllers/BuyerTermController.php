@@ -1943,7 +1943,7 @@ class BuyerTermController extends Controller {
 			}			
 			$seller_data = DB::table('users')			
 			->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
-			->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')->orderBy ( 'users.username', 'asc' )
+			->leftjoin ('seller_details', 'users.id', '=', 'sellers.user_id')->orderBy ( 'users.username', 'asc' )
 			->where(['users.is_active' => 1])			
 			->where('users.lkp_role_id', SELLER)
                         ->orWhere('users.secondary_role_id', SELLER)

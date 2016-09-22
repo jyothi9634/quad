@@ -902,7 +902,7 @@ class CheckoutComponent{
   	switch ($serviceId) {
   		case ROAD_FTL :
   			$data= DB::table('orders');
-  			$data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+  			$data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('seller_details as sd', 'sd.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('users as u', 'u.id', '=', 'orders.seller_id');
   			$data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
@@ -935,7 +935,7 @@ class CheckoutComponent{
   			$data= DB::table('orders');
                         $data->leftjoin('ptl_buyer_quote_items as bqi', 'bqi.buyer_quote_id', '=', 'orders.buyer_quote_id');
   			$data->leftjoin('lkp_packaging_types as lpt', 'lpt.id', '=', 'bqi.lkp_packaging_type_id');
-                        $data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+                        $data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('seller_details as sd', 'sd.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('users as u', 'u.id', '=', 'orders.seller_id');
   			$data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
@@ -967,7 +967,7 @@ class CheckoutComponent{
   			$data= DB::table('orders');
                         $data->leftjoin('rail_buyer_quote_items as bqi', 'bqi.buyer_quote_id', '=', 'orders.buyer_quote_id');
   			$data->leftjoin('lkp_packaging_types as lpt', 'lpt.id', '=', 'bqi.lkp_packaging_type_id');
-  			$data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+  			$data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('seller_details as sd', 'sd.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('users as u', 'u.id', '=', 'orders.seller_id');
   			$data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
@@ -997,7 +997,7 @@ class CheckoutComponent{
   			$data= DB::table('orders');
                         $data->leftjoin('airdom_buyer_quote_items as bqi', 'bqi.buyer_quote_id', '=', 'orders.buyer_quote_id');
   			$data->leftjoin('lkp_packaging_types as lpt', 'lpt.id', '=', 'bqi.lkp_packaging_type_id');
-  			$data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+  			$data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('seller_details as sd', 'sd.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('users as u', 'u.id', '=', 'orders.seller_id');
   			$data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
@@ -1027,7 +1027,7 @@ class CheckoutComponent{
   			$data= DB::table('orders');
                         $data->leftjoin('ocean_buyer_quote_items as bqi', 'bqi.buyer_quote_id', '=', 'orders.buyer_quote_id');
   			$data->leftjoin('lkp_packaging_types as lpt', 'lpt.id', '=', 'bqi.lkp_packaging_type_id');
-  			$data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+  			$data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('seller_details as sd', 'sd.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('users as u', 'u.id', '=', 'orders.seller_id');
   			$data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
@@ -1057,7 +1057,7 @@ class CheckoutComponent{
   			$data= DB::table('orders');
                         $data->leftjoin('airint_buyer_quote_items as bqi', 'bqi.buyer_quote_id', '=', 'orders.buyer_quote_id');
   			$data->leftjoin('lkp_packaging_types as lpt', 'lpt.id', '=', 'bqi.lkp_packaging_type_id');
-  			$data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+  			$data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('seller_details as sd', 'sd.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('users as u', 'u.id', '=', 'orders.seller_id');
   			$data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
@@ -1089,7 +1089,7 @@ class CheckoutComponent{
         case COURIER :
             
             $data= DB::table('orders');
-            $data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+            $data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
             $data->leftjoin('users as u', 'u.id', '=', 'orders.seller_id');
             $data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
             $data->leftjoin('order_invoices', 'order_invoices.order_id', '=', 'orders.id');
@@ -1128,7 +1128,7 @@ class CheckoutComponent{
         case RELOCATION_DOMESTIC :
   			
   			$data= DB::table('orders');
-  			$data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+  			$data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('users as u', 'u.id', '=', 'orders.seller_id');
   			$data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
   			$data->leftjoin('order_invoices', 'order_invoices.order_id', '=', 'orders.id');
@@ -1149,7 +1149,7 @@ class CheckoutComponent{
         case RELOCATION_INTERNATIONAL :
             
             $data= DB::table('orders');
-            $data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+            $data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
             $data->leftjoin('users as u', 'u.id', '=', 'orders.seller_id');
             $data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
             $data->leftjoin('order_invoices', 'order_invoices.order_id', '=', 'orders.id');
@@ -1168,7 +1168,7 @@ class CheckoutComponent{
         case RELOCATION_OFFICE_MOVE :
             
             $data= DB::table('orders');
-            $data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+            $data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('users as u', 'u.id', '=', 'orders.seller_id');
             $data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
             $data->leftjoin('order_invoices', 'order_invoices.order_id', '=', 'orders.id');
@@ -1185,7 +1185,7 @@ class CheckoutComponent{
             case RELOCATION_PET_MOVE :
   			
   			$data= DB::table('orders');
-  			$data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+  			$data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('users as u', 'u.id', '=', 'orders.seller_id');
   			$data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
   			$data->leftjoin('order_invoices', 'order_invoices.order_id', '=', 'orders.id');
@@ -1208,7 +1208,7 @@ class CheckoutComponent{
             case RELOCATION_GLOBAL_MOBILITY :
   			
   			$data= DB::table('orders');
-  			$data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+  			$data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('users as u', 'u.id', '=', 'orders.seller_id');
   			$data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
   			$data->leftjoin('order_invoices', 'order_invoices.order_id', '=', 'orders.id');
@@ -1226,7 +1226,7 @@ class CheckoutComponent{
   			break;        
             case ROAD_TRUCK_HAUL :	   
   			$data= DB::table('orders');
-  			$data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+  			$data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('seller_details as sd', 'sd.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('users as u', 'u.id', '=', 'orders.seller_id');
   			$data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
@@ -1257,7 +1257,7 @@ class CheckoutComponent{
                     
             case ROAD_TRUCK_LEASE :	    
   			$data= DB::table('orders');
-  			$data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+  			$data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('seller_details as sd', 'sd.user_id', '=', 'orders.seller_id');
                         $data->leftjoin('users as u', 'u.id', '=', 'orders.seller_id');
   			$data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
@@ -1301,7 +1301,7 @@ class CheckoutComponent{
   		case ROAD_FTL :
   				
   			 $data= DB::table('orders');
-             $data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+             $data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
              $data->leftjoin('seller_details as sd', 'sd.user_id', '=', 'orders.seller_id');
              $data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
              $data->leftjoin('seller_order_invoices', 'seller_order_invoices.order_id', '=', 'orders.id');
@@ -1329,7 +1329,7 @@ class CheckoutComponent{
   			$data= DB::table('orders');
                         $data->leftjoin('ptl_buyer_quote_items as bqi', 'bqi.buyer_quote_id', '=', 'orders.buyer_quote_id');
   			$data->leftjoin('lkp_packaging_types as lpt', 'lpt.id', '=', 'bqi.lkp_packaging_type_id');
-  			$data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+  			$data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
   			$data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
   			$data->leftjoin('seller_order_invoices', 'seller_order_invoices.order_id', '=', 'orders.id');
   			$data->leftjoin('lkp_vehicle_types', 'lkp_vehicle_types.id', '=', 'orders.lkp_vehicle_type_id');
@@ -1354,7 +1354,7 @@ class CheckoutComponent{
   			$data= DB::table('orders');
                         $data->leftjoin('rail_buyer_quote_items as bqi', 'bqi.buyer_quote_id', '=', 'orders.buyer_quote_id');
   			$data->leftjoin('lkp_packaging_types as lpt', 'lpt.id', '=', 'bqi.lkp_packaging_type_id');
-  			$data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+  			$data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
   			$data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
   			$data->leftjoin('seller_order_invoices', 'seller_order_invoices.order_id', '=', 'orders.id');
   			$data->leftjoin('lkp_vehicle_types', 'lkp_vehicle_types.id', '=', 'orders.lkp_vehicle_type_id');
@@ -1378,7 +1378,7 @@ class CheckoutComponent{
   			$data= DB::table('orders');
                         $data->leftjoin('airdom_buyer_quote_items as bqi', 'bqi.buyer_quote_id', '=', 'orders.buyer_quote_id');
   			$data->leftjoin('lkp_packaging_types as lpt', 'lpt.id', '=', 'bqi.lkp_packaging_type_id');
-  			$data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+  			$data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
   			$data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
   			$data->leftjoin('seller_order_invoices', 'seller_order_invoices.order_id', '=', 'orders.id');
   			$data->leftjoin('lkp_vehicle_types', 'lkp_vehicle_types.id', '=', 'orders.lkp_vehicle_type_id');
@@ -1401,7 +1401,7 @@ class CheckoutComponent{
   			$data= DB::table('orders');
                         $data->leftjoin('ocean_buyer_quote_items as bqi', 'bqi.buyer_quote_id', '=', 'orders.buyer_quote_id');
   			$data->leftjoin('lkp_packaging_types as lpt', 'lpt.id', '=', 'bqi.lkp_packaging_type_id');
-  			$data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+  			$data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
   			$data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
   			$data->leftjoin('seller_order_invoices', 'seller_order_invoices.order_id', '=', 'orders.id');
   			$data->leftjoin('lkp_vehicle_types', 'lkp_vehicle_types.id', '=', 'orders.lkp_vehicle_type_id');
@@ -1425,7 +1425,7 @@ class CheckoutComponent{
   			$data= DB::table('orders');
             $data->leftjoin('airint_buyer_quote_items as bqi', 'bqi.buyer_quote_id', '=', 'orders.buyer_quote_id');
   			$data->leftjoin('lkp_packaging_types as lpt', 'lpt.id', '=', 'bqi.lkp_packaging_type_id');
-  			$data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+  			$data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
   			$data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
   			$data->leftjoin('seller_order_invoices', 'seller_order_invoices.order_id', '=', 'orders.id');
   			$data->leftjoin('lkp_vehicle_types', 'lkp_vehicle_types.id', '=', 'orders.lkp_vehicle_type_id');
@@ -1449,7 +1449,7 @@ class CheckoutComponent{
   			break;
         case COURIER :
             $data= DB::table('orders');
-            $data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+            $data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
             $data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
             $data->leftjoin('seller_order_invoices', 'seller_order_invoices.order_id', '=', 'orders.id');
             $data->leftjoin('courier_buyer_quotes', 'courier_buyer_quotes.id', '=', 'orders.buyer_quote_id');
@@ -1487,7 +1487,7 @@ class CheckoutComponent{
         case RELOCATION_DOMESTIC :
   				
             $data= DB::table('orders');
-            $data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+            $data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
             $data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
             $data->leftjoin('seller_order_invoices', 'seller_order_invoices.order_id', '=', 'orders.id');
             $data->leftjoin('lkp_vehicle_types', 'lkp_vehicle_types.id', '=', 'orders.lkp_vehicle_type_id');
@@ -1508,7 +1508,7 @@ class CheckoutComponent{
         case RELOCATION_INTERNATIONAL :
                 
             $data= DB::table('orders');
-            $data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+            $data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
             $data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
             $data->leftjoin('seller_order_invoices', 'seller_order_invoices.order_id', '=', 'orders.id');
             $data->leftjoin('lkp_cities as from_city', 'from_city.id', '=', 'orders.from_city_id');
@@ -1528,7 +1528,7 @@ class CheckoutComponent{
         case RELOCATION_OFFICE_MOVE :
                 
             $data= DB::table('orders');
-            $data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+            $data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
             $data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
             $data->leftjoin('seller_order_invoices', 'seller_order_invoices.order_id', '=', 'orders.id');
             $data->leftjoin('lkp_cities as from_city', 'from_city.id', '=', 'orders.from_city_id');
@@ -1546,7 +1546,7 @@ class CheckoutComponent{
         case RELOCATION_PET_MOVE :
   				
             $data= DB::table('orders');
-            $data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+            $data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
             $data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
             $data->leftjoin('seller_order_invoices', 'seller_order_invoices.order_id', '=', 'orders.id');
             $data->leftjoin('relocationpet_buyer_posts as rbp', 'rbp.id', '=', 'orders.buyer_quote_id');
@@ -1569,7 +1569,7 @@ class CheckoutComponent{
         
         case ROAD_TRUCK_HAUL :			
   			 $data= DB::table('orders');
-             $data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+             $data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
              $data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
              $data->leftjoin('seller_order_invoices', 'seller_order_invoices.order_id', '=', 'orders.id');
              $data->leftjoin('lkp_vehicle_types', 'lkp_vehicle_types.id', '=', 'orders.lkp_vehicle_type_id');
@@ -1592,7 +1592,7 @@ class CheckoutComponent{
   			break;
         case ROAD_TRUCK_LEASE :			
   			 $data= DB::table('orders');
-             $data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+             $data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
              $data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
              $data->leftjoin('seller_order_invoices', 'seller_order_invoices.order_id', '=', 'orders.id');
              $data->leftjoin('lkp_vehicle_types', 'lkp_vehicle_types.id', '=', 'orders.lkp_vehicle_type_id');
@@ -1611,7 +1611,7 @@ class CheckoutComponent{
         case RELOCATION_GLOBAL_MOBILITY :
                 
             $data= DB::table('orders');
-            $data->leftjoin('sellers', 'sellers.user_id', '=', 'orders.seller_id');
+            $data->leftjoin('seller_details', 'sellers.user_id', '=', 'orders.seller_id');
             $data->leftjoin('buyer_details', 'buyer_details.user_id', '=', 'orders.buyer_id');
             $data->leftjoin('seller_order_invoices', 'seller_order_invoices.order_id', '=', 'orders.id');
             $data->leftjoin('lkp_cities as from_city', 'from_city.id', '=', 'orders.from_city_id');

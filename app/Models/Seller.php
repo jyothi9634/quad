@@ -12,7 +12,7 @@ class Seller extends Model
      *
      * @var string
      */
-    protected $table = 'sellers';
+    protected $table = 'seller_details';
 
 
     /**
@@ -37,47 +37,5 @@ class Seller extends Model
     		->where('s.user_id', '=', $userid)
     		->first();
     }
-
-    public function userSales($id,$inputs){
-        
-        $base_query = DB::table('orders as od')
-                       ->leftJoin('seller_details as sd','sd.id','=','od.seller_id') 
-                       ->leftJoin('buyer_details as bd','bd.id','=','od.buyer_id')   
-                       ->leftJoin('lkp_services as lkps','lkps.id','=','od.lkp_service_id')   
-                       ->select('bd.firstname','lkps.service_name','od.created_at','od.price','od.order_payment_id');
-        
-                       
-        if(empty($inputs)){
-
-          $sub_query = $base_query->where('sd.user_id',$id);
-        
-        }
-        else{
-          
-          if(!empty($inputs['seller_name']))
-          $sub_query = $base_query->where('bd.id',$inputs['seller_name']);
-          
-        }               
-
-        $final_query = $sub_query->orderBy('od.created_at','desc')->get();
-
-        return $final_query;
-    }
-
-   public function getBuyers($id){
-
-
-        return DB::table('orders as od')
-               ->leftJoin('seller_details as sd','sd.id','=','od.seller_id') 
-               ->leftJoin('buyer_details as bd','bd.id','=','od.buyer_id')   
-               ->leftJoin('lkp_services as lkps','lkps.id','=','od.lkp_service_id')   
-               ->select('bd.firstname as buyer','bd.id','lkps.service_name','lkps.id as service_id')
-               ->where('sd.user_id',$id)
-               ->orderBy('od.created_at','desc')
-               ->get();
-
-               
-
-   } 
 
 }

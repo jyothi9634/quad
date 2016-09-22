@@ -93,59 +93,61 @@
 									</div>
 									<div class="col-md-6 form-control-fld">
 										<div class="input-prepend">
-											{!! Form:: text ('landline', '', array( 'class'=>'form-control form-control1','id'=>'landline','placeholder'=>'Landline number', 'maxlength'=>'11' )) !!}
+											{!! Form:: text ('address3', '', array( 'class'=>'form-control form-control1','id'=>'address3','placeholder'=>'Address Line 3', 'maxlength'=>'150' )) !!}
 										</div>
 									</div>
 								</div>
 								<div class="col-md-12 padding-none">
+									<div class="col-md-6 form-control-fld">
+										<div class="input-prepend">
+											{!! Form:: text ('landline', '', array( 'class'=>'form-control form-control1','id'=>'landline','placeholder'=>'Landline number', 'maxlength'=>'11' )) !!}
+										</div>
+									</div>
 									<div class="col-md-6 form-control-fld">
 										<div class="input-prepend">
 											{!! Form:: text ('mobile', $user->phone, array( 'class'=>'form-control form-control1','id'=>'mobile','placeholder'=>'Mobile number*', 'maxlength'=>'10','readonly' )) !!}
 										</div>
 									</div>
+									
+								</div>
+								<div class="col-md-12 padding-none">
 									<div class="col-md-6 form-control-fld">
 										<div class="input-prepend">
 											{!! Form:: text ('alternative_mobile', '', array( 'class'=>'form-control form-control1','id'=>'alternative_mobile','placeholder'=>'Alternative Mobile Number', 'maxlength'=>'10' )) !!}
 										</div>
 									</div>
-								</div>
-								<div class="col-md-12 padding-none">
 									<div class="col-md-6 form-control-fld">
 										<div class="input-prepend">
 											{!! Form:: text ('email', $user->email, array( 'class'=>'form-control form-control1','id'=>'email','placeholder'=>'Email ID*', 'maxlength'=>'55','readonly' )) !!}
 										</div>
 									</div>
+								</div>	
+								<div class="col-md-12 padding-none">
 									<div class="col-md-6 form-control-fld">
 										<div class="input-prepend">
 											{!! Form:: text ('alternative_email', '', array( 'class'=>'form-control form-control1','id'=>'alternative_email','placeholder'=>'Alternate E Mail ID', 'maxlength'=>'55' )) !!}
 										</div>
 									</div>
-								</div>	
-								<div class="col-md-12 padding-none">
 									<div class="col-md-6 form-control-fld">
-								
-											
-											
-											<div class="normal-select">
-								   
-											
-												<select name="id_proof" id="id_proof" class="form-control form-control1">
-													<option value="">ID Proof*</option>
-													<option value="1">Adhar card</option>
-													<option value="2">Driving Lic</option>
-													<option value="3">Passport</option>
-													<option value="4">Pancard</option>
-													<option value="5">Voter Id</option>
-												</select>
-												<p class="error" style="display:none" id="idProofError">Required</p>
-											</div>
+										<div class="normal-select">
+											<select name="id_proof" id="id_proof" class="form-control form-control1">
+												<option value="">ID Proof*</option>
+												<option value="1">Adhar card</option>
+												<option value="2">Driving Lic</option>
+												<option value="3">Passport</option>
+												<option value="4">Pancard</option>
+												<option value="5">Voter Id</option>
+											</select>
+											<p class="error" style="display:none" id="idProofError">Required</p>
 										</div>
-									<div class="col-md-6 form-control-fld idproofValue" style="display:none;">
+									</div>
+									
+								</div>
+								<div class="col-md-6 form-control-fld idproofValue" style="display:none;">
 										<div class="input-prepend">
 											{!! Form:: text ('id_proof_value', '', array( 'class'=>'form-control form-control1','id'=>'id_proof_value','placeholder'=>'ID Proof Value*', 'maxlength'=>'22' )) !!}
 										</div>
 									</div>
-								</div>
 								<div class="col-md-12 form-control-fld">
 								<br>
 									<div class="col-md-8 form-control-fld">
@@ -199,6 +201,7 @@ $(function() {
 			address2: {
 				required: true,
 			},
+			
 			alternative_email: {
                 email:true,
 				notEqulToEmail: true

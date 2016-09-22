@@ -60,7 +60,7 @@ class ThankyouController extends Controller {
 		Log::info ( 'Seller has been successfully redirected to Payment Page:' . $this->user_pk, array (
 				'c' => '1' 
 		) );
-		
+		DB::table('users')->where('id',$this->user_pk)->update(['is_business'=>1]);
 		return view ( 'thankyou.seller_pay' );
 	}
 	
@@ -69,11 +69,9 @@ class ThankyouController extends Controller {
 	 * in seller and seller_details tables
 	 */
 	public function addSubscription($startDate, $endDate, $is_business) {
-		if ($is_business == 0) {
+
 			$tableName = 'seller_details';
-		} elseif ($is_business == 1) {
-			$tableName = 'sellers';
-		}
+		
 		
 	try{	DB::table ( $tableName )->where ( 'user_id', $this->user_pk )->update ( array (
 				'subscription_start_date' => $startDate,

@@ -567,7 +567,7 @@ class CommonComponent{
 				}
 			}else{
 				if($getUserrole->is_business == 1){
-					$buyerTable = 'sellers';
+					$buyerTable = 'seller_details';
 					$contact = 'contact_mobile';
 				}else{
 					$buyerTable = 'seller_details';
@@ -4614,7 +4614,7 @@ class CommonComponent{
 		 	$data = DB::table ( 'seller_details' )->where ( 'user_id', $user_id )->select ( 'address' )->first();
 		 	
 		 }else{
-		 	$data = DB::table ( 'sellers' )->where ( 'user_id', $user_id )->select ( 'address' )->first();
+		 	$data = DB::table ( 'seller_details' )->where ( 'user_id', $user_id )->select ( 'address' )->first();
 		 }
 		 
 		 if(count($data)>0){
@@ -5252,12 +5252,7 @@ class CommonComponent{
 	
 	public static function getBuyerDetails(){
 		try {
-		if(Auth::User()->is_business == 1){
-			$buyerTable = 'buyer_business_details';
-		}else{
-			$buyerTable = 'buyer_details';
-		}
-		
+		$buyerTable = 'buyer_details';		
 		$buyerDetails = DB::table ( 'users' )->leftJoin( $buyerTable , 'users.id', '=', $buyerTable.'.user_id' )->where ('users.id', Auth::User()->id)->first();
 		
 		return $buyerDetails;
@@ -5269,21 +5264,13 @@ class CommonComponent{
 	public static function getUserNameDetails(){
 		try {
 		if((Auth::user()->lkp_role_id == BUYER && (Session::get('last_login_role_id')== 0)) || (Session::get('last_login_role_id')== BUYER) )	{
-			if(Auth::User()->is_business == 1){
-				$buyerTable = 'buyer_business_details';
-				$buyerDetails = DB::table ( 'users' )
-				->leftJoin( $buyerTable , 'users.id', '=', $buyerTable.'.user_id' )
-				->where ('users.id', Auth::User()->id)
-				->select($buyerTable.'.address',$buyerTable.'.contact_email',$buyerTable.'.name as contact_firstname',$buyerTable.'.contact_mobile',$buyerTable.'.principal_place')
-				->first();
-			}else{
-				$buyerTable = 'buyer_details';
-				$buyerDetails = DB::table ( 'users' )
-				->leftJoin( $buyerTable , 'users.id', '=', $buyerTable.'.user_id' )
-				->where ('users.id', Auth::User()->id)
-				->select($buyerTable.'.address',$buyerTable.'.contact_email',$buyerTable.'.firstname as contact_firstname',$buyerTable.'.mobile as contact_mobile',$buyerTable.'.principal_place')
-				->first();
-			}
+			$buyerTable = 'buyer_details';
+			$buyerDetails = DB::table ( 'users' )
+			->leftJoin( $buyerTable , 'users.id', '=', $buyerTable.'.user_id' )
+			->where ('users.id', Auth::User()->id)
+			->select($buyerTable.'.address1',$buyerTable.'.address2',$buyerTable.'.address3',$buyerTable.'.contact_email',$buyerTable.'.firstname as contact_firstname',$buyerTable.'.mobile as contact_mobile',$buyerTable.'.principal_place')
+			->first();
+
 			if(!$buyerDetails->principal_place){
 					$sellerTable = 'seller_details';
 					$sellerDetails = DB::table ( 'users' )
@@ -6180,7 +6167,7 @@ class CommonComponent{
 
 
 				});
-				$user_phone_number->leftJoin('sellers as cc2', function($join)
+				$user_phone_number->leftJoin('seller_details as cc2', function($join)
 				{
 					$join->on('users.id', '=', 'cc2.user_id');
 					$join->on(DB::raw('users.is_business'),'=',DB::raw(1));
@@ -6292,8 +6279,10 @@ class CommonComponent{
 	*/
 	public static function smsApiRequest($params=array()){
 		//Please Enter Your Details
-		$user="Logistiks"; //your username
-		$password= "$"."Marketplacelogi"; //your password
+
+		$user="logistiks"; //your username
+		$password='$Marketplacelogi';  //your password
+
 
 		if($params['requestType']=='report'){
 			$fromdate = $params['from'];
@@ -6345,11 +6334,12 @@ class CommonComponent{
 		$hashData = HDFC_PAYMENT_GATEWAY_ACCOUNT_SECRET_KEY;
 		$hashMethod = HDFC_HASHING_METHOD;
 		$user_det = CommonComponent::getUserNameDetails();
+		$userAddress = $user_det->address1.''.$user_det->address1.''.$user_det->address2.''.$user_det->address3;
 		$payment_mode = array('CC'=>1,'DB'=>2,'NB'=>3);
 
         $PaymentFields = array(
                 'account_id'         => HDFC_PAYMENT_GATEWAY_ACCOUNT_ID,
-                'address'            => $user_det->address,
+                'address'            => $userAddress,
                 'amount'             => $params['amount'],
                 'channel'            => '10',
                 'city'               => $user_det->principal_place,
@@ -6436,79 +6426,79 @@ class CommonComponent{
 				case ROAD_PTL:
 					$seller_data = DB::table('ptl_seller_post_items')
 					->join('users','ptl_seller_post_items.created_by','=','users.id')
-					->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
+					//->leftjoin ('seller_details', 'users.id', '=', 'sellers.user_id')
 					->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
 					->leftjoin ('ptl_seller_posts', 'users.id', '=', 'ptl_seller_posts.seller_id')
 					->distinct('ptl_seller_post_items.created_by')
 					->whereIn('ptl_seller_post_items.lkp_district_id',$district_array)
 					->where('users.lkp_role_id',SELLER)
 					->where('ptl_seller_posts.lkp_ptl_post_type_id',PTL_LOCATION)
-					->select('users.id','users.username','sellers.principal_place','sellers.name','seller_details.firstname')
+					->select('users.id','users.username','seller_details.principal_place','seller_details.name','seller_details.firstname')
 					->get();
 					break;
 				case RAIL:
 					$seller_data = DB::table('rail_seller_post_items as spi')
 					->join('users','spi.created_by','=','users.id')
-					->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
+					//->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
 					->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
 					->leftjoin ('rail_seller_posts as sp', 'users.id', '=', 'sp.seller_id')
 					->distinct('spi.created_by')
 					->whereIn('spi.lkp_district_id',$district_array)
 					->where('users.lkp_role_id',SELLER)
 					->where('sp.lkp_ptl_post_type_id',PTL_LOCATION)
-					->select('users.id','users.username','sellers.principal_place','sellers.name','seller_details.firstname')
+					->select('users.id','users.username','seller_details.principal_place','seller_details.name','seller_details.firstname')
 					->get();
 					break;
 				case AIR_DOMESTIC:
 					$seller_data = DB::table('airdom_seller_post_items as spi')
 					->join('users','spi.created_by','=','users.id')
-					->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
+					//->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
 					->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
 					->leftjoin ('airdom_seller_posts as sp', 'users.id', '=', 'sp.seller_id')
 					->distinct('spi.created_by')
 					->whereIn('spi.lkp_district_id',$district_array)
 					->where('users.lkp_role_id',SELLER)
 					->where('sp.lkp_ptl_post_type_id',PTL_LOCATION)
-					->select('users.id','users.username','sellers.principal_place','sellers.name','seller_details.firstname')
+					->select('users.id','users.username','seller_details.principal_place','seller_details.name','seller_details.firstname')
 					->get();
 					break;
 				case AIR_INTERNATIONAL:
 					$seller_data = DB::table('airint_seller_post_items as spi')
 					->join('users','spi.created_by','=','users.id')
-					->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
+					//->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
 					->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
 					->leftjoin ('airint_seller_posts as sp', 'users.id', '=', 'sp.seller_id')
 					->distinct('spi.created_by')
 					->whereIn('spi.lkp_district_id',$district_array)
 					->where('users.lkp_role_id',SELLER)
 					->where('sp.lkp_ptl_post_type_id',PTL_LOCATION)
-					->select('users.id','users.username','sellers.principal_place','sellers.name','seller_details.firstname')
+					->select('users.id','users.username','seller_details.principal_place','seller_details.name','seller_details.firstname')
 					->get();
 					break;
 				case OCEAN:
 					$seller_data = DB::table('ocean_seller_post_items as spi')
 					->join('users','spi.created_by','=','users.id')
-					->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
+					//->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
 					->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
 					->leftjoin ('ocean_seller_posts as sp', 'users.id', '=', 'sp.seller_id')
 					->distinct('spi.created_by')
 					->whereIn('spi.lkp_district_id',$district_array)
 					->where('users.lkp_role_id',SELLER)
 					->where('sp.lkp_ptl_post_type_id',PTL_LOCATION)
-					->select('users.id','users.username','sellers.principal_place','sellers.name','seller_details.firstname')
+					->select('users.id','users.username','seller_details.principal_place','seller_details.name','seller_details.firstname')
 					->get();
 					break;
 				case COURIER:
 					$seller_data = DB::table('courier_seller_post_items as spi')
 					->join('users','spi.created_by','=','users.id')
-					->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
+					//->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
 					->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
 					->leftjoin ('courier_seller_posts as sp', 'users.id', '=', 'sp.seller_id')
 					->distinct('spi.created_by')
 					->whereIn('spi.lkp_district_id',$district_array)
 					->where('users.lkp_role_id',SELLER)
 					->where('sp.lkp_ptl_post_type_id',PTL_LOCATION)
-					->select('users.id','users.username','sellers.principal_place','sellers.name','seller_details.firstname')
+					->select('users.id','users.username','seller_details.principal_place','seller_details.name','seller_details.firstname')
 					->get();
 					break;
 			}
@@ -7009,51 +6999,51 @@ class CommonComponent{
 				case ROAD_FTL:
 					$seller_data = DB::table('seller_post_items')
 					->join('users', 'seller_post_items.created_by', '=', 'users.id')
-					->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+					//->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
 					->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
 					->distinct('seller_post_items.created_by')
 					->whereIn('seller_post_items.lkp_district_id', $district_array)
 					->where('users.lkp_role_id', SELLER)
 					->orWhere('users.secondary_role_id', SELLER)
-					->select('users.id', 'users.username', 'sellers.principal_place', 'sellers.name', 'seller_details.firstname')
+					->select('users.id', 'users.username', 'seller_details.principal_place', 'seller_details.name', 'seller_details.firstname')
 					->get();
 	
 					break;
 				case RELOCATION_DOMESTIC:
 					$seller_data = DB::table('relocation_seller_post_items')
 					->join('users', 'relocation_seller_post_items.created_by', '=', 'users.id')
-					->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+					//->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
 					->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
 					->distinct('relocation_seller_post_items.created_by')
 					//->whereIn('relocation_seller_post_items.lkp_district_id', $district_array)
 					->where('users.lkp_role_id', SELLER)
 					->orWhere('users.secondary_role_id', SELLER)
-					->select('users.id', 'users.username', 'sellers.principal_place', 'sellers.name', 'seller_details.firstname')
+					->select('users.id', 'users.username', 'seller_details.principal_place', 'seller_details.name', 'seller_details.firstname')
 					->get();
 					break;
 				case RELOCATION_INTERNATIONAL:
 						$seller_data = DB::table('relocation_seller_post_items')
 						->join('users', 'relocation_seller_post_items.created_by', '=', 'users.id')
-						->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+						//->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
 						->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
 						->distinct('relocation_seller_post_items.created_by')
 						//->whereIn('relocation_seller_post_items.lkp_district_id', $district_array)
 						->where('users.lkp_role_id', SELLER)
 						->orWhere('users.secondary_role_id', SELLER)
-						->select('users.id', 'users.username', 'sellers.principal_place', 'sellers.name', 'seller_details.firstname')
+						->select('users.id', 'users.username', 'seller_details.principal_place', 'seller_details.name', 'seller_details.firstname')
 						->get();
 						break;
 					 
 				case RELOCATION_GLOBAL_MOBILITY:
 						$seller_data = DB::table('relocation_seller_post_items')
 						->join('users', 'relocation_seller_post_items.created_by', '=', 'users.id')
-						->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+						//->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
 						->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
 						->distinct('relocation_seller_post_items.created_by')
 						//->whereIn('relocation_seller_post_items.lkp_district_id', $district_array)
 						->where('users.lkp_role_id', SELLER)
 						->orWhere('users.secondary_role_id', SELLER)
-						->select('users.id', 'users.username', 'sellers.principal_place', 'sellers.name', 'seller_details.firstname')
+						->select('users.id', 'users.username', 'seller_details.principal_place', 'seller_details.name', 'seller_details.firstname')
 						->get();
 						break;
 			}
@@ -7531,16 +7521,16 @@ class CommonComponent{
 			$nameStr = '';
 			$user_name = DB::table('users');
 			$user_name_arr = $user_name->where('users.id', $user_id);
-			
+
 			 if($role == SELLER){
-				$user_name_arr->leftJoin('seller_details as c2', function($join)
+				$user_name_arr->leftJoin('buyer_details as c2', function($join)
 				{
 					$join->on('users.id', '=', 'c2.user_id');
 					$join->on(DB::raw('users.is_business'),'=',DB::raw(0));
 					
 						
 				});
-				$user_name_arr->leftJoin('sellers as cc2', function($join)
+				$user_name_arr->leftJoin('seller_details as cc2', function($join)
 				{
 					$join->on('users.id', '=', 'cc2.user_id');
 					$join->on(DB::raw('users.is_business'),'=',DB::raw(1));
@@ -8659,7 +8649,7 @@ class CommonComponent{
 			
 			
 				if($getUserrole->is_business == 1){
-					$buyerTable = 'sellers';
+					$buyerTable = 'seller_details';
 					$contact = 'contact_mobile';
 					$contactland='contact_landline';
 					$gta = 'gta';
@@ -8682,7 +8672,7 @@ class CommonComponent{
 			$getUserDetails = DB::table('users')
 			->leftJoin( $buyerTable , 'users.id', '=', $buyerTable.'.user_id' )
 			->where('users.id', Auth::user()->id)
-			->select($buyerTable.'.'.$principal_place .' as principal_place','users.*',$buyerTable.'.description',$buyerTable.'.address',$buyerTable.'.'.$contact .' as phone',
+			->select($buyerTable.'.'.$principal_place .' as principal_place','users.*',$buyerTable.'.description',$buyerTable.'.address1',$buyerTable.'.'.$contact .' as phone',
 					$buyerTable.'.'.$gta .' as gat',$buyerTable.'.'.$tin .' as tin',$buyerTable.'.'.$serivce .' as service',$buyerTable.'.'.$est .' as est',$buyerTable.'.'.$contactland .' as land')
 			->first();
 			

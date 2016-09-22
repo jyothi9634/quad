@@ -295,6 +295,7 @@ class RegisterController extends Controller {
 		try{
 			
           $registration_fields = Input::all();
+		  $userName = $registration_fields['firstname']." ".$registration_fields['lastname'];
 		  
 		  $finalArray = [
 						'user_id' => $registration_fields['user_id'],
@@ -307,14 +308,17 @@ class RegisterController extends Controller {
 						'lkp_state_id' => $registration_fields['lkp_state_id'],
 						'address1' => $registration_fields['address1'],
 						'address2' => $registration_fields['address2'],
+						'address3' => $registration_fields['address3'],
 						'landline' => $registration_fields['landline'],
 						'alternative_mobile' => $registration_fields['alternative_mobile'],
+						'alternative_email' => $registration_fields['alternative_email'],
 						'id_proof' => $registration_fields['id_proof'],
-						'id_proof_value' => $registration_fields['id_proof_value']
+						'id_proof_value' => $registration_fields['id_proof_value'],
+						'principal_place' => $registration_fields['region']
 						];
 		  
 		  DB::table ( 'buyer_details' )->insert($finalArray);
-		  DB::table ( 'users' )->where('id',$registration_fields['user_id'])->update(['is_active'=>1]);
+		  DB::table ( 'users' )->where('id',$registration_fields['user_id'])->update(['is_active'=>1,'username'=>$userName]);
 		  
 		  session::put('user_id',$registration_fields['user_id']);
 		  
@@ -346,8 +350,9 @@ class RegisterController extends Controller {
 		$lkp_industry = $this->getIndustries();
 		
 		$getEmployeeStrengths = $this->getEmployeeStrengths();
-						
-		return view("auth.marketplace_register",compact('services','intracity_cities','stateList','business','lkp_industry','getEmployeeStrengths'));
+		$getYearofEstablished = CommonComponent::getYearofEstablished();
+		
+		return view("auth.marketplace_register",compact('services','intracity_cities','stateList','business','lkp_industry','getEmployeeStrengths','getYearofEstablished'));
 	}
 
 
@@ -363,15 +368,15 @@ class RegisterController extends Controller {
 		
 		
 		$getPrincipalPlace = DB::table('lkp_ptl_pincodes as lpp')
-		->where('lpp.pincode', '=', $data ['business_pincode'])
-		->select('lpp.lkp_district_id','lpp.id','lpp.divisionname','lpp.state_id','lpp.postoffice_name')
+		->where('id', '=', $data ['pincodeLocationId'])
+		->select('lpp.lkp_district_id','lpp.pincode','lpp.id','lpp.divisionname','lpp.state_id','lpp.postoffice_name')
 		->first();
-		
+		//dd($getPrincipalPlace);
 		//$sellerUpladFolder = 'uploads/seller/' . $this->user_pk . '/';
 		//$data ['profile_picture_file'] = str_replace($sellerUpladFolder,"",$data ['profile_picture']);
 		//$data ['logo_user_file'] = str_replace($sellerUpladFolder,"",$data ['logo_user']);		
 		
-		$sellerIndividual = new Seller();
+		$sellerIndividual = new SellerDetail();
 		$services = array ();
 		$createdAt = date ( 'Y-m-d H:i:s' );
 		$createdIp = $_SERVER ["REMOTE_ADDR"];
@@ -379,14 +384,16 @@ class RegisterController extends Controller {
 		$sellerIndividual->user_id = $this->user_pk;
 		$sellerIndividual->name = $data ['business_name'];
 		$sellerIndividual->uin_number = $data ['cin_no'];
-		$sellerIndividual->lkp_location_id = $data ['business_pincode'];
-		$sellerIndividual->pincode = $data ['business_pincode'];
+		$sellerIndividual->lkp_location_id = $data ['pincodeLocationId'];
+		$sellerIndividual->pincode = $getPrincipalPlace->pincode;
 		//$sellerIndividual->lkp_city_id = $data ['business_city'];
 		$sellerIndividual->lkp_state_id = $getPrincipalPlace->state_id;
 		$sellerIndividual->lkp_district_id = $getPrincipalPlace->lkp_district_id;
+		$sellerIndividual->lkp_location_id = $getPrincipalPlace->id;
 		$sellerIndividual->lkp_country_id = 1;
 		$sellerIndividual->address1 = $data ['address1'];
 		$sellerIndividual->address2 = $data ['address2'];
+		$sellerIndividual->address3 = $data ['address3'];
 		$sellerIndividual->established_in = $data ['year_of_est'];
 		$sellerIndividual->contact_firstname = $data ['contact_fname'];
 		$sellerIndividual->contact_lastname = $data ['contact_lname'];
@@ -424,16 +431,18 @@ class RegisterController extends Controller {
 		$sellerIndividual->created_at = $createdAt;
 		$sellerIndividual->created_ip = $createdIp;
 		$sellerIndividual->created_by = $this->user_pk;
+		$sellerIndividual->principal_place = $data ['business_place'];
+		
 		
 		try {
 			if ($sellerIndividual->save ()) {
 				$marketPlaceid = $sellerIndividual->id;
-				$updateUserInfo = ['marketplace_id'=>$marketPlaceid,'is_business'=>1,'is_admin'=>0,'business_email_id'=>$data['business_emailId']];
+				$updateUserInfo = ['marketplace_id'=>$marketPlaceid,'is_admin'=>0,'business_email_id'=>$data['business_emailId']];
 				if(in_array($data['business_const'],[2,3,4])){ // if business const public private mnc then is_admin=1
 					$updateUserInfo['is_admin'] =  1;
 				}
 				DB::table('users')->where('id',$this->user_pk)->update($updateUserInfo);
-				CommonComponent::auditLog ( $sellerIndividual->id, 'sellers' );
+				CommonComponent::auditLog ( $sellerIndividual->id, 'seller_details' );
 				Session::put ( 'company_name', $sellerIndividual->name ); // session for future use
 				$intracityArea = array ();
 				$pamArea = array ();
@@ -1928,7 +1937,7 @@ class RegisterController extends Controller {
 			$sellerBusiness->created_by = $this->user_pk;
 			
 			if ($sellerBusiness->save ()) {
-				CommonComponent::auditLog ( $sellerBusiness->id, 'sellers' );
+				CommonComponent::auditLog ( $sellerBusiness->id, 'seller_details' );
 				Session::put ( 'company_name', $sellerBusiness->name ); // session for future use
 				$intracityArea = array ();
 				$pamArea = array ();
@@ -2350,7 +2359,7 @@ class RegisterController extends Controller {
 			$intracity_cities[$intracity_cities_list[$k]->id]= $intracity_cities_list[$k]->city_name;
 		}
 		
-		$is_seller_business = DB::table ( 'sellers' )->where ( 'user_id', '=', $this->user_pk )->first ();
+		$is_seller_business = DB::table ( 'seller_details' )->where ( 'user_id', '=', $this->user_pk )->first ();
 	
 		if(empty($is_seller_business)){
 			$is_seller_business_exist = 0;
@@ -2358,11 +2367,11 @@ class RegisterController extends Controller {
 			$is_seller_business_exist = 1;
 		}
 
-		$seller_business = DB::table ( 'users' )->leftJoin ( 'sellers', 'users.id', '=', 'sellers.user_id' )
+		$seller_business = DB::table ( 'users' )->leftJoin ( 'seller_details', 'users.id', '=', 'seller_details.user_id' )
 				/** Start : @jagadeesh - 02/05/2016 
 				 *Reg : Getting User uploaded logo and user picture details
 				 */
-					->select('users.*','sellers.*','users.logo as logo')
+					->select('users.*','seller_details.*','users.logo as logo')
 				/** 
 				 *End : @jagadeesh - 02/05/2016 
 				 */
@@ -2492,7 +2501,7 @@ class RegisterController extends Controller {
 				$data ['other_business_type'] = null;
 			}
 			
-			$seller_business = DB::table ( 'sellers' )->where ( 'user_id', '=', $this->user_pk )->first ();
+			$seller_business = DB::table ( 'seller_details' )->where ( 'user_id', '=', $this->user_pk )->first ();
 			
 			$sellerBusinessDirectory = 'uploads/seller/' . $this->user_pk . '/';
 			
@@ -2588,7 +2597,7 @@ class RegisterController extends Controller {
 			
 			$newBuyer = RegisterController::createEditSellerBusiness ( $id, $data );
 
-			$seller_subscription_details = DB::table ( 'sellers' )->where ( 'user_id', '=', $this->user_pk )->select ('subscription_start_date','subscription_end_date')->get();
+			$seller_subscription_details = DB::table ( 'seller_details' )->where ( 'user_id', '=', $this->user_pk )->select ('subscription_start_date','subscription_end_date')->get();
 			$subStartDate =date ( "d-m-Y",  strtotime($seller_subscription_details[0]->subscription_start_date));
 			$subEndDate = date ( "d-m-Y", strtotime ($seller_subscription_details[0]->subscription_end_date));
 
@@ -2716,7 +2725,7 @@ class RegisterController extends Controller {
 					'updated_at' => $updatedAt,
 					'updated_ip' => $updatedIp 
 			) );
-			CommonComponent::auditLog ( $id, 'sellers' );
+			CommonComponent::auditLog ( $id, 'seller_details' );
 			Session::put ( 'company_name', $data ['name'] ); // session for future use
 			$services = array ();			
 			$intracityArea = array ();
@@ -3244,7 +3253,7 @@ class RegisterController extends Controller {
 						 */
 						->where ( 'user_id', '=', $this->user_pk )
 						->first ();
-		DB::table ( 'users' )->leftJoin ( 'sellers', 'users.id', '=', 'sellers.user_id' )->where ( 'users.id', '=', $this->user_pk )->first ();
+		DB::table ( 'users' )->leftJoin ( 'seller_details', 'users.id', '=', 'seller_details.user_id' )->where ( 'users.id', '=', $this->user_pk )->first ();
 		
 		$intracity = DB::table ( 'users' )->select ( 'lkp_locality_id as locality_id', 'lc.id as city_id' )->leftJoin ( 'seller_intracity_localities as sip', 'users.id', '=', 'sip.user_id' )->leftJoin ( 'lkp_localities as ll', 'sip.lkp_locality_id', '=', 'll.id' )->leftJoin ( 'lkp_cities as lc', 'll.lkp_city_id', '=', 'lc.id' )->where ( 'users.id', '=', $this->user_pk )->get ();
 		
@@ -3983,7 +3992,7 @@ class RegisterController extends Controller {
 		
 			if(Auth::User()->is_business == '1')
 			{
-				$dataTable='sellers';
+				$dataTable='seller_details';
 			}else{
 				$dataTable='seller_details';
 			}
@@ -4140,7 +4149,7 @@ class RegisterController extends Controller {
 				
 				if (Auth::User ()->is_business == '1') {
 					
-					$is_seller_business = DB::table ( 'sellers' )->where ( 'user_id', '=', $this->user_pk )->first ();
+					$is_seller_business = DB::table ( 'seller_details' )->where ( 'user_id', '=', $this->user_pk )->first ();
 
 					if (empty ( $is_seller_business )) {
 						return json_encode ( [ 
@@ -4388,7 +4397,7 @@ class RegisterController extends Controller {
 		$pin = Input::get('prop_pinid');
 		$getPrincipalPlace = DB::table('lkp_ptl_pincodes as lpp')
 		->where('lpp.pincode', '=', $pin)
-		->select('lpp.districtname','lpp.id','lpp.divisionname','lpp.statename','lpp.postoffice_name')
+		->select('lpp.districtname','lpp.id','lpp.divisionname','lpp.statename','lpp.postoffice_name','lpp.state_id','lpp.lkp_district_id')
 		->first();
 		return Response::json($getPrincipalPlace);
 	}
@@ -4397,8 +4406,8 @@ class RegisterController extends Controller {
   		
   		 $email = Input::get('business_emailId');
             
-          $validator = DB::table('sellers')->where('contact_email',$email)->get();
-
+          $validator = DB::table('users')->where('business_email_id',$email)->get();
+		
           if(!empty($validator)){
           	
           	return 'true';
@@ -4417,7 +4426,7 @@ class RegisterController extends Controller {
   		
   		 $pannumber = Input::get('business_pan');
             
-          $validator = DB::table('sellers')->where('pannumber',$pannumber)->get();
+          $validator = DB::table('seller_details')->where('pannumber',$pannumber)->get();
 
           if(!empty($validator)){
           	
@@ -4436,11 +4445,16 @@ class RegisterController extends Controller {
     public function getSectorTypes($id){
 
 		$sectors = DB::table('sector_type')->where('industry_type',$id)->get();
-		$str  = '<option value=""></option>';
-		foreach($sectors as $sector) {
-			$str.='<option value="'.$sector->sector_id.'">'.$sector->sector_type.'</option>';
+		if(count($sectors)>0) {
+			$str  = '<option value="">Select Sector</option>';
+			foreach($sectors as $sector) {
+				$str.='<option value="'.$sector->sector_id.'">'.$sector->sector_type.'</option>';
+			}
+			echo $str;
+		} else {
+			return 0;
 		}
-		echo $str;
+		
     
    }
      

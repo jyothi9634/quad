@@ -1622,14 +1622,13 @@ class TruckHaulBuyerComponent {
         try {
             Log::info('Get leads for the buyer: ' . Auth::id(), array('c' => '2'));
             $sellerData = DB::table('truckhaul_seller_post_items')
-                    ->join('users', 'truckhaul_seller_post_items.created_by', '=', 'users.id')
-                    ->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+                    ->join('users', 'truckhaul_seller_post_items.created_by', '=', 'users.id')                    
                     ->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
                     ->distinct('truckhaul_seller_post_items.created_by')
                     ->where('truckhaul_seller_post_items.lkp_district_id', $districtId)
                     ->whereNotIn('sellers.id', $sellerIds)
                     ->where('users.lkp_role_id', SELLER)
-                    ->select('users.id', 'users.username', 'sellers.principal_place', 'sellers.name', 'seller_details.firstname')
+                    ->select('users.id', 'users.username', 'seller_details.principal_place', 'seller_details.name', 'seller_details.contact_firstname')
                     ->get();
             return $sellerData;
         } catch (Exception $exc) {
@@ -2224,7 +2223,7 @@ class TruckHaulBuyerComponent {
                         $getCounterQuotePrice = CommonComponent::getQuotePriceForSearch($buyer_id,$buyer_quote_id,Auth::user()->id,'counter_quote_price','truckhaul_buyer_quote_sellers_quotes_prices');
                         $getFinalQuotePrice   = CommonComponent::getQuotePriceForSearch($buyer_id,$buyer_quote_id,Auth::user()->id,'final_quote_price','truckhaul_buyer_quote_sellers_quotes_prices');
                         $getFirmQuotePrice   = CommonComponent::getQuotePriceForSearch($buyer_id,$buyer_quote_id,Auth::user()->id,'firm_price','truckhaul_buyer_quote_sellers_quotes_prices');
-                        $subscription  = DB::table('sellers')
+                        $subscription  = DB::table('seller_details')
                         ->where('sellers.user_id',Auth::user()->id)
                         ->select('sellers.subscription_end_date','sellers.subscription_start_date')
                         ->get();

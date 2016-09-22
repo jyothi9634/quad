@@ -5438,7 +5438,7 @@ function arrayTostringValue(request_array){
         select: function(event, ui) {        	
         	$('#ptlFromLocation').val(ui.item.value);
             $('#ptlFromLocationId').val(ui.item.id);
-            $(this).closest("form").validate().element($('#ptlFromLocationId'));
+           // $(this).closest("form").validate().element($('#ptlFromLocationId'));
             /*Need to add this below class to every autocomplete: Shriram */
             $('#ptlFromLocation').addClass("clsAutoDisable");
             //$('#ptlFromLocation').removeClass("maxlimitsix_lmtVal");

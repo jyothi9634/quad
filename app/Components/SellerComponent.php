@@ -836,7 +836,7 @@ class SellerComponent {
 			
 			
 				if($getUserrole->is_business == 1){
-					$buyerTable = 'sellers';
+					$buyerTable = 'seller_details';
 					$contact = 'contact_mobile';
 					$contactland='contact_landline';
 					$gta = 'gta';
@@ -859,7 +859,7 @@ class SellerComponent {
 			$getUserDetails = DB::table('users')
 			->leftJoin( $buyerTable , 'users.id', '=', $buyerTable.'.user_id' )
 			->where('users.id', $id)
-			->select($buyerTable.'.'.$principal_place .' as principal_place','users.*',$buyerTable.'.description',$buyerTable.'.address',$buyerTable.'.'.$contact .' as phone',
+			->select($buyerTable.'.'.$principal_place .' as principal_place','users.*',$buyerTable.'.description',$buyerTable.'.address1',$buyerTable.'.address2',$buyerTable.'.address3',$buyerTable.'.'.$contact .' as phone',
 					$buyerTable.'.'.$gta .' as gat',$buyerTable.'.'.$tin .' as tin',$buyerTable.'.'.$serivce .' as service',$buyerTable.'.'.$est .' as est',$buyerTable.'.'.$contactland .' as land')
 			->first();
 			

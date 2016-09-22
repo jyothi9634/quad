@@ -1620,7 +1620,7 @@ public function getOfficePropertyParticulars(){
  			case RELOCATION_DOMESTIC:
  				$seller_data = DB::table('relocation_seller_posts')
  				->join('users', 'relocation_seller_posts.created_by', '=', 'users.id')
- 				->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+ 				->leftjoin('seller_details', 'users.id', '=', 'sellers.user_id')
  				->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
  				->distinct('relocation_seller_posts.created_by')
  				->whereIn('relocation_seller_posts.seller_district_id', $district_array)
@@ -1632,7 +1632,7 @@ public function getOfficePropertyParticulars(){
                         case RELOCATION_OFFICE_MOVE:
                                 $seller_data = DB::table('relocationoffice_seller_posts')
                                 ->join('users', 'relocationoffice_seller_posts.created_by', '=', 'users.id')
-                                ->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+                                ->leftjoin('seller_details', 'users.id', '=', 'sellers.user_id')
                                 ->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
                                 ->distinct('relocationoffice_seller_posts.created_by')
                                 ->whereIn('relocationoffice_seller_posts.seller_district_id', $district_array)

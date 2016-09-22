@@ -95,7 +95,7 @@ class SmsController extends Controller {
 	public function send(){
 		
 		//$mobiles = 9700280383,9246610156;
-		$mobiles = array('9866343939','9059893036');
+		$mobiles = array('9866343939','3885314144');
 		$params = array(
 				'username' => 'Jagadeeshp1'
 			);

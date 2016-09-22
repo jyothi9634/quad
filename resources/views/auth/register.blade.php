@@ -41,12 +41,12 @@
 					</label>
 <!-- <input type="radio" class="search-text" value="1" name="is_business" id="option2"><span class="lbl padding-8">Business</span> </label> -->
 					<!--</div>-->
-					<div class="social-login">
+					<!--<div class="social-login">
 							<span class="bg"><a href="{{ url('/facebook?key=login') }}"  alt="Facebook" title="Facebook" ><img src="../images/facebook.jpg" alt=""></a></span>
                                                         <span class="bg"><a href="{{ url('/google?key=login') }}" alt="Linked In" title="Linked In"  ><img src="../images/google.jpg" alt=""></a></span>
 							<span class="bg"><a href="{{ url('/linkedin?key=login') }}"  alt="Google Plus" title="Google Plus"><img src="../images/linkedin.jpg" alt=""></a></span>
-					</div>
-					<div class="text-center size"> -------------------------- Or -------------------------- </div>
+					</div>-->
+					<!--<div class="text-center size"> -------------------------- Or -------------------------- </div>-->
 					<div class="login-form">
 						<div class="center-width">
 							<div class="col-md-12 form-control-fld margin-bottom-none">
@@ -109,7 +109,7 @@
 							<div id="enableOtp" style="display:none;"> 
 							<div class="col-md-12 form-control-fld margin-bottom-none">
 								<div class="input-prepend">
-									{!! Form::text('otp', '', $attributes = array('class' => 'form-control form-control1 validateOtp', 'autocomplete' => 'off', 'id' =>'otp', 'maxlength' => '10', 'placeholder' => 'Enter OTP *' )) !!}
+									{!! Form::text('otp', '', $attributes = array('class' => 'form-control form-control1 validateOtp', 'autocomplete' => 'off', 'id' =>'otp', 'maxlength' => '4', 'placeholder' => 'Enter OTP *' )) !!}
 								</div>
 								<span class="error"><p id="error_otp"></p></span>
 								<span class="resend_otp" style="display:none;">OTP Sent successfully</span>
@@ -170,7 +170,7 @@
 				<div class="col-md-12 padding-none">
 					<div class="col-md-6 form-control-fld">
 						{!! Form::hidden('hidden_otp', '') !!}
-						{!! Form::text ('otp', '',array ( 'class' => 'form-control form-control1 clsMobileno', 'autocomplete'=> 'off', 'id' => 'otp', 'onpaste' => "return false", 'maxlength' => '6', 'placeholder' =>'Please Enter OTP *')) !!}
+						{!! Form::text ('otp', '',array ( 'class' => 'form-control form-control1 clsMobileno numberVal', 'autocomplete'=> 'off', 'id' => 'otp', 'onpaste' => "return false", 'maxlength' => '4', 'placeholder' =>'Please Enter OTP *')) !!}
 					</div>
 					<div class="col-md-6 form-control-fld">
 						<input type="button" value="Submit" id="confirm_otp" class="login loginmodal-submit"/>

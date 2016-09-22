@@ -948,7 +948,7 @@ use AuthenticatesAndRegistersUsers,
         $sellerBusiness->created_by = $this->user_pk;
         // echo "<pre>";print_r($data);die();
         if ($sellerBusiness->save()) {
-            CommonComponent::auditLog($sellerBusiness->id, 'sellers');
+            CommonComponent::auditLog($sellerBusiness->id, 'seller_details');
             Session::put('company_name', $sellerBusiness->name); // session for future use
             $services = $data ['services'];
             $packaging = $data ['packaging'];
@@ -1206,9 +1206,9 @@ use AuthenticatesAndRegistersUsers,
         $locality = \DB::table('lkp_localities')->orderBy('locality_name', 'asc')->lists('locality_name', 'id');
         $cities = \DB::table('lkp_cities')->orderBy('city_name', 'asc')->lists('city_name', 'id');
 
-        $seller_business = DB::table('sellers')->where('user_id', '=', $this->user_pk)->first();
+        $seller_business = DB::table('seller_details')->where('user_id', '=', $this->user_pk)->first();
 
-        $seller_business = DB::table('users')->leftJoin('sellers', 'users.id', '=', 'sellers.user_id')->where('users.id', '=', $this->user_pk)->first();
+        $seller_business = DB::table('users')->leftJoin('seller_details', 'users.id', '=', 'sellers.user_id')->where('users.id', '=', $this->user_pk)->first();
 
         $intracity = DB::table('users')->select('lkp_locality_id as locality_id', 'lc.id as city_id')->leftJoin('seller_intracity_localities as sip', 'users.id', '=', 'sip.user_id')->leftJoin('lkp_localities as ll', 'sip.lkp_locality_id', '=', 'll.id')->leftJoin('lkp_cities as lc', 'll.lkp_city_id', '=', 'lc.id')->where('users.id', '=', $this->user_pk)->get();
 
@@ -1415,7 +1415,7 @@ use AuthenticatesAndRegistersUsers,
                 'updated_at' => $updatedAt,
                 'updated_ip' => $updatedIp
             ));
-            CommonComponent::auditLog($id, 'sellers');
+            CommonComponent::auditLog($id, 'seller_details');
             Session::put('company_name', $data ['name']); // session for future use
             $services = $data ['services'];
             $packaging = $data ['packaging'];

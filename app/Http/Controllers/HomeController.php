@@ -99,7 +99,7 @@ class HomeController extends Controller {
 						return Redirect ( 'register/buyer_business' )->with ( 'message', 'Please fill the below details...' );
 					}
 				} elseif ($roleId == SELLER) {
-					$sellerDetails = DB::table ( 'sellers' )->where ( 'sellers.user_id', $userId )->select ( 'sellers.id' )->get ();
+					$sellerDetails = DB::table ( 'seller_details' )->where ( 'seller_details.user_id', $userId )->select ( 'seller_details.id' )->get ();
 					if (count ( $sellerDetails ) == 0) {
 						return Redirect ( 'register/seller_business' )->with ( 'message', 'Please fill the below details...' );
 					}
@@ -352,7 +352,7 @@ class HomeController extends Controller {
                 else
                     MessagesComponent::setSendMessageDetails($inputForMessage,'',$messageType);
             }
-            if(strpos($_SERVER['HTTP_REFERER'],'byersearchresults')===false && strpos($_SERVER['HTTP_REFERER'],'buyerordersearch')===false && strpos($_SERVER['HTTP_REFERER'],'sellerorderSearch')===false && strpos($_SERVER['HTTP_REFERER'],'sellerlist')===false && strpos($_SERVER['HTTP_REFERER'],'buyersearchresults')===false && strpos($_SERVER['HTTP_REFERER'],'termsellersearchresults')===false)
+            if(strpos($_SERVER['HTTP_REFERER'],'byersearchresults')===false && strpos($_SERVER['HTTP_REFERER'],'buyerordersearch')===false && strpos($_SERVER['HTTP_REFERER'],'sellerorderSearch')===false && strpos($_SERVER['HTTP_REFERER'],'sellerlist')===false && strpos($_SERVER['HTTP_REFERER'],'buyersearchresults')===false && strpos($_SERVER['HTTP_REFERER'],'termseller_detailsearchresults')===false)
             return Redirect::back()->with('success','Message sent successfully');
             else
                 echo true;

@@ -1794,7 +1794,7 @@ class TermSellerComponent {
 		$bidDateTimes = CommonComponent::getBidDateTimeByQuoteId($buyer_quote_id,Session::get ( 'service_id' ));
 		$buyer_items = CommonComponent::getItemsBuyer($buyer_quote_id);
 		$buyer_items_count = count($buyer_items);
-		$subscription  = DB::table('sellers')
+		$subscription  = DB::table('seller_details')
 		->where('sellers.user_id',Auth::user()->id)
 		->select('sellers.subscription_end_date','sellers.subscription_start_date')
 		->get();

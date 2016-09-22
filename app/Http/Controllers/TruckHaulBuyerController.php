@@ -447,14 +447,13 @@ class TruckHaulBuyerController extends Controller {
             
                
             $seller_data = DB::table('seller_post_items')
-            ->join('users', 'seller_post_items.created_by', '=', 'users.id')
-            ->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+            ->join('users', 'seller_post_items.created_by', '=', 'users.id')            
             ->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
             ->distinct('seller_post_items.created_by')
             ->whereIn('seller_post_items.lkp_district_id', $district_array)
             ->where('users.lkp_role_id', SELLER)
             ->orWhere('users.secondary_role_id', SELLER)
-            ->select('users.id', 'users.username', 'sellers.principal_place', 'sellers.name', 'seller_details.firstname')
+            ->select('users.id', 'users.username', 'seller_details.principal_place', 'seller_details.name', 'seller_details.contact_firstname')
             ->get();
                     
             foreach ($seller_data as $query) {
@@ -515,7 +514,7 @@ class TruckHaulBuyerController extends Controller {
     		}
     		$seller_data = DB::table('seller_post_items')
     		->join('users', 'seller_post_items.created_by', '=', 'users.id')
-    		->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+    		->leftjoin('seller_details', 'users.id', '=', 'sellers.user_id')
     		->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
     		->distinct('seller_post_items.created_by')
     		->whereIn('seller_post_items.lkp_district_id', $district_array)

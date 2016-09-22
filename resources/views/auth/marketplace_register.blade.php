@@ -28,9 +28,9 @@
 											</div>
 										</div>
 										<div class="col-md-6 form-control-fld">
-											<div class="input-prepend">
-												
-											</div>
+											
+											<a href="/auth/login" style="margin-left:63%;color:white;" id="askmeLater" class="btn add-btn pull-right">ASK ME LATER</a>
+											
 										</div>
 									</div>
 								</div>
@@ -71,6 +71,15 @@
 											{!! Form:: text ('business_place', '', array( 'class'=>'form-control form-control1','id'=>'business_place','placeholder'=>'Principal Place of Business', 'maxlength'=>'30' )) !!}
 										</div>
 									</div>
+									
+									<div class="col-md-6 form-control-fld margin-none">
+								<!--<div class="input-prepend">
+									<span class="add-on"><i class="fa fa-map-marker"></i></span>
+									{!! Form::text('ptlFromLocation', '' , ['id' => 'ptlFromLocation', 'class'=>'form-control numericvalidation_autopop maxlimitsix_lmtVal', 'placeholder' => 'From Pincode*']) !!}
+	                           		{!! Form::hidden('ptlFromLocationId', '' , array('id' => 'ptlFromLocationId')) !!}
+								</div>-->
+							</div>
+									
 									<div class="col-md-6 form-control-fld">
 										<div class="input-prepend">
 											{!!Form:: text ('business_pincode', '', array( 'class'=>'form-control form-control1', 'id'=>'business_pincode', 'placeholder'=>'Pincode*', 'maxlength'=>'30' )) !!}
@@ -102,62 +111,40 @@
 									</div>
 								</div>
 								<div class="col-md-12 padding-none">
-									<div class="col-md-12 form-control-fld">
+									<div class="col-md-6 form-control-fld">
 										<div class="input-prepend">
 											{!! Form:: text('address1', '', array( 'class'=>'form-control form-control1','id'=>'address1','placeholder'=>'Address1*', 'maxlength'=>'50', 'rows'=>'5' )) !!}
 										</div>
 									</div>
 									<div class="col-md-6 form-control-fld">
 										<div class="input-prepend">
-											
-										</div>
-									</div>
-								</div>
-								<div class="col-md-12 padding-none">
-									<div class="col-md-12 form-control-fld">
-										<div class="input-prepend">
 											{!! Form:: text ('address2', '', array( 'class'=>'form-control form-control1','id'=>'address2','placeholder'=>'Address2*', 'maxlength'=>'50')) !!}
 										</div>
 									</div>
-									<div class="col-md-6 form-control-fld">
-										
-									</div>
+								</div>
+								<div class="col-md-12 padding-none">
 									<div class="col-md-6 form-control-fld">
 										<div class="input-prepend">
-											
+											{!! Form:: text ('address3', '', array( 'class'=>'form-control form-control1','id'=>'address3','placeholder'=>'Address3', 'maxlength'=>'50')) !!}
 										</div>
 									</div>
-									<!-- <div class="col-md-6 form-control-fld">
+									<div class="col-md-6 form-control-fld">
 										<div class="normal-select">
-											<select name="annual_turnover[]" id="annual_turnover[]" class="form-control form-control1">
-												<option value="">ID Proof*</option>
-												<option value="1">Adhar card</option>
-												<option value="2">Driving Lic</option>
-												<option value="3">Passport</option>
-												<option value="4">Pancard</option>
-												<option value="5">Voter Id</option>
-											</select>
+											 <!--<select name="year_of_est" id="year_of_est">
+											  <option value="">Year of Establishment*</option>
+											  <option value="2016">2016</option>
+											  <option value="2015">2015</option>
+											  <option value="2014">2014</option>
+											</select>-->
+											{!!
+												Form::select('year_of_est',array('' => 'Year of Establishment*')
+												+ $getYearofEstablished
+												,null,['class'=>'selectpicker','id'=>'year_of_est'])
+											!!}
 										</div>
-									</div> -->
+									</div>
 								</div>	
-								<div class="col-md-12 padding-none">
-								<div class="col-md-6 form-control-fld">
-									<div class="normal-select">
-										 <select name="year_of_est" id="year_of_est">
-						                  <option value="">Year of Establishment*</option>
-						                  <option value="2016">2016</option>
-						                  <option value="2015">2015</option>
-						                  <option value="2014">2014</option>
-						                </select>
-										<!-- {!! Form:: text ('contact_fname', '', array( 'class'=>'form-control form-control1','id'=>'contact_fname','placeholder'=>'Contact Fname*', 'maxlength'=>'55' )) !!} -->
-									</div>
-								</div>
-								<div class="col-md-6 form-control-fld">
-									<div class="input-prepend">
-										<!-- {!! Form:: text ('contact_lname', '', array( 'class'=>'form-control form-control1','id'=>'contact_lname','placeholder'=>'Contact Lname*', 'maxlength'=>'55' )) !!} -->
-									</div>
-								</div>
-								</div>
+								
 								<div class="col-md-12 padding-none">
 									&nbsp;&nbsp;&nbsp;
 								</div>
@@ -252,7 +239,26 @@
 										<!-- {!! Form:: text ('contact_fname', '', array( 'class'=>'form-control form-control1','id'=>'contact_fname','placeholder'=>'Contact Fname*', 'maxlength'=>'55' )) !!} -->
 									</div>
 								</div>
+								
 								<div class="col-md-6 form-control-fld">
+									<div class="normal-select">
+										 <select name="employee_strn" id="employee_strn">
+						                  <option value="">Employee Strength</option>
+						                  @foreach($getEmployeeStrengths as $key=>$value)
+						                  <option value="{{$key}}">{{$value}}</option>
+						                  @endforeach
+						                 <!--  <option value="2015">2015</option>
+						                  <option value="2014">2014</option> -->
+						                </select>
+										<!-- {!! Form:: text ('contact_fname', '', array( 'class'=>'form-control form-control1','id'=>'contact_fname','placeholder'=>'Contact Fname*', 'maxlength'=>'55' )) !!} -->
+									</div>
+								</div>
+								
+								</div>
+								
+
+								<div class="col-md-12 padding-none">
+									<div class="col-md-6 form-control-fld">
 									<div class="normal-select">
 										<!--  <select name="industry_type_name" id="industry_type_name" class="industry_types">
 						                  <option value="">Industry Type*</option>
@@ -268,30 +274,11 @@
 										<!-- {!! Form:: text ('contact_fname', '', array( 'class'=>'form-control form-control1','id'=>'contact_fname','placeholder'=>'Contact Fname*', 'maxlength'=>'55' )) !!} -->
 									</div>
 								</div>	
-								</div>
-								
-
-								<div class="col-md-12 padding-none">
-								<div class="col-md-6 form-control-fld">
-									<div class="normal-select">
-									{!! Form::select('sector_type', ([''=>'Select Sector']  ), null, ['class' => 'selectpicker','id' => 'sector_type']) !!}
-									</div>
-								</div>
-								
-								<div class="col-md-6 form-control-fld">
-									<div class="normal-select">
-										 <select name="employee_strn" id="employee_strn">
-						                  <option value="">Employee Strength</option>
-						                  @foreach($getEmployeeStrengths as $key=>$value)
-						                  <option value="{{$key}}">{{$value}}</option>
-						                  @endforeach
-						                 <!--  <option value="2015">2015</option>
-						                  <option value="2014">2014</option> -->
-						                </select>
-										<!-- {!! Form:: text ('contact_fname', '', array( 'class'=>'form-control form-control1','id'=>'contact_fname','placeholder'=>'Contact Fname*', 'maxlength'=>'55' )) !!} -->
-									</div>
-								</div>
-									
+									<div class="col-md-6 form-control-fld" id="displayToggleSector">
+										<div class="normal-select">
+										{!! Form::select('sector_type', ([''=>'Select Sector']  ), null, ['class' => 'selectpicker','id' => 'sector_type']) !!}
+										</div>
+									</div>	
 								</div>
 								<div class="col-md-12 padding-none">
 								<div class="col-md-6 form-control-fld">
@@ -954,7 +941,6 @@ $(document).ready(function () {
                 required: true,
                
             },
-            
             year_of_est: {
                 required: true,
               
@@ -976,12 +962,16 @@ $(document).ready(function () {
                 
             },
              sector_type: {
-                required: true,
+                //required: true,
                 
             },
              business_pan: {
               required :true,
-              panCard:true
+              panCard:true,
+			  /*remote:{
+					url: '/validatePancard?',
+					type: "post"
+				}*/
             
             },
 
@@ -991,7 +981,7 @@ $(document).ready(function () {
             } ,
            
            ifsc_code: {
-              required :true,
+              //required :true,
               alphanumeric : true
                 
             } ,
@@ -1028,6 +1018,11 @@ $(document).ready(function () {
 				required: true
 			}
        },
+	   /*messages: {
+			business_pan:{
+				remote: "Pancard Already Exists"
+			}
+		},*/
     errorPlacement: function(error, element) {
           var parentTag = $(element).parent();
       if(parentTag.is('span')) {
@@ -1272,11 +1267,18 @@ $(document).ready(function () {
 	  dataType: 'text',
       success: function(data){
 		  
-		$("#sector_type").html(data);
+		 if(data == 0) {
+			 $('#displayToggleSector').addClass("displayToggle");
+			 $('#displayToggleSector').removeClass("displayToggleBlock");
+		 } else {
+			 $('#displayToggleSector').removeClass("displayToggle");
+			 $('#displayToggleSector').addClass("displayToggleBlock");
+			 
+			$("#sector_type").html(data);
          
-		 $('.selectpicker').selectpicker('refresh'); 
-      	
-      }
+			$('.selectpicker').selectpicker('refresh'); 
+		 }
+		}
     });
     
     
@@ -1285,16 +1287,17 @@ $(document).ready(function () {
   $("#submit_id").on("click",function(){
       
     if($('#show_validate').css('display') == "block"){
-      
-      $('#business_emailId').focus();
-      
+      $('#business_emailId').focus();      
       return false;
     
     }
 
     if($("#service_taxno").val() == "") { 
-		$("#serviceTaxModal").modal('show');
-		return false;
+		if($("#individual-form").valid()) {
+			$("#serviceTaxModal").modal('show');
+			return false;
+		}
+		
     }
 	
 	
@@ -1337,10 +1340,14 @@ $(document).ready(function () {
     }
   });
 
-  
+  $("#business_pan").on("keyup",function(){
+	  $('#show_pan').css('display','none');
+  });  
 
    $("#business_pan").on("blur",function(){
     var business_pan = $("#business_pan").val();
+	$('#show_pan').css('display','none');	
+	
     if(business_pan != ""){
       var url = "/validatePancard";
       var data = "business_pan=" + business_pan;
@@ -1361,8 +1368,6 @@ $(document).ready(function () {
   });
 
    $('#service_taxno').on("blur",function(){
-
-   	
 
    });
 
@@ -1427,7 +1432,6 @@ $("#gta_no").on("click",function() {
 		$("#gta_number").removeClass("displayToggleBlock");
 	} 
 });
-
 
 
 </script>

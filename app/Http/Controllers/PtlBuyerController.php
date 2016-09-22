@@ -551,6 +551,50 @@ public function ptlPincodesAutocomplete()
    	 
    }
    
+
+public function pincodesAutocomplete()
+   {
+   try{
+   		$term = trim(Input::get('term'));
+   		$strLength =  strlen($term);
+   		$pincode = Input::get('pincode');
+   		$results = array();
+   		if (!preg_match('/[^A-Za-z]/', $term)) // '/[^a-z\d]/i' should also work.
+   		{
+   		  echo "error";
+   		  exit;
+   		  	
+   		}
+   		if(isset($pincode)){
+   			if ($strLength > 5) {
+   			$queries = DB::table('lkp_ptl_pincodes')->orderBy ( 'postoffice_name', 'asc' )
+   			->where('pincode', 'LIKE', $term.'%')
+   			->where('id','<>', $pincode) 	
+   			->take(30)->get();
+   			} else {
+   			$queries = DB::table('lkp_ptl_pincodes')->orderBy ( 'postoffice_name', 'asc' )
+   			->where('pincode', 'LIKE', $term.'%')
+   			->where('id','<>', $pincode)
+   			->take(10)->get();
+   			}
+   		}else {
+   			$queries = DB::table('lkp_ptl_pincodes')->orderBy ( 'postoffice_name', 'asc' )
+   			->where('pincode', 'LIKE', $term.'%')
+   			->take(10)->get();
+   		}
+   		foreach ($queries as $query) {   		
+   			$results[] = ['id' => $query->id , 'value' => $query->pincode.' - '.$query->postoffice_name.' , '.$query->districtname.' , '.$query->statename, 'statename' => $query->statename,'state_id' => $query->state_id,'districtname'=>$query->districtname,'lkp_district_id'=>$query->lkp_district_id,'postoffice_name'=>$query->postoffice_name,'city'=>$query->taluk,'pincode'=>$query->pincode,'region'=>$query->regionname]; 
+   		}
+   		return Response::json($results);
+   	}
+   	catch (Exception $e)
+   	{
+   		echo 'Caught exception: ',  $e->getMessage(), "\n";
+   	}
+   	 
+   }
+
+
    
    //Pincode related to the To City in Checoutpage
    public function ptlToPincodesCheckout()
@@ -835,7 +879,7 @@ public function ptlPincodesAutocomplete()
                 case ROAD_PTL:
    		$seller_data = DB::table('ptl_seller_post_items')
    		->join('users','ptl_seller_post_items.created_by','=','users.id')   		
-   		->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
+   		->leftjoin ('seller_details', 'users.id', '=', 'sellers.user_id')
    		->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
    		->leftjoin ('ptl_seller_posts', 'users.id', '=', 'ptl_seller_posts.seller_id')
    		->distinct('ptl_seller_post_items.created_by')
@@ -849,7 +893,7 @@ public function ptlPincodesAutocomplete()
                 case RAIL:
    		$seller_data = DB::table('rail_seller_post_items as spi')
    		->join('users','spi.created_by','=','users.id')   		
-   		->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
+   		->leftjoin ('seller_details', 'users.id', '=', 'sellers.user_id')
    		->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
    		->leftjoin ('rail_seller_posts as sp', 'users.id', '=', 'sp.seller_id')
    		->distinct('spi.created_by')
@@ -863,7 +907,7 @@ public function ptlPincodesAutocomplete()
                 case AIR_DOMESTIC:
    		$seller_data = DB::table('airdom_seller_post_items as spi')
    		->join('users','spi.created_by','=','users.id')   		
-   		->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
+   		->leftjoin ('seller_details', 'users.id', '=', 'sellers.user_id')
    		->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
    		->leftjoin ('airdom_seller_posts as sp', 'users.id', '=', 'sp.seller_id')
    		->distinct('spi.created_by')
@@ -877,7 +921,7 @@ public function ptlPincodesAutocomplete()
                 case AIR_INTERNATIONAL:
    		$seller_data = DB::table('airint_seller_post_items as spi')
    		->join('users','spi.created_by','=','users.id')   		
-   		->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
+   		->leftjoin ('seller_details', 'users.id', '=', 'sellers.user_id')
    		->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
    		->leftjoin ('airint_seller_posts as sp', 'users.id', '=', 'sp.seller_id')
    		->distinct('spi.created_by')
@@ -891,7 +935,7 @@ public function ptlPincodesAutocomplete()
                 case OCEAN:
    		$seller_data = DB::table('ocean_seller_post_items as spi')
    		->join('users','spi.created_by','=','users.id')   		
-   		->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
+   		->leftjoin ('seller_details', 'users.id', '=', 'sellers.user_id')
    		->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
    		->leftjoin ('ocean_seller_posts as sp', 'users.id', '=', 'sp.seller_id')
    		->distinct('spi.created_by')
@@ -905,7 +949,7 @@ public function ptlPincodesAutocomplete()
                 case COURIER:
                 	$seller_data = DB::table('courier_seller_post_items as spi')
                 	->join('users','spi.created_by','=','users.id')
-                	->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
+                	->leftjoin ('seller_details', 'users.id', '=', 'sellers.user_id')
                 	->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
                 	->leftjoin ('courier_seller_posts as sp', 'users.id', '=', 'sp.seller_id')
                 	->distinct('spi.created_by')
@@ -968,7 +1012,7 @@ public function ptlPincodesAutocomplete()
    				}
    				$seller_data = DB::table('ptl_seller_post_items')
    				->join('users','ptl_seller_post_items.created_by','=','users.id')
-   				->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
+   				->leftjoin ('seller_details', 'users.id', '=', 'sellers.user_id')
    				->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
    				->leftjoin ('ptl_seller_posts', 'users.id', '=', 'ptl_seller_posts.seller_id')
    				->distinct('ptl_seller_post_items.created_by')
@@ -991,7 +1035,7 @@ public function ptlPincodesAutocomplete()
    				}
    				$seller_data = DB::table('rail_seller_post_items as spi')
    				->join('users','spi.created_by','=','users.id')
-   				->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
+   				->leftjoin ('seller_details', 'users.id', '=', 'sellers.user_id')
    				->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
    				->leftjoin ('rail_seller_posts as sp', 'users.id', '=', 'sp.seller_id')
    				->distinct('spi.created_by')
@@ -1014,7 +1058,7 @@ public function ptlPincodesAutocomplete()
    				}
    				$seller_data = DB::table('airdom_seller_post_items as spi')
    				->join('users','spi.created_by','=','users.id')
-   				->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
+   				->leftjoin ('seller_details', 'users.id', '=', 'sellers.user_id')
    				->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
    				->leftjoin ('airdom_seller_posts as sp', 'users.id', '=', 'sp.seller_id')
    				->distinct('spi.created_by')
@@ -1037,7 +1081,7 @@ public function ptlPincodesAutocomplete()
    				}
    				$seller_data = DB::table('airint_seller_post_items as spi')
    				->join('users','spi.created_by','=','users.id')
-   				->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
+   				->leftjoin ('seller_details', 'users.id', '=', 'sellers.user_id')
    				->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
    				->leftjoin ('airint_seller_posts as sp', 'users.id', '=', 'sp.seller_id')
    				->distinct('spi.created_by')
@@ -1060,7 +1104,7 @@ public function ptlPincodesAutocomplete()
    				}
    				$seller_data = DB::table('ocean_seller_post_items as spi')
    				->join('users','spi.created_by','=','users.id')
-   				->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
+   				->leftjoin ('seller_details', 'users.id', '=', 'sellers.user_id')
    				->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
    				->leftjoin ('ocean_seller_posts as sp', 'users.id', '=', 'sp.seller_id')
    				->distinct('spi.created_by')
@@ -1083,7 +1127,7 @@ public function ptlPincodesAutocomplete()
    					}
    					$seller_data = DB::table('courier_seller_post_items as spi')
    					->join('users','spi.created_by','=','users.id')
-   					->leftjoin ('sellers', 'users.id', '=', 'sellers.user_id')
+   					->leftjoin ('seller_details', 'users.id', '=', 'sellers.user_id')
    					->leftjoin ('seller_details', 'users.id', '=', 'seller_details.user_id')
    					->leftjoin ('courier_seller_posts as sp', 'users.id', '=', 'sp.seller_id')
    					->distinct('spi.created_by')

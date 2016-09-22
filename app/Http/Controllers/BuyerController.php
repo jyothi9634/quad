@@ -723,7 +723,7 @@ class BuyerController extends Controller {
             if(isset($_POST['seller_list'])) {
                  $sellerlist = (count($cities) > 0) ? $cities : $_POST['seller_list'];
             }
-           
+           $district_array = array();
             if(isset($sellerlist)){
 	            $sellersStr = $sellerlist;
 	            $districts = DB::table('lkp_cities')
@@ -738,32 +738,30 @@ class BuyerController extends Controller {
             switch($serviceId){
             	case ROAD_FTL:
             		$seller_data = DB::table('seller_post_items')
-            		->leftjoin('users', 'seller_post_items.created_by', '=', 'users.id')
-            		->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+            		->leftjoin('users', 'seller_post_items.created_by', '=', 'users.id')            		
             		->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
             		->distinct('seller_post_items.created_by')
             		->whereIn('seller_post_items.lkp_district_id', $district_array)
             		->whereRaw("(users.id != ". Auth::User()->id .")")
                     ->whereRaw("(users.lkp_role_id = ". SELLER ." or users.secondary_role_id = ". SELLER .")")->orderBy ( 'users.username', 'asc' )
-            		->select('users.id', 'users.username', 'sellers.principal_place', 'sellers.name', 'seller_details.firstname')
+            		->select('users.id', 'users.username', 'seller_details.principal_place', 'seller_details.name', 'seller_details.contact_firstname')
             		->get();            		
             		break;
                 case ROAD_TRUCK_HAUL:
                     $seller_data = DB::table('truckhaul_seller_post_items')
-                    ->leftjoin('users', 'truckhaul_seller_post_items.created_by', '=', 'users.id')
-                    ->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+                    ->leftjoin('users', 'truckhaul_seller_post_items.created_by', '=', 'users.id')                    
                     ->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
                     ->distinct('truckhaul_seller_post_items.created_by')
                     ->whereIn('truckhaul_seller_post_items.lkp_district_id', $district_array)
                     ->whereRaw("(users.id != ". Auth::User()->id .")")
                     ->whereRaw("(users.lkp_role_id = ". SELLER ." or users.secondary_role_id = ". SELLER .")")->orderBy ( 'users.username', 'asc' )
-                    ->select('users.id', 'users.username', 'sellers.principal_place', 'sellers.name', 'seller_details.firstname')
+                    ->select('users.id', 'users.username', 'seller_details.principal_place', 'seller_details.name', 'seller_details.contact_firstname')
                     ->get();                    
                     break;
                  case ROAD_TRUCK_LEASE:
                     	$seller_data = DB::table('trucklease_seller_post_items')
                     	->leftjoin('users', 'trucklease_seller_post_items.created_by', '=', 'users.id')
-                    	->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+                    	->leftjoin('seller_details', 'users.id', '=', 'sellers.user_id')
                     	->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
                     	->distinct('trucklease_seller_post_items.created_by')
                     	->whereIn('trucklease_seller_post_items.lkp_district_id', $district_array)
@@ -775,7 +773,7 @@ class BuyerController extends Controller {
             	case RELOCATION_DOMESTIC:
             		$seller_data = DB::table('relocation_seller_post_items')
             		->leftjoin('users', 'relocation_seller_post_items.created_by', '=', 'users.id')
-            		->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+            		->leftjoin('seller_details', 'users.id', '=', 'sellers.user_id')
             		->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
             		->distinct('relocation_seller_post_items.created_by')
             		->whereRaw("(users.id != ". Auth::User()->id .")")
@@ -787,7 +785,7 @@ class BuyerController extends Controller {
             	case RELOCATION_PET_MOVE:
                     $seller_data = DB::table('relocationpet_seller_post_items')
                         ->leftjoin('users', 'relocationpet_seller_post_items.created_by', '=', 'users.id')
-                        ->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+                        ->leftjoin('seller_details', 'users.id', '=', 'sellers.user_id')
                         ->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
                         ->distinct('relocationpet_seller_post_items.created_by')
                         ->whereRaw("(users.id != ". Auth::User()->id .")")
@@ -799,7 +797,7 @@ class BuyerController extends Controller {
                 case RELOCATION_OFFICE_MOVE:               
                     $seller_data = DB::table('relocationoffice_seller_posts')
                     ->leftjoin('users', 'relocationoffice_seller_posts.created_by', '=', 'users.id')
-                    ->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+                    ->leftjoin('seller_details', 'users.id', '=', 'sellers.user_id')
                     ->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
                     ->distinct('relocationoffice_seller_posts.created_by')
                     ->whereRaw("(users.id != ". Auth::User()->id .")")
@@ -810,7 +808,7 @@ class BuyerController extends Controller {
             	case RELOCATION_INTERNATIONAL:
                     $seller_data = DB::table('relocationint_seller_posts as sp')
                         ->leftjoin('users', 'sp.created_by', '=', 'users.id')
-                        ->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+                        ->leftjoin('seller_details', 'users.id', '=', 'sellers.user_id')
                         ->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
                         ->distinct('sp.created_by')
                         ->whereRaw("(users.id != ". Auth::User()->id .")")
@@ -822,7 +820,7 @@ class BuyerController extends Controller {
                 case RELOCATION_GLOBAL_MOBILITY:                    
                     $seller_data = DB::table('relocationgm_seller_posts')
                         ->leftjoin('users', 'relocationgm_seller_posts.created_by', '=', 'users.id')
-                        ->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+                        ->leftjoin('seller_details', 'users.id', '=', 'sellers.user_id')
                         ->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
                         ->distinct('relocationgm_seller_posts.created_by')
                         ->whereRaw("(users.id != ". Auth::User()->id .")")
@@ -4486,7 +4484,7 @@ class BuyerController extends Controller {
                 if($serviceId==ROAD_FTL){
     		$seller_data = DB::table('seller_post_items')
     		->join('users', 'seller_post_items.created_by', '=', 'users.id')
-    		->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+    		->leftjoin('seller_details', 'users.id', '=', 'sellers.user_id')
     		->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
     		->distinct('seller_post_items.created_by')
     		->whereIn('seller_post_items.lkp_district_id', $district_array)
@@ -4498,7 +4496,7 @@ class BuyerController extends Controller {
                 } elseif($serviceId==ROAD_TRUCK_HAUL) {
                 $seller_data = DB::table('truckhaul_seller_post_items')
     		->join('users', 'truckhaul_seller_post_items.created_by', '=', 'users.id')
-    		->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+    		->leftjoin('seller_details', 'users.id', '=', 'sellers.user_id')
     		->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
     		->distinct('truckhaul_seller_post_items.created_by')
     		->whereIn('truckhaul_seller_post_items.lkp_district_id', $district_array)
@@ -4510,7 +4508,7 @@ class BuyerController extends Controller {
              }elseif($serviceId==ROAD_TRUCK_LEASE) {
                 	$seller_data = DB::table('trucklease_seller_post_items')
                 	->join('users', 'trucklease_seller_post_items.created_by', '=', 'users.id')
-                	->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+                	->leftjoin('seller_details', 'users.id', '=', 'sellers.user_id')
                 	->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
                 	->distinct('trucklease_seller_post_items.created_by')
                 	->whereIn('trucklease_seller_post_items.lkp_district_id', $district_array)
@@ -4522,7 +4520,7 @@ class BuyerController extends Controller {
                 }elseif($serviceId==RELOCATION_DOMESTIC) {
                 $seller_data = DB::table('relocation_seller_post_items')
     		->join('users', 'relocation_seller_post_items.created_by', '=', 'users.id')
-    		->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+    		->leftjoin('seller_details', 'users.id', '=', 'sellers.user_id')
     		->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
     		->distinct('relocation_seller_post_items.created_by')
     		
@@ -4534,7 +4532,7 @@ class BuyerController extends Controller {
                 }elseif($serviceId==RELOCATION_OFFICE_MOVE) {
                 $seller_data = DB::table('relocationoffice_seller_posts')
             ->join('users', 'relocationoffice_seller_posts.created_by', '=', 'users.id')
-            ->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+            ->leftjoin('seller_details', 'users.id', '=', 'sellers.user_id')
             ->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
             ->distinct('relocationoffice_seller_posts.created_by')
             
@@ -4546,7 +4544,7 @@ class BuyerController extends Controller {
                 }elseif($serviceId==RELOCATION_PET_MOVE) {
                 $seller_data = DB::table('relocationpet_seller_posts')
                     ->join('users', 'relocationpet_seller_posts.created_by', '=', 'users.id')
-                    ->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+                    ->leftjoin('seller_details', 'users.id', '=', 'sellers.user_id')
                     ->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
                     ->distinct('relocationpet_seller_posts.created_by')
 
@@ -4558,7 +4556,7 @@ class BuyerController extends Controller {
                 }elseif($serviceId==RELOCATION_INTERNATIONAL) {
                     $seller_data = DB::table('relocationint_seller_posts as sp')
                     ->join('users', 'sp.created_by', '=', 'users.id')
-                    ->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+                    ->leftjoin('seller_details', 'users.id', '=', 'sellers.user_id')
                     ->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
                     ->distinct('sp.created_by')
                     ->whereNotIn('sp.created_by', $sellerall_ids)

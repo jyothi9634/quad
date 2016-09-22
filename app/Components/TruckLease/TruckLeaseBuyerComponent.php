@@ -609,7 +609,7 @@ class TruckLeaseBuyerComponent {
     		Log::info('Get leads for the buyer: ' . Auth::id(), array('c' => '2'));
     		$sellerData = DB::table('trucklease_seller_post_items')
     		->join('users', 'trucklease_seller_post_items.created_by', '=', 'users.id')
-    		->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+    		->leftjoin('seller_details', 'users.id', '=', 'sellers.user_id')
     		->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
     		->distinct('trucklease_seller_post_items.created_by')
     		->where('trucklease_seller_post_items.lkp_district_id', $districtId)

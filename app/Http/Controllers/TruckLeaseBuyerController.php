@@ -354,7 +354,7 @@ class TruckLeaseBuyerController extends Controller {
              	    	
             $buyer_quote_lineitem_id = $mainid;
             //$buyer_quote_lineitem_id=$mainid;
-            //return view('buyers.editbuyer',array('buyer_post_edit' => $buyer_post_edit_action,'vehicle_type' => $vehicle_type,'load_type' => $load_type,'quote_type' => $quote_type,$buyer_quote_lineitem_id,'sellers'=>$buyer_post_edit_seller));
+            //return view('buyers.editbuyer',array('buyer_post_edit' => $buyer_post_edit_action,'vehicle_type' => $vehicle_type,'load_type' => $load_type,'quote_type' => $quote_type,$buyer_quote_lineitem_id,'seller_details'=>$buyer_post_edit_seller));
             return view('buyers.editbuyer', array('buyer_post_edit' => $buyer_post_edit_action, $buyer_quote_lineitem_id, 'buyer_post_edit_seller' => $buyer_post_edit_seller, 'buyer_post_id' => $buyer_post_id));
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
@@ -451,7 +451,7 @@ class TruckLeaseBuyerController extends Controller {
     		 
     		$seller_data = DB::table('trucklease_seller_post_items')
     		->join('users', 'trucklease_seller_post_items.created_by', '=', 'users.id')
-    		->leftjoin('sellers', 'users.id', '=', 'sellers.user_id')
+    		->leftjoin('seller_details', 'users.id', '=', 'sellers.user_id')
     		->leftjoin('seller_details', 'users.id', '=', 'seller_details.user_id')
     		->distinct('trucklease_seller_post_items.created_by')
     		->whereIn('trucklease_seller_post_items.lkp_district_id', $district_array)

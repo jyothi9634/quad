@@ -79,6 +79,11 @@ $(document).ready(function() {
 			return false;
 		}
 	});
+	$("#otp").on("keyup",function(){
+		var otp = $("#otp").val();
+		if(otp.length > 3)
+		document.getElementById("error_otp").innerHTML = "";
+	});
 	
 	$('#registerSignup').click(function(event){
 		

@@ -17,7 +17,6 @@ use Illuminate\Http\Request;
 use Redirect;
 use Illuminate\Support\Facades\Mail;
 use Log;
-use App\Models\Seller;
 
 class WarehouseController extends Controller {
     /**
@@ -25,10 +24,7 @@ class WarehouseController extends Controller {
      *
      * @return void
      */
-    public function __construct(Seller $seller) {
-        
-        $this->seller = $seller;
-
+    public function __construct() {
         $this->middleware('auth', [
             'except' => 'getLogout'
         ]);
@@ -43,7 +39,6 @@ class WarehouseController extends Controller {
         //$warehouse = Warehouse::all()->where('seller_id',Auth::id())->where('is_active','1');
         $warehouse = DB::table ( 'warehouses as w' )->leftjoin('lkp_warehouse_types as wt','wt.id','=','w.lkp_warehouse_type_id')
                 ->where('w.seller_id', Auth::id())->where('w.is_active','1')->select('w.*','wt.warehouse_name')->get();
-
         return view('users.warehouse_list', compact('warehouse'));
     }
 
@@ -130,33 +125,6 @@ class WarehouseController extends Controller {
     public function show($id) {
         //
     }
-
-     public function userSales() {
-
-        Log::info('Sales made by the seller: ' . Auth::id(), array('c' => '1'));
-        
-        $inputs = Input::all();
-        
-        if(!empty($inputs['seller_name']) || !empty($inputs['dispatch_date']) || !empty($inputs['seller_id'])){
-
-        $sales = $this->seller->userSales(647,$inputs);
-        
-        }
-        else{
-
-         $inputs = "";   
-         $sales = $this->seller->userSales(647,$inputs);   
-        
-        }
-        
-
-        $getBuyers = $this->seller->getBuyers(647);
-        //print_r($getSellers);exit;
-        /*$getAllVehicleTypes = DB::table('lkp_vehicle_types')->where('is_active','=',IS_ACTIVE)->orderBy ( 'id', 'asc' )->lists('vehicle_type', 'id');*/
-        
-        return view('users.usersales', compact('sales','getBuyers'));
-    }
-
 
     /**
      * Show the form for editing the specified warehouse.
